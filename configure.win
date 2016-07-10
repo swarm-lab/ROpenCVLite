@@ -1,0 +1,28 @@
+set -x
+set -e
+
+mkdir inst/tmp
+mkdir inst/opencv/
+
+cd inst/tmp/
+
+Rscript -e 'download.file("https://github.com/Itseez/opencv/archive/3.1.0.tar.gz", "opencv_3.1.0.tar.gz")'
+tar zxvf opencv_3.1.0.tar.gz
+
+Rscript -e 'download.file("https://github.com/Itseez/opencv_contrib/archive/3.1.0.tar.gz", "opencv_contrib_3.1.0.tar.gz")'
+tar zxvf opencv_contrib_3.1.0.tar.gz
+Rscript -e 'download.file("https://raw.githubusercontent.com/alalek/opencv_contrib/d766663add331bbec49f6dfbd5dee45966bbc34b/modules/hdf/include/opencv2/hdf/hdf5.hpp", "opencv_contrib-3.1.0/modules/hdf/include/opencv2/hdf/hdf5.hpp")'
+Rscript -e 'download.file("https://raw.githubusercontent.com/alalek/opencv_contrib/d766663add331bbec49f6dfbd5dee45966bbc34b/modules/hdf/src/hdf5.cpp", "opencv_contrib-3.1.0/modules/hdf/src/hdf5.cpp")'
+
+cd opencv-3.1.0
+
+mkdir build
+cd build
+
+cmake -G "Unix Makefiles" -DBUILD_opencv_bioinspired=OFF -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.1.0/modules/ ../
+make -j4
+make install
+
+cd ../../../
+
+rm -rf tmp

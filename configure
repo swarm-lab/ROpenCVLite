@@ -1,0 +1,23 @@
+set -x
+set -e
+
+mkdir inst/tmp
+mkdir inst/opencv/
+
+cd inst/tmp/
+
+Rscript -e 'download.file("https://github.com/Itseez/opencv/archive/3.1.0.zip", "opencv_3.1.0.zip")'
+Rscript -e 'unzip("opencv_3.1.0.zip")'
+
+cd opencv-3.1.0
+
+mkdir build
+cd build
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/
+make -j4
+make install
+
+cd ../../../
+
+rm -rf tmp
