@@ -14,7 +14,7 @@ cd opencv-3.1.0
 mkdir build
 cd build
 
-cmake -G "MSYS Makefiles" -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
+cmake -G "MSys Makefiles" -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
 make -j4
 make install
 
