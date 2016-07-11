@@ -16,7 +16,7 @@ cd build
 
 export CC=C:/Rtools/mingw_64/bin/gcc.exe
 export CXX=C:/Rtools/mingw_64/bin/g++.exe
-cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
+cmake -G "MSYS Makefiles" -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
 make -j4
 make install
 
