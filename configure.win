@@ -18,6 +18,10 @@ cmake -G "Unix Makefiles" -D CMAKE_C_COMPILER=C:/Rtools/mingw_64/bin/gcc.exe -DC
 make -j4
 make install
 
+cmake -G "Unix Makefiles" -D CMAKE_C_COMPILER=C:/Rtools/mingw_32/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_32/bin/g++.exe -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
+make -j4
+make install
+
 cd ../../../
 
 rm -rf tmp
