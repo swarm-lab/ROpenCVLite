@@ -14,13 +14,13 @@ cd opencv-3.1.0
 mkdir build
 cd build
 
-if [ Rscript -e 'any(list.files(paste0(R.home(), "/bin") == "x64"))' ]; then
+if [ -d "$R_ARCH/bin/x64" ]; then
   cmake -G "Unix Makefiles" -D CMAKE_C_COMPILER=C:/Rtools/mingw_64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_64/bin/g++.exe -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
   make -j4
   make install
 fi
 
-if [ Rscript -e 'any(list.files(paste0(R.home(), "/bin") == "i386"))' ]; then
+if [ -d "$R_ARCH/bin/i386" ]; then
   cmake -G "Unix Makefiles" -D CMAKE_C_COMPILER=C:/Rtools/mingw_32/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_32/bin/g++.exe -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
   make -j4
   make install
