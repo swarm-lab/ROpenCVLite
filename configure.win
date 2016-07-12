@@ -11,21 +11,24 @@ tar zxvf opencv_3.1.0.tar.gz
 
 cd opencv-3.1.0
 
-mkdir build
-cd build
-
 if [ -d "$R_HOME/bin/x64" ]; then
+  mkdir build64
+  cd build64
   cmake -G "Unix Makefiles" -D CMAKE_C_COMPILER=C:/Rtools/mingw_64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_64/bin/g++.exe -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
   make -j4
   make install
+  cd ../
 fi
 
 if [ -d "$R_HOME/bin/i386" ]; then
+  mkdir build32
+  cd build32
   cmake -G "Unix Makefiles" -D CMAKE_C_COMPILER=C:/Rtools/mingw_32/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_32/bin/g++.exe -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
   make -j4
   make install
+  cd ../
 fi
 
-cd ../../../
+cd ../../
 
 rm -rf tmp
