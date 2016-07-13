@@ -43,7 +43,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
 
   if (output == "libs") {
     if (.Platform$OS.type == "windows") {
-      if (arch == "i386") {
+      if (grepl("i386", arch)) {
         execPrefix <- paste0(prefix, "/x86/mingw")
       } else {
         execPrefix <- paste0(prefix, "/x64/mingw")
