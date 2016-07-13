@@ -37,13 +37,17 @@ opencvVersion <- function() {
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
 #' @export
-opencvConfig <- function(output = "libs") {
+opencvConfig <- function(output = "libs", arch = NULL) {
   pkgPath <- find.package("ROpenCVLite")
   prefix <- paste0(pkgPath, "/opencv")
 
   if (output == "libs") {
     if (.Platform$OS.type == "windows") {
-      execPrefix <- paste0(prefix, "/x86/mingw")
+      if (arch == "i386") {
+        execPrefix <- paste0(prefix, "/x86/mingw")
+      } else {
+        execPrefix <- paste0(prefix, "/x64/mingw")
+      }
       libDir <- paste0(execPrefix, "/lib")
       libs <- gsub("libopencv", "opencv", list.files(libDir, "lib*"))
       libs <- gsub("\\.a", "", libs)
