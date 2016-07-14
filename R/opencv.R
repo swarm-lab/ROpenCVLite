@@ -3,7 +3,7 @@
 #' @description Determines the version of OpenCV installed within R.
 #'
 #' @return A character string with the version of OpenCV installed by
-#'  \code{\link{ROpenCV}}.
+#'  \code{\link{ROpenCVLite}}.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
@@ -26,7 +26,7 @@ opencvVersion <- function() {
 #' @title C/C++ configuration options
 #'
 #' @description Determines the configuration options for compiling C/C++-based
-#'  packages against OpenCV installed by \code{\link{ROpenCV}}.
+#'  packages against OpenCV installed by \code{\link{ROpenCVLite}}.
 #'
 #' @param output Either 'libs' for library configuration options or 'cflags' for
 #'  C/C++ configuration flags.
