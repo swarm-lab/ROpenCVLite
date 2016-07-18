@@ -42,13 +42,13 @@ Download `CMake` for Mac at [https://cmake.org/download/](https://cmake.org/down
 You can also use [`Homebrew`](http://brew.sh/) or [`MacPorts`](https://www.macports.org/)
 if you prefer (I prefer!).
 
-`*Homebrew*`:
+*`Homebrew`:*
 
 ```bash
 brew install cmake
 ```
 
-`*MacPorts*`:
+*`MacPorts`:*
 
 ```bash
 sudo port install cmake
@@ -63,7 +63,7 @@ Download `CMake` for Linux at [https://cmake.org/download/](https://cmake.org/do
 However it is recommended that you install it using your distribution's package
 management system.
 
-`*Ubuntu*`:
+*`Ubuntu`:*
 
 ```bash
 sudo apt-get install cmake
