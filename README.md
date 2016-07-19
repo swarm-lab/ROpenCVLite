@@ -2,7 +2,7 @@
 
 **Not ready for production. Try at your own risks.**
 
-## 1. Package description
+## 1 - Package description
 
 `ROpenCVLite` is a utility package that installs [`OpenCV`](http://opencv.org/) 
 within `R` for use by other packages. This package is not a wrapper around 
@@ -16,11 +16,11 @@ Read the [FAQ](#3-faq) below for more info about the what, why, and how of
 
 ---
 
-## 2. Package installation
+## 2 - Package installation
 
-### 2.1 Before installing 
+### 2.1 - Before installing 
 
-#### 2.1.1 Windows
+#### 2.1.1 - Windows
 
 Before installing `ROpenCVLite`, you will need to install the latest versions of
 [`CMake`](https://cmake.org/) and [`Rtools`](https://cran.r-project.org/bin/windows/Rtools/). 
@@ -33,7 +33,7 @@ Download the latest "frozen" version of `Rtools` at
 In both cases, make sure to tell the installer to add `CMake` and `Rtools` to 
 your "PATH".
 
-#### 2.1.2 Mac
+#### 2.1.2 - Mac
 
 Before installing `ROpenCVLite`, you will need to install the latest version of
 [`CMake`](https://cmake.org/).
@@ -54,7 +54,7 @@ brew install cmake
 sudo port install cmake
 ```
 
-#### 2.1.3 Linux
+#### 2.1.3 - Linux
 
 Before installing `ROpenCVLite`, you will need to install the latest version of
 [`CMake`](https://cmake.org/).
@@ -71,23 +71,26 @@ sudo apt-get install cmake
 
 [TODO: add more Linux install commands]
 
-#### 2.1.4 Mac, Linux and Windows
+#### 2.1.4 - Mac, Linux and Windows
 
-You will need to install the `devtools` package in `R`. 
+Before installing `ROpenCVLite`, you will need to install the `devtools` package 
+in `R`. 
 
 ```r
 install.package("devtools")
 ```
 
-### 2.2 Installing `ROpenCVLite`
+### 2.2 - Installing `ROpenCVLite`
 
 ```r
 devtools::install_github("swarm-lab/ROpenCVLite")
 ```
 
+This step can take some time. Go make yourself a cup of coffee or two.
+
 ---
 
-## 3. FAQ
+## 3 - FAQ
 
 ### What is OpenCV? 
 
