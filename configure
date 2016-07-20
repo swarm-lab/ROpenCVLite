@@ -9,11 +9,14 @@ cd inst/tmp/
 Rscript -e 'download.file("https://github.com/Itseez/opencv/archive/3.1.0.zip", "opencv_3.1.0.zip")'
 Rscript -e 'unzip("opencv_3.1.0.zip")'
 
-mv ../OpenCVModule.patch opencv-3.1.0/cmake/OpenCVModule.patch
-cd opencv-3.1.0/cmake/
-patch < OpenCVModule.patch
-rm -rf OpenCVModule.patch
-cd ..
+if [[ $R_PLATFORM == *"apple"* ]]
+then
+  mv ../OpenCVModule.patch opencv-3.1.0/cmake/OpenCVModule.patch
+  cd opencv-3.1.0/cmake/
+  patch < OpenCVModule.patch
+  rm -rf OpenCVModule.patch
+  cd ..
+fi
 
 mkdir build
 cd build
