@@ -15,9 +15,10 @@ then
   cd opencv-3.1.0/cmake/
   patch < OpenCVModule.patch
   rm -rf OpenCVModule.patch
-  cd ..
+  cd ../..
 fi
 
+cd opencv-3.1.0
 mkdir build
 cd build
 
