@@ -4,7 +4,7 @@
 \alias{opencvConfig}
 \title{C/C++ configuration options}
 \usage{
-opencvConfig(output = "libs")
+opencvConfig(output = "libs", arch = NULL)
 }
 \arguments{
 \item{output}{Either 'libs' for library configuration options or 'cflags' for
@@ -16,7 +16,7 @@ A concatenated character string (with \code{\link{cat}}) of the
 }
 \description{
 Determines the configuration options for compiling C/C++-based
- packages against OpenCV installed by \code{\link{ROpenCV}}.
+ packages against OpenCV installed by \code{\link{ROpenCVLite}}.
 }
 \author{
 Simon Garnier, \email{garnier@njit.edu}

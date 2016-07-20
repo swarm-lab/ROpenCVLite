@@ -8,7 +8,7 @@ opencvVersion()
 }
 \value{
 A character string with the version of OpenCV installed by
- \code{\link{ROpenCV}}.
+ \code{\link{ROpenCVLite}}.
 }
 \description{
 Determines the version of OpenCV installed within R.
