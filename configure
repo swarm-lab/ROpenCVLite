@@ -9,15 +9,19 @@ cd inst/tmp/
 Rscript -e 'download.file("https://github.com/Itseez/opencv/archive/3.1.0.zip", "opencv_3.1.0.zip")'
 Rscript -e 'unzip("opencv_3.1.0.zip")'
 
-cd opencv-3.1.0
+mv ../OpenCVModule.patch opencv-3.1.0/cmake/OpenCVModule.patch
+cd opencv-3.1.0/cmake/
+patch < OpenCVModule.patch
+rm -rf OpenCVModule.patch
+cd ..
 
 mkdir build
 cd build
 
-cmake -D WITH_IPP=ON -D INSTALL_CREATE_DISTRIB=ON -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
+cmake -D R_PACKAGE_DIR=${R_PACKAGE_DIR} -D WITH_IPP=ON -D INSTALL_CREATE_DISTRIB=ON -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
 make -j4
 make install
 
-cd ../../../
+cd ../../../opencv
 
 rm -rf tmp
