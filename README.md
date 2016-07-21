@@ -8,9 +8,9 @@
 + [2 - Package installation](#2---package-installation)
   + [2.1 - Before installing ](#21---Before-installing )
     + [2.1.1 - Windows](#211---Windows)
-    + [2.1.2 - Windows](#212---Mac)
-    + [2.1.3 - Windows](#213---Linux)
-    + [2.1.4 - Windows](#214---mac-linux-and-windows)
+    + [2.1.2 - Mac](#212---Mac)
+    + [2.1.3 - Linux](#213---Linux)
+    + [2.1.4 - Mac, Linux and Windows](#214---mac-linux-and-windows)
   + [2.2 - Installing `ROpenCVLite`](#22---installing-ropencvlite)
   + [3. FAQ](#3---faq)
 
