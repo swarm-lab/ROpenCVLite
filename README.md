@@ -12,7 +12,7 @@
     + [2.1.3 - Linux](#213---Linux)
     + [2.1.4 - Mac, Linux and Windows](#214---mac-linux-and-windows)
   + [2.2 - Installing `ROpenCVLite`](#22---installing-ropencvlite)
-  + [3. FAQ](#3---faq)
++ [3. FAQ](#3---faq)
 
 ---
 
