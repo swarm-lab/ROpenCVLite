@@ -2,6 +2,20 @@
 
 **Not ready for production. Try at your own risks.**
 
+---
+
++ [1 - Package description](#1---package-description)
++ [2 - Package installation](#2---package-installation)
+  + [2.1 - Before installing ](#21---Before-installing )
+    + [2.1.1 - Windows](#211---Windows)
+    + [2.1.2 - Windows](#212---Mac)
+    + [2.1.3 - Windows](#213---Linux)
+    + [2.1.4 - Windows](#214---mac-linux-and-windows)
+  + [2.2 - Installing `ROpenCVLite`](#22---installing-ropencvlite)
+  + [3. FAQ](#3---faq)
+
+---
+
 ## 1 - Package description
 
 `ROpenCVLite` is a utility package that installs [`OpenCV`](http://opencv.org/) 
@@ -11,7 +25,7 @@ computer vision package for R. All it does is compiling and installing OpenCV
 within your R installation so that other packages can easily find it and compile 
 against it. 
 
-Read the [FAQ](#3-faq) below for more info about the what, why, and how of 
+Read the [FAQ](#3---faq) below for more info about the what, why, and how of 
 `ROpenCVLite`.
 
 ---
