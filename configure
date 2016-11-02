@@ -6,19 +6,32 @@ mkdir inst/opencv/
 
 cd inst/tmp/
 
-Rscript -e 'download.file("https://github.com/Itseez/opencv/archive/3.1.0.zip", "opencv_3.1.0.zip")'
-Rscript -e 'unzip("opencv_3.1.0.zip")'
+# Rscript -e 'download.file("https://github.com/Itseez/opencv/archive/3.1.0.zip", "opencv_3.1.0.zip")'
+# Rscript -e 'unzip("opencv_3.1.0.zip")'
+
+Rscript -e 'download.file("https://github.com/opencv/opencv/archive/master.zip", "opencv-master.zip")'
+Rscript -e 'unzip("opencv-master.zip")'
+
+# if [[ $R_PLATFORM == *"apple"* ]]
+# then
+#   cp ../OpenCVModule.patch opencv-3.1.0/cmake/OpenCVModule.patch
+#   cd opencv-3.1.0/cmake/
+#   patch < OpenCVModule.patch
+#   rm -rf OpenCVModule.patch
+#   cd ../..
+# fi
 
 if [[ $R_PLATFORM == *"apple"* ]]
 then
-  mv ../OpenCVModule.patch opencv-3.1.0/cmake/OpenCVModule.patch
-  cd opencv-3.1.0/cmake/
-  patch < OpenCVModule.patch
-  rm -rf OpenCVModule.patch
+  cp ../6810.patch opencv-master/cmake/6810.patch
+  cd opencv-master/cmake/
+  patch < 6810.patch
+  rm -rf 6810.patch
   cd ../..
 fi
 
-cd opencv-3.1.0
+# cd opencv-3.1.0
+cd opencv-master
 mkdir build
 cd build
 
