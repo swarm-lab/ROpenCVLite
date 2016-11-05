@@ -18,7 +18,7 @@ index bd3286c..24c7054 100644
      RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH}
 +    INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib
    )
- 
+
    # For dynamic link numbering convenions
 
 From a47a5ca056d70c637f66bd0e3990ea2de38f444a Mon Sep 17 00:00:00 2001
@@ -43,7 +43,7 @@ index bd3286c..df92142 100644
 @@ -75,6 +75,12 @@ set(OPENCV_MODULES_DISABLED_AUTO  "" CACHE INTERNAL "List of OpenCV modules impl
  set(OPENCV_MODULES_DISABLED_FORCE "" CACHE INTERNAL "List of OpenCV modules which can not be build in current configuration")
  unset(OPENCV_WORLD_MODULES CACHE)
- 
+
 +# set CMAKE_INSTALL_NAME_DIR if CMAKE_INSTALL_PREFIX isn't default value of "/usr/local"
 +if(UNIX AND NOT ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr/local")
 +  set(CMAKE_INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib)
@@ -73,5 +73,5 @@ index 537f784..df92142 100644
      RUNTIME_OUTPUT_DIRECTORY ${EXECUTABLE_OUTPUT_PATH}
 -    INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib
    )
- 
+
    # For dynamic link numbering convenions

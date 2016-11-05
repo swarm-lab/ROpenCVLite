@@ -35,8 +35,9 @@ cd opencv-master
 mkdir build
 cd build
 
-cmake -D R_PACKAGE_DIR=${R_PACKAGE_DIR} -D WITH_IPP=ON -D INSTALL_CREATE_DISTRIB=ON -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
+cmake -D R_PACKAGE_DIR=${R_PACKAGE_DIR} -D WITH_IPP=ON -D INSTALL_CREATE_DISTRIB=ON -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ ../
 make -j4
+sed -i '' 's/.*set(CMAKE_INSTALL_PREFIX.*/  set(CMAKE_INSTALL_PREFIX "\.\.\/\.\.\/\.\.\/opencv")/' cmake_install.cmake
 make install
 
 cd ../../..
