@@ -60,7 +60,9 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       pcPath <- "/opencv/lib/pkgconfig/opencv.pc"
       pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")$V1
       libs <- gsub(".*\\/lib ", "", as.character(pc[grepl("Libs:", pc)]))
-      cat(paste0("-L", libDir, " ", libs))
+      libs <- c(libs, gsub(".*\\Libs.private: ", "", as.character(pc[grepl("Libs.private:", pc)])))
+      rpath <-
+      cat(paste0("-Wl,-rpath=", libDir, " ", "-L", libDir, " ", paste0(libs, collapse = " ")))
     }
   } else if (output == "cflags") {
     includedirOld <- paste0(prefix, "/include/opencv")

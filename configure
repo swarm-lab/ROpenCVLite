@@ -2,56 +2,24 @@ set -x
 set -e
 
 mkdir inst/tmp
-# mkdir inst/opencv/
 
 cd inst/tmp/
-
-# Rscript -e 'download.file("https://github.com/Itseez/opencv/archive/3.1.0.zip", "opencv_3.1.0.zip")'
-# Rscript -e 'unzip("opencv_3.1.0.zip")'
 
 Rscript -e 'download.file("https://github.com/opencv/opencv/archive/master.zip", "opencv-master.zip")'
 Rscript -e 'unzip("opencv-master.zip")'
 
-# if [[ $R_PLATFORM == *"apple"* ]]
-# then
-#   cp ../OpenCVModule.patch opencv-3.1.0/cmake/OpenCVModule.patch
-#   cd opencv-3.1.0/cmake/
-#   patch < OpenCVModule.patch
-#   rm -rf OpenCVModule.patch
-#   cd ../..
-# fi
+cp ../6810.patch opencv-master/cmake/6810.patch
+cd opencv-master/cmake/
+patch < 6810.patch
+rm -rf 6810.patch
+cd ../..
 
-if [[ $R_PLATFORM == *"apple"* ]]
-then
-  cp ../6810.patch opencv-master/cmake/6810.patch
-  cd opencv-master/cmake/
-  patch < 6810.patch
-  rm -rf 6810.patch
-  cd ../..
-fi
-
-# cd opencv-3.1.0
 cd opencv-master
 mkdir build
 cd build
 
-if [[ $R_PLATFORM == *"apple"* ]]
-  then
-    cmake -D R_PACKAGE_DIR=${R_PACKAGE_DIR} -D WITH_IPP=ON -D INSTALL_CREATE_DISTRIB=ON -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ ../
-    sed -i '' 's/.*set(CMAKE_INSTALL_PREFIX.*/  set(CMAKE_INSTALL_PREFIX "\.\.\/\.\.\/\.\.\/opencv")/' cmake_install.cmake
-  else
-    cmake -D R_PACKAGE_DIR=${R_PACKAGE_DIR} -D WITH_IPP=ON -D INSTALL_CREATE_DISTRIB=ON -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../../opencv/ ../
-fi
-
+cmake -DWITH_IPP=ON -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ ../
 make -j4
-
-# if [[ $R_PLATFORM == *"apple"* ]]
-#   then
-#     sed -i '' 's/.*set(CMAKE_INSTALL_PREFIX.*/  set(CMAKE_INSTALL_PREFIX "\.\.\/\.\.\/\.\.\/opencv")/' cmake_install.cmake
-#   else
-#     sed -i '/set(CMAKE_INSTALL_PREFIX/c\set(CMAKE_INSTALL_PREFIX "\.\.\/\.\.\/\.\.\/opencv")' cmake_install.cmake
-# fi
-
 make install
 
 cd ../../..
