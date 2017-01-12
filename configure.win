@@ -6,15 +6,10 @@ mkdir inst/opencv/
 
 cd inst/tmp/
 
-# Rscript -e 'download.file("https://github.com/Itseez/opencv/archive/3.1.0.tar.gz", "opencv_3.1.0.tar.gz")'
-# tar zxvf opencv_3.1.0.tar.gz
+Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.2.0.tar.gz", "opencv-3.2.0.tar.gz")'
+tar zxvf opencv-3.2.0.tar.gz
 
-# cd opencv-3.1.0
-
-Rscript -e 'download.file("https://github.com/opencv/opencv/archive/master.tar.gz", "opencv-master.tar.gz")'
-tar zxvf opencv-master.tar.gz
-
-cd opencv-master
+cd opencv-3.2.0
 
 if [ -d "$R_HOME/bin/x64" ]; then
   mkdir build64

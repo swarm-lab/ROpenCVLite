@@ -1,7 +1,7 @@
 Package: ROpenCVLite
 Type: Package
 Title: Install OpenCV Within R
-Version: 0.1.31
+Version: 0.1.32
 Author: Simon Garnier
 Maintainer: Simon Garnier <garnier@njit.edu>
 Description: This is a utility package that installs OpenCV within R for use by

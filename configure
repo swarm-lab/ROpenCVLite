@@ -2,19 +2,20 @@ set -x
 set -e
 
 mkdir inst/tmp
+mkdir inst/opencv/
 
 cd inst/tmp/
 
-Rscript -e 'download.file("https://github.com/opencv/opencv/archive/master.zip", "opencv-master.zip")'
-Rscript -e 'unzip("opencv-master.zip")'
+Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.2.0.zip", "opencv-3.2.0.zip")'
+Rscript -e 'unzip("opencv-3.2.0.zip")'
 
-cp ../6810.patch opencv-master/cmake/6810.patch
-cd opencv-master/cmake/
+cp ../6810.patch opencv-3.2.0/cmake/6810.patch
+cd opencv-3.2.0/cmake/
 patch < 6810.patch
 rm -rf 6810.patch
 cd ../..
 
-cd opencv-master
+cd opencv-3.2.0
 mkdir build
 cd build
 
