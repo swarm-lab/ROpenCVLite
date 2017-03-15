@@ -16,4 +16,3 @@ Determines the version of OpenCV installed within R.
 \author{
 Simon Garnier, \email{garnier@njit.edu}
 }
-

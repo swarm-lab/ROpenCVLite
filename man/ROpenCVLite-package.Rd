@@ -13,4 +13,3 @@ This is a utility package that installs OpenCV within R for use
 \author{
 Simon Garnier, \email{garnier@njit.edu}
 }
-

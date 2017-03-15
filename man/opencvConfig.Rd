@@ -21,4 +21,3 @@ Determines the configuration options for compiling C/C++-based
 \author{
 Simon Garnier, \email{garnier@njit.edu}
 }
-
