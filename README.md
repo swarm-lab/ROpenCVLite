@@ -2,6 +2,13 @@
 
 **Not ready for production. Try at your own risks.**
 
+`swarm-lab` badge:
+[![Travis-CI Build Status](https://travis-ci.org/swarm-lab/ROpenCVLite.svg?branch=master)](https://travis-ci.org/swarm-lab/ROpenCVLite)
+
+`muschellij2` badge:
+[![Travis-CI Build Status](https://travis-ci.org/muschellij2/ROpenCVLite.svg?branch=master)](https://travis-ci.org/muschellij2/ROpenCVLite)
+
+
 ---
 
 + [1 - Package description](#1---package-description)
