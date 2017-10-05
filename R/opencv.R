@@ -38,7 +38,7 @@ opencvVersion <- function() {
 #'  configuration options.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
-#'
+#' @importFrom utils read.table
 #' @export
 opencvConfig <- function(output = "libs", arch = NULL) {
   pkgPath <- find.package("ROpenCVLite")

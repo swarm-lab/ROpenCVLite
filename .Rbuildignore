@@ -5,3 +5,4 @@ inst/opencv
 appveyor\.yml$
 ^\.travis\.yml$
 ^appveyor\.yml$
+LICENSE
