@@ -31,6 +31,9 @@ opencvVersion <- function() {
 #' @param output Either 'libs' for library configuration options or 'cflags' for
 #'  C/C++ configuration flags.
 #'
+#' @param arch architecture relevant for Windows.  If \code{NULL},
+#' then \code{R.version$arch} will be used.
+#'
 #' @return A concatenated character string (with \code{\link{cat}}) of the
 #'  configuration options.
 #'
@@ -43,6 +46,9 @@ opencvConfig <- function(output = "libs", arch = NULL) {
 
   if (output == "libs") {
     if (.Platform$OS.type == "windows") {
+      if (is.null(arch)) {
+        arch = R.version$arch
+      }
       if (grepl("i386", arch)) {
         execPrefix <- paste0(prefix, "/x86/mingw")
       } else {
