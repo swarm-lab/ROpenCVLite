@@ -4,3 +4,4 @@ inst/opencv
 \.travis\.yml$
 appveyor\.yml$
 ^\.travis\.yml$
+^appveyor\.yml$
