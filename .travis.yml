@@ -1,0 +1,46 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: false
+cache: packages
+warnings_are_errors: true
+cran: http://cran.rstudio.com
+
+os:
+  - linux
+  - osx
+
+env:
+  global:
+  - R_BUILD_ARGS=""
+  - R_CHECK_ARGS="--as-cran --install-args=--build"
+  - WARNINGS_ARE_ERRORS=1
+
+before_install:
+  - fname=travis_helpers.sh
+  - wget -O ${fname} http://bit.ly/travis_helpers
+  - cat ${fname}; source ${fname}; rm ${fname}
+  - cat DESCRIPTION
+  - export PACKAGE_NAME=`package_name`
+  - export RCHECK_DIR=${PACKAGE_NAME}.Rcheck
+  - export cmake_version="3.4"
+  - cmake --version
+  - x=`cmake_setup`; echo "${x}"; eval ${x};
+  - cmake --version
+
+script:
+  - travis_wait 100 R CMD build ${R_BUILD_ARGS} .
+  - rm -f travis_wait*.log
+  - PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1)
+  - travis_wait 100 R CMD check ${R_CHECK_ARGS} "${PKG_TARBALL}"; CHECK_RET=$? ;
+  - rm -f travis_wait*.log
+  - check_fail
+  - check_warnings
+
+after_success:
+  - cat ${RCHECK_DIR}/00install.out
+  - cat ${RCHECK_DIR}/00check.log
+
+after_failure:
+  - cat ${RCHECK_DIR}/00install.out
+  - cat ${RCHECK_DIR}/00check.log

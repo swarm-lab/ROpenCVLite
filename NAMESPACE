@@ -2,3 +2,4 @@
 
 export(opencvConfig)
 export(opencvVersion)
+importFrom(utils,read.table)
