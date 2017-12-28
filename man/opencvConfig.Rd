@@ -9,6 +9,9 @@ opencvConfig(output = "libs", arch = NULL)
 \arguments{
 \item{output}{Either 'libs' for library configuration options or 'cflags' for
 C/C++ configuration flags.}
+
+\item{arch}{architecture relevant for Windows.  If \code{NULL},
+then \code{R.version$arch} will be used.}
 }
 \value{
 A concatenated character string (with \code{\link{cat}}) of the

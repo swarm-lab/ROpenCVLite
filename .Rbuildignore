@@ -1,3 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 inst/opencv
+\.travis\.yml$
+appveyor\.yml$
+^\.travis\.yml$
+^appveyor\.yml$
+LICENSE

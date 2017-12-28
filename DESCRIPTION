@@ -1,16 +1,23 @@
 Package: ROpenCVLite
 Type: Package
 Title: Install OpenCV Within R
-Version: 0.1.32
-Author: Simon Garnier
+Version: 0.1.32.1
+Authors@R: c(person(given = "Simon", family = "Garnier", 
+    email = "garnier@njit.edu", role = c("aut", "cre")),
+    person(given = "John", family = "Muschelli", 
+    role = "ctb")
+    )
 Maintainer: Simon Garnier <garnier@njit.edu>
-Description: This is a utility package that installs OpenCV within R for use by
-    other packages. This Lite version does not contain any of the contributed
-    modules of OpenCV.
+Description: This is a utility package that installs OpenCV within R for
+    use by other packages. This Lite version does not contain any of
+    the contributed modules of OpenCV.
 License: GPL-3
 LazyData: TRUE
 Imports:
-    Rcpp (>= 0.12.5)
+    Rcpp (>= 0.12.5),
+    utils
 LinkingTo: Rcpp
 SystemRequirements: cmake
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
+Encoding: UTF-8
+
