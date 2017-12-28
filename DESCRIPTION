@@ -1,7 +1,7 @@
 Package: ROpenCVLite
 Type: Package
 Title: Install OpenCV Within R
-Version: 0.1.33
+Version: 0.1.32.1
 Authors@R: c(person(given = "Simon", family = "Garnier", 
     email = "garnier@njit.edu", role = c("aut", "cre")),
     person(given = "John", family = "Muschelli", 
