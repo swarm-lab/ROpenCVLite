@@ -8,16 +8,18 @@ mkdir -p inst/opencv/
 
 cd inst/tmp/
 
-Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.2.0.zip", "opencv-3.2.0.zip")'
-Rscript -e 'unzip("opencv-3.2.0.zip")'
+Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.0.zip", "opencv-3.4.0.zip")'
+Rscript -e 'unzip("opencv-3.4.0.zip")'
 
-cp ../6810.patch opencv-3.2.0/cmake/6810.patch
-cd opencv-3.2.0/cmake/
-patch < 6810.patch
-rm -rf 6810.patch
-cd ../..
+# cp ../6810.patch opencv-3.4.0/cmake/6810.patch
+# cd opencv-3.4.0/cmake/
+# patch < 6810.patch
+# rm -rf 6810.patch
+# cd ../..
 
-cd opencv-3.2.0
+cp ../OpenCVModule.cmake opencv-3.4.0/cmake/
+
+cd opencv-3.4.0
 mkdir build
 cd build
 
