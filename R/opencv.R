@@ -86,7 +86,8 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       } else {
         execdir <- paste0(prefix, "/x64/mingw/bin")
       }
-      cat(paste0('-I"', shortPathName(includedirOld), '" -I"', shortPathName(includedirNew), '"', '" -I"', shortPathName(execdir), '"'))
+
+      cat(paste0('-I"', shortPathName(includedirOld), '" -I"', shortPathName(includedirNew), '" -I"', shortPathName(execdir), '"'))
     } else {
       cat(paste0("-I", includedirOld, " -I", includedirNew))
     }
