@@ -78,7 +78,15 @@ opencvConfig <- function(output = "libs", arch = NULL) {
     includedirNew <- paste0(prefix, "/include")
 
     if (.Platform$OS.type == "windows") {
-      cat(paste0('-I"', shortPathName(includedirOld), '" -I"', shortPathName(includedirNew), '"'))
+      if (is.null(arch)) {
+        arch = R.version$arch
+      }
+      if (grepl("i386", arch)) {
+        execdir <- paste0(prefix, "/x86/mingw/bin")
+      } else {
+        execdir <- paste0(prefix, "/x64/mingw/bin")
+      }
+      cat(paste0('-I"', shortPathName(includedirOld), '" -I"', shortPathName(includedirNew), '"', '" -I"', shortPathName(execdir), '"'))
     } else {
       cat(paste0("-I", includedirOld, " -I", includedirNew))
     }
