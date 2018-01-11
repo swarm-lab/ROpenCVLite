@@ -7,8 +7,8 @@
     } else {
       binPath <- "/opencv/x64/mingw/bin"
     }
-    binPath <- shortPathName(paste0(pkgPath, binPath))
-    Sys.setenv(PATH = paste(binPath, opath, sep=";"))
+    binPath <- utils::shortPathName(paste0(pkgPath, binPath))
+    Sys.setenv(PATH = paste(binPath, opath, sep = ";"))
   }
 
   # are you sure not want to check .Platform$OS.type == "unix"?
@@ -28,8 +28,8 @@
     } else {
       binPath <- "/opencv/x64/mingw/bin"
     }
-    binPath <- shortPathName(paste0(pkgPath, binPath))
-    Sys.setenv(PATH = paste(binPath, opath, sep=";"))
+    binPath <- utils::shortPathName(paste0(pkgPath, binPath))
+    Sys.setenv(PATH = paste(binPath, opath, sep = ";"))
   }
 
   # are you sure not want to check .Platform$OS.type == "unix"?
