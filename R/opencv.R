@@ -59,7 +59,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       libs <- gsub("\\.a", "", libs)
       libs <- gsub("\\.dll", "", libs)
       libs <- paste0("-l", libs)
-      cat(paste0('-L"', shortPathName(libDir), '"'), libs)
+      cat(paste0('-L"', utils::shortPathName(libDir), '"'), libs)
     } else {
       execPrefix <- prefix
       libDir <- paste0(execPrefix, "/lib")
@@ -87,7 +87,9 @@ opencvConfig <- function(output = "libs", arch = NULL) {
         execdir <- paste0(prefix, "/x64/mingw/bin")
       }
 
-      cat(paste0('-I"', shortPathName(includedirOld), '" -I"', shortPathName(includedirNew), '" -I"', shortPathName(execdir), '"'))
+      cat(paste0('-I"', utils::shortPathName(includedirOld), '" -I"',
+                 utils::shortPathName(includedirNew), '" -I"',
+                 utils::shortPathName(execdir), '"'))
     } else {
       cat(paste0("-I", includedirOld, " -I", includedirNew))
     }
