@@ -8,3 +8,4 @@ src/*.dll
 inst/opencv
 inst/tmp
 OpenCVModule_old.patch
+inst/old
