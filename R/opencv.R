@@ -58,6 +58,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       libs <- gsub("libopencv", "opencv", list.files(libDir, "lib*"))
       libs <- gsub("\\.a", "", libs)
       libs <- gsub("\\.dll", "", libs)
+      libs <- ifelse(substring(libs, 1, 3) == "lib", substring(libs, 4), libs)
       libs <- paste0("-l", libs)
       cat(paste0('-L"', utils::shortPathName(libDir), '"'), libs)
     } else {
