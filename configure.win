@@ -13,8 +13,6 @@ cp ../cap_dshow.cpp opencv-3.4.0/modules/videoio/src/
 
 cd opencv-3.4.0
 
-# OPENCV_BIN_PATH=""
-
 if [ -d "$R_HOME/bin/x64" ]; then
   mkdir build64
   cd build64
@@ -22,7 +20,6 @@ if [ -d "$R_HOME/bin/x64" ]; then
   make -j4
   make install
   cd ../
-  # OPENCV_BIN_PATH="${OPENCV_BIN_PATH}${R_LIBS_USER}/ROpenCVLite/opencv/x64/mingw/bin;"
 fi
 
 if [ -d "$R_HOME/bin/i386" ]; then
@@ -32,11 +29,8 @@ if [ -d "$R_HOME/bin/i386" ]; then
   make -j4
   make install
   cd ../
-  # OPENCV_BIN_PATH="${OPENCV_BIN_PATH}${R_LIBS_USER}/ROpenCVLite/opencv/x86/mingw/bin;"
 fi
 
 cd ../../
 
 rm -rf tmp
-
-# setx PATH "%PATH%;${OPENCV_BIN_PATH}"
