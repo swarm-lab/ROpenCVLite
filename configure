@@ -11,12 +11,11 @@ set -e
 Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.2.0.zip", "opencv-3.2.0.zip")'
 Rscript -e 'unzip("opencv-3.2.0.zip")'
 
-cp ../6810.patch opencv-3.2.0/cmake/6810.patch
+cp 6810.patch opencv-3.2.0/cmake/6810.patch
 cd opencv-3.2.0/cmake/
 patch < 6810.patch
 rm -rf 6810.patch
 # cd ../..
-
 
 mkdir build
 cd build
