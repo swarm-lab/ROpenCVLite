@@ -58,8 +58,9 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       libs <- gsub("libopencv", "opencv", list.files(libDir, "lib*"))
       libs <- gsub("\\.a", "", libs)
       libs <- gsub("\\.dll", "", libs)
+      libs <- ifelse(substring(libs, 1, 3) == "lib", substring(libs, 4), libs)
       libs <- paste0("-l", libs)
-      cat(paste0('-L"', shortPathName(libDir), '"'), libs)
+      cat(paste0('-L"', utils::shortPathName(libDir), '"'), libs)
     } else {
       execPrefix <- prefix
       libDir <- paste0(execPrefix, "/lib")
@@ -78,7 +79,18 @@ opencvConfig <- function(output = "libs", arch = NULL) {
     includedirNew <- paste0(prefix, "/include")
 
     if (.Platform$OS.type == "windows") {
-      cat(paste0('-I"', shortPathName(includedirOld), '" -I"', shortPathName(includedirNew), '"'))
+      if (is.null(arch)) {
+        arch = R.version$arch
+      }
+      if (grepl("i386", arch)) {
+        execdir <- paste0(prefix, "/x86/mingw/bin")
+      } else {
+        execdir <- paste0(prefix, "/x64/mingw/bin")
+      }
+
+      cat(paste0('-I"', utils::shortPathName(includedirOld), '" -I"',
+                 utils::shortPathName(includedirNew), '" -I"',
+                 utils::shortPathName(execdir), '"'))
     } else {
       cat(paste0("-I", includedirOld, " -I", includedirNew))
     }
