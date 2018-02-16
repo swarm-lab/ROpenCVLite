@@ -9,14 +9,10 @@ set -e
 # cd inst/tmp/
 cd ./src
 
-Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.2.0.zip", "opencv-3.2.0.zip")'
-Rscript -e 'unzip("opencv-3.2.0.zip")'
+Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.0.zip", "opencv-3.4.0.zip")'
+Rscript -e 'unzip("opencv-3.4.0.zip")'
 
-cp 6810.patch opencv-3.2.0/cmake/6810.patch
-cd opencv-3.2.0/cmake/
-patch < 6810.patch
-rm -rf 6810.patch
-cd ../..
+cp OpenCVModule.cmake opencv-3.4.0/cmake/
 
 mkdir build
 cd build
@@ -28,7 +24,7 @@ cmake -DWITH_IPP=ON \
 	-DINSTALL_CREATE_DISTRIB=ON \
 	-DCMAKE_BUILD_TYPE=RELEASE \
 	-DCMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ \
-	../opencv-3.2.0
+	../opencv-3.4.0
 cd ../
 # make -j4
 # make install
@@ -36,3 +32,4 @@ cd ../
 # cd ../../..
 
 # rm -rf tmp
+
