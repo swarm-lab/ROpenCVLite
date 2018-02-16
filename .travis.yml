@@ -33,6 +33,7 @@ script:
   - rm -f travis_wait*.log
   - PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1)
   - travis_wait 100 R CMD check ${R_CHECK_ARGS} "${PKG_TARBALL}"; CHECK_RET=$? ;
+  - echo ${CHECK_RET}
   - rm -f travis_wait*.log
   - check_fail
   - check_warnings
