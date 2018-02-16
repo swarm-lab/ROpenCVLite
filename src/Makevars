@@ -1,8 +1,7 @@
-.PHONY: all libs
+.PHONY: all opencv
 
 all: $(SHLIB)
 
-libs: ; cd build && $(MAKE) -j4 &&  && $(MAKE) all install
+opencv: ; cd build && make -j4 &&  && make all install
 
-
-$(SHLIB): libs
+$(SHLIB): opencv
