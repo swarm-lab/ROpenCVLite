@@ -4,4 +4,4 @@ all: $(SHLIB)
 
 $(SHLIB): opencv
 
-opencv: ; cd build && make -j4 && make all install
+opencv: ; cd build && make -j4 && make all install && cd ../ && rm -rf build
