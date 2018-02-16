@@ -2,4 +2,7 @@
 
 all: $(SHLIB)
 
+libs: ; cd build && $(MAKE) -j4 &&  && $(MAKE) all install
+
+
 $(SHLIB): libs
