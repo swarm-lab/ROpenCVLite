@@ -7,6 +7,7 @@ set -e
 # mkdir -p inst/opencv/
 
 # cd inst/tmp/
+cd ./src
 
 Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.2.0.zip", "opencv-3.2.0.zip")'
 Rscript -e 'unzip("opencv-3.2.0.zip")'
@@ -28,7 +29,7 @@ cmake -DWITH_IPP=ON \
 	-DCMAKE_BUILD_TYPE=RELEASE \
 	-DCMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ \
 	../opencv-3.2.0
-
+cd ../
 # make -j4
 # make install
 
