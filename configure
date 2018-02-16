@@ -16,7 +16,7 @@ cp 6810.patch opencv-3.2.0/cmake/6810.patch
 cd opencv-3.2.0/cmake/
 patch < 6810.patch
 rm -rf 6810.patch
-# cd ../..
+cd ../..
 
 mkdir build
 cd build
