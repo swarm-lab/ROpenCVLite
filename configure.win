@@ -9,7 +9,7 @@ mkdir inst/opencv/
 cd inst/tmp/
 
 Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.1.tar.gz", "opencv-3.4.1.tar.gz")'
-tar zxvf opencv-3.4.1.tar.gz
+tar zxvf opencv-3.4.1.tar.gz >/dev/null
 
 cp ../cap_dshow.cpp opencv-3.4.1/modules/videoio/src/
 
