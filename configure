@@ -8,12 +8,12 @@ mkdir -p inst/opencv/
 
 cd inst/tmp/
 
-Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.0.zip", "opencv-3.4.0.zip")'
-Rscript -e 'unzip("opencv-3.4.0.zip")'
+Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.1.zip", "opencv-3.4.1.zip")'
+Rscript -e 'unzip("opencv-3.4.1.zip")'
 
-cp ../OpenCVModule.cmake opencv-3.4.0/cmake/
+# cp ../OpenCVModule.cmake opencv-3.4.0/cmake/
 
-cd opencv-3.4.0
+cd opencv-3.4.1
 mkdir build
 cd build
 
