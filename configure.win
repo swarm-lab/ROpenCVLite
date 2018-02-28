@@ -18,7 +18,7 @@ cd opencv-3.4.1
 if [ -d "$R_HOME/bin/x64" ]; then
   mkdir build64
   cd build64
-  cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_64/bin/g++.exe -DCMAKE_RC_COMPILER=C:/Rtools/mingw_64/bin/windres.exe -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DPYTHON_EXECUTABLE=OFF -DBUILD_OPENCV_PHOTO=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../opencv/ ../
+  cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_64/bin/g++.exe -DCMAKE_RC_COMPILER=C:/Rtools/mingw_64/bin/windres.exe -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DPYTHON_EXECUTABLE=OFF -DBUILD_opencv_photo=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../opencv/ ../
   make -j4
   make install
   cd ../
@@ -27,7 +27,7 @@ fi
 if [ -d "$R_HOME/bin/i386" ]; then
   mkdir build32
   cd build32
-  cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_32/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_32/bin/g++.exe -DCMAKE_RC_COMPILER=C:/Rtools/mingw_32/bin/windres.exe -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DPYTHON_EXECUTABLE=OFF -DBUILD_OPENCV_PHOTO=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../opencv/ ../
+  cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_32/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_32/bin/g++.exe -DCMAKE_RC_COMPILER=C:/Rtools/mingw_32/bin/windres.exe -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DPYTHON_EXECUTABLE=OFF -DBUILD_opencv_photo=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../opencv/ ../
   make -j4
   make install
   cd ../
