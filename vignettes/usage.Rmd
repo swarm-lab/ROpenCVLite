@@ -28,9 +28,9 @@ No, but you can use it to develop a computer vision package for R (see our
 in the DESCRIPTION file of your package.
 2. Use the [`opencvConfig` function](https://swarm-lab.github.io/ROpenCVLite/reference/opencvConfig.html)
 provided with [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) to:
-  2.1. set the `PKG_LIBS` value of the Makevars and Makevars.win 
+  1. set the `PKG_LIBS` value of the Makevars and Makevars.win 
 files of your package (using `opencvConfig("libs")`). 
-  2.2. set the `PKG_CPPFLAGS` () value of the Makevars and Makevars.win 
+  2. set the `PKG_CPPFLAGS` () value of the Makevars and Makevars.win 
 files of your package (using `opencvConfig("cflags")`).
 
 You can find an example of how to set up your package to use 
