@@ -52,6 +52,9 @@
 <li>
       <a href="articles/install.html">Installing ROpenCVLite</a>
     </li>
+    <li>
+      <a href="articles/usage.html">Using ROpenCVLite</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -79,7 +82,7 @@
 <h2 class="hasAnchor">
 <a href="#description" class="anchor"></a>Description</h2>
 <p><a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> is a utility package that installs <a href="http://opencv.org/"><code>OpenCV</code></a> within <a href="https://cran.r-project.org"><code>R</code></a> for use by other packages. This package is not a wrapper around <a href="http://opencv.org/"><code>OpenCV</code></a> (it does not provide access to <a href="http://opencv.org/"><code>OpenCV</code></a> functions in R), not is it a computer vision package for <a href="https://cran.r-project.org"><code>R</code></a>. All it does is compiling and installing <a href="http://opencv.org/"><code>OpenCV</code></a> within your <a href="https://cran.r-project.org"><code>R</code></a> installation so that other packages can easily find it and compile against it.</p>
-<p>Instructions to install <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> can be found <a href="">here</a>. Instructions on how to use <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> when developing packages can be found <a href="">here</a>.</p>
+<p>Instructions to install <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> can be found <a href="/articles/install.html">here</a>. Instructions on how to use <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> when developing packages can be found <a href="articles/usage.html">here</a>.</p>
 <hr>
 </div>
 <div id="faq" class="section level2">
@@ -102,6 +105,13 @@
 <p>Yes, but… it is fairly difficult to ship binary files compiled against <a href="http://opencv.org/"><code>OpenCV</code></a> that will work for sure on someone else’s computer. It is not <a href="http://opencv.org/"><code>OpenCV</code></a>’s fault; it is because there are so many video formats and standards for peripherals out there that nobody can be certain what interfaces and libraries will be available on anyone’s computer to grab images from videos and camera streams. The least worst solution for developers is therefore to make sure that there is a copy of <a href="http://opencv.org/"><code>OpenCV</code></a> on each user’s computer that has been compiled taking into account the specificities of said computer.</p>
 <p>HOWEVER…</p>
 <p><a href="http://opencv.org/"><code>OpenCV</code></a> is notoriously difficult to compile and install from scratch, especially for people without experience with low level languages. This is where <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> come into play. This package tries as much as possible to cleanly compile <a href="http://opencv.org/"><code>OpenCV</code></a> and to install it in a standardized location that all <a href="https://cran.r-project.org"><code>R</code></a> package developers can easily find.</p>
+</div>
+<div id="why-lite-are-you-keeping-something-from-us" class="section level3">
+<h3 class="hasAnchor">
+<a href="#why-lite-are-you-keeping-something-from-us" class="anchor"></a>Why “Lite”? Are you keeping something from us?</h3>
+<p><a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> compiles and installs the core modules of the <a href="http://opencv.org/"><code>OpenCV</code></a> library but does not compile or install its <a href="https://github.com/opencv/opencv_contrib">contributed extra modules</a>. This is to reduce the compilation time (which is already long enough) and also because most of these extra modules are (1) too specific for most applications of <a href="http://opencv.org/"><code>OpenCV</code></a>, and (2) they do not always compile nicely.</p>
+<p>We will work toward providing a mechanism to install the extra modules, but this is not part of our immediate plans.</p>
+<hr>
 </div>
 </div>
 </div>

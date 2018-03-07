@@ -18,17 +18,18 @@ All installation steps are described below.
 
 ---
 
-+ [1 - Before installing ](#1---Before-installing )
-  + [1.1 - Windows](#11---Windows)
-  + [1.2 - Mac](#12---Mac)
-  + [1.3 - Linux](#13---Linux)
-  + [1.4 - Mac, Linux and Windows](#14---mac-linux-and-windows)
-+ [2 - Installing `ROpenCVLite`](#2---installing-ropencvlite)
++ [1 - Before installing ](#Before-installing )
+  + [1.1 - Windows](#Windows)
+  + [1.2 - Mac](#Mac)
+  + [1.3 - Linux](#Linux)
+  + [1.4 - Mac, Linux and Windows](#mac-linux-and-windows)
++ [2 - Installing `ROpenCVLite`](#installing-ropencvlite)
   
+---
 
-# 1 - Before installing 
+## 1 - Before installing 
 
-## 1.1 - Windows
+### 1.1 - Windows
 
 Before installing `ROpenCVLite`, you will need to install the latest versions of
 [`CMake`](https://cmake.org/) and [`Rtools`](https://cran.r-project.org/bin/windows/Rtools/). 
@@ -41,7 +42,7 @@ Download the latest "frozen" version of `Rtools` at
 In both cases, make sure to tell the installer to add `CMake` and `Rtools` to 
 your "PATH".
 
-## 1.2 - Mac
+### 1.2 - Mac
 
 Before installing `ROpenCVLite`, you will need to install the latest version of
 [`CMake`](https://cmake.org/).
@@ -62,7 +63,7 @@ brew install cmake
 sudo port install cmake
 ```
 
-## 1.3 - Linux
+### 1.3 - Linux
 
 Before installing `ROpenCVLite`, you will need to install the latest version of
 [`CMake`](https://cmake.org/).
@@ -79,7 +80,7 @@ sudo apt-get install cmake
 
 [TODO: add more Linux install commands]
 
-## 1.4 - Mac, Linux and Windows
+### 1.4 - Mac, Linux and Windows
 
 Before installing `ROpenCVLite`, you will need to install the `devtools` package 
 in `R`. 
@@ -88,7 +89,7 @@ in `R`.
 install.package("devtools")
 ```
 
-# 2 - Installing `ROpenCVLite`
+## 2 - Installing `ROpenCVLite`
 
 ```r
 devtools::install_github("swarm-lab/ROpenCVLite")

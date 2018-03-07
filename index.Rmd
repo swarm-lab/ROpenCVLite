@@ -15,8 +15,9 @@ it does is compiling and installing [`OpenCV`](http://opencv.org/) within your
 find it and compile against it. 
 
 Instructions to install [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite)
-can be found [here](). Instructions on how to use [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite)
-when developing packages can be found [here]().
+can be found [here](/articles/install.html). Instructions on how to use 
+[`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite)
+when developing packages can be found [here](articles/usage.html).
 
 ---
 
@@ -62,3 +63,17 @@ This is where [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) come int
 play. This package tries as much as possible to cleanly compile [`OpenCV`](http://opencv.org/)
 and to install it in a standardized location that all [`R`](https://cran.r-project.org) 
 package developers can easily find.
+
+### Why "Lite"? Are you keeping something from us? 
+
+[`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) compiles and installs 
+the core modules of the [`OpenCV`](http://opencv.org/) library but does not 
+compile or install its [contributed extra modules](https://github.com/opencv/opencv_contrib).
+This is to reduce the compilation time (which is already long enough) and also 
+because most of these extra modules are (1) too specific for most applications of 
+[`OpenCV`](http://opencv.org/), and (2) they do not always compile nicely.
+
+We will work toward providing a mechanism to install the extra modules, but this 
+is not part of our immediate plans. 
+
+---
