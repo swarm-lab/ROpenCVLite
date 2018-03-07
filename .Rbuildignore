@@ -6,3 +6,4 @@ appveyor\.yml$
 ^appveyor\.yml$
 LICENSE
 docs
+_pkgdown.yaml

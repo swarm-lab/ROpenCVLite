@@ -40,7 +40,3 @@ You can find an example of how to set up your package to use
 - [DESCRIPTION](https://github.com/swarm-lab/Rvision/blob/master/DESCRIPTION)
 - [Makevars](https://github.com/swarm-lab/Rvision/blob/master/Makevars)
 - [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/Makevars.win)
-
-
-
-
