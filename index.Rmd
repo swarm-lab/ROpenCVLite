@@ -4,3 +4,18 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/swarm-lab/ROpenCVLite.svg?branch=master)](https://travis-ci.org/swarm-lab/ROpenCVLite)
 
+--- 
+
+## 1 - Package description
+
+`ROpenCVLite` is a utility package that installs [`OpenCV`](http://opencv.org/) 
+within `R` for use by other packages. This package is not a wrapper around 
+`OpenCV` (it does not provide access to `OpenCV` functions in R), not is it a 
+computer vision package for R. All it does is compiling and installing OpenCV 
+within your R installation so that other packages can easily find it and compile 
+against it. 
+
+Read the [FAQ](#3---faq) below for more info about the what, why, and how of 
+`ROpenCVLite`.
+
+---
