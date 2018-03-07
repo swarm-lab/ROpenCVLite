@@ -15,7 +15,7 @@ it does is compiling and installing [`OpenCV`](http://opencv.org/) within your
 find it and compile against it. 
 
 Instructions to install [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite)
-can be found [here](/ROpenCVLite//articles/install.html). Instructions on how to use 
+can be found [here](/ROpenCVLite/articles/install.html). Instructions on how to use 
 [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite)
 when developing packages can be found [here](/ROpenCVLite/articles/usage.html).
 
