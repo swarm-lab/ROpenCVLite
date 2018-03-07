@@ -1,0 +1,97 @@
+---
+author: "Simon Garnier"
+title: "Installing ROpenCVLite"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{pkgdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Installing [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) should go 
+smoothly on all major operating systems (Mac, Windows, "Ubuntu-like" Linux). 
+There are a few steps to follow before installing the package itself in order to
+install all the necessary external (i.e. non-R) dependencies for 
+[`OpenCV`](http://opencv.org/) to install on your system. 
+
+All installation steps are described below. 
+
+---
+
++ [1 - Before installing ](#1---Before-installing )
+  + [1.1 - Windows](#11---Windows)
+  + [1.2 - Mac](#12---Mac)
+  + [1.3 - Linux](#13---Linux)
+  + [1.4 - Mac, Linux and Windows](#14---mac-linux-and-windows)
++ [2 - Installing `ROpenCVLite`](#2---installing-ropencvlite)
+  
+
+# 1 - Before installing 
+
+## 1.1 - Windows
+
+Before installing `ROpenCVLite`, you will need to install the latest versions of
+[`CMake`](https://cmake.org/) and [`Rtools`](https://cran.r-project.org/bin/windows/Rtools/). 
+
+Download `CMake` for Windows at [https://cmake.org/download/](https://cmake.org/download/).
+
+Download the latest "frozen" version of `Rtools` at 
+[https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/).
+
+In both cases, make sure to tell the installer to add `CMake` and `Rtools` to 
+your "PATH".
+
+## 1.2 - Mac
+
+Before installing `ROpenCVLite`, you will need to install the latest version of
+[`CMake`](https://cmake.org/).
+
+Download `CMake` for Mac at [https://cmake.org/download/](https://cmake.org/download/).
+You can also use [`Homebrew`](http://brew.sh/) or [`MacPorts`](https://www.macports.org/)
+if you prefer (I prefer!).
+
+**Homebrew:**
+
+```bash
+brew install cmake
+```
+
+**MacPorts:**
+
+```bash
+sudo port install cmake
+```
+
+## 1.3 - Linux
+
+Before installing `ROpenCVLite`, you will need to install the latest version of
+[`CMake`](https://cmake.org/).
+
+Download `CMake` for Linux at [https://cmake.org/download/](https://cmake.org/download/).
+However it is recommended that you install it using your distribution's package
+management system.
+
+**Ubuntu:**
+
+```bash
+sudo apt-get install cmake
+```
+
+[TODO: add more Linux install commands]
+
+## 1.4 - Mac, Linux and Windows
+
+Before installing `ROpenCVLite`, you will need to install the `devtools` package 
+in `R`. 
+
+```r
+install.package("devtools")
+```
+
+# 2 - Installing `ROpenCVLite`
+
+```r
+devtools::install_github("swarm-lab/ROpenCVLite")
+```
+
+This step can take some time. Go make yourself a cup of coffee or two.
