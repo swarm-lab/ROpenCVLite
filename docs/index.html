@@ -62,14 +62,36 @@
 <div id="ropencvlite" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ropencvlite" class="anchor"></a>ROpenCVLite</h1></div>
+
 <hr>
-<hr>
-<div id="package-description" class="section level2">
+<div id="description" class="section level2">
 <h2 class="hasAnchor">
-<a href="#package-description" class="anchor"></a>1 - Package description</h2>
-<p><code>ROpenCVLite</code> is a utility package that installs <a href="http://opencv.org/"><code>OpenCV</code></a> within <code>R</code> for use by other packages. This package is not a wrapper around <code>OpenCV</code> (it does not provide access to <code>OpenCV</code> functions in R), not is it a computer vision package for R. All it does is compiling and installing OpenCV within your R installation so that other packages can easily find it and compile against it.</p>
-<p>Read the <a href="#3---faq">FAQ</a> below for more info about the what, why, and how of <code>ROpenCVLite</code>.</p>
+<a href="#description" class="anchor"></a>Description</h2>
+<p><a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> is a utility package that installs <a href="http://opencv.org/"><code>OpenCV</code></a> within <a href="https://cran.r-project.org"><code>R</code></a> for use by other packages. This package is not a wrapper around <a href="http://opencv.org/"><code>OpenCV</code></a><br>
+(it does not provide access to <a href="http://opencv.org/"><code>OpenCV</code></a> functions in R), not is it a computer vision package for <a href="https://cran.r-project.org"><code>R</code></a>. All it does is compiling and installing <a href="http://opencv.org/"><code>OpenCV</code></a> within your <a href="https://cran.r-project.org"><code>R</code></a> installation so that other packages can easily find it and compile against it.</p>
 <hr>
+</div>
+<div id="faq" class="section level2">
+<h2 class="hasAnchor">
+<a href="#faq" class="anchor"></a>FAQ</h2>
+<div id="what-is-opencv" class="section level3">
+<h3 class="hasAnchor">
+<a href="#what-is-opencv" class="anchor"></a>What is OpenCV?</h3>
+<p><a href="http://opencv.org/"><code>OpenCV</code></a> is one of the most - if not the most - popular and efficient open-source computer vision library available today. If you want to develop fast video processing software or implement real time computer vision algorithms, you pretty much have to use <a href="http://opencv.org/"><code>OpenCV</code></a> nowadays.</p>
+</div>
+<div id="why-is-ropencvlite-necessary" class="section level3">
+<h3 class="hasAnchor">
+<a href="#why-is-ropencvlite-necessary" class="anchor"></a>Why is <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> necessary?</h3>
+<p>There are no computer vision package available for <a href="https://cran.r-project.org"><code>R</code></a> currently. There are some very good image processing packages (see <a href="http://dahtah.github.io/imager/">imager</a> for instance) but none of them can handle fast processing of large videos.</p>
+<p>The goal of <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> is to promote the development of efficient computer vision packages for <a href="https://cran.r-project.org"><code>R</code></a> based on <a href="http://opencv.org/"><code>OpenCV</code></a>. <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> facilitates the installation of <a href="http://opencv.org/"><code>OpenCV</code></a> in a convenient location for other packages to find it and compile against it.</p>
+</div>
+<div id="couldnt-you-just-ship-opencvs-binaries-with-your-package" class="section level3">
+<h3 class="hasAnchor">
+<a href="#couldnt-you-just-ship-opencvs-binaries-with-your-package" class="anchor"></a>Couldn’t you just ship <a href="http://opencv.org/"><code>OpenCV</code></a>’s binaries with your package?</h3>
+<p>Yes, but… it is fairly difficult to ship binary files compiled against <a href="http://opencv.org/"><code>OpenCV</code></a> that will work for sure on someone else’s computer. It is not <a href="http://opencv.org/"><code>OpenCV</code></a>’s fault; it is because there are so many video formats and standards for peripherals out there that nobody can be certain what interfaces and libraries will be available on anyone’s computer to grab images from videos and camera streams. The least worst solution for developers is therefore to make sure that there is a copy of <a href="http://opencv.org/"><code>OpenCV</code></a> on each user’s computer that has been compiled taking into account the specificities of said computer.</p>
+<p>HOWEVER…</p>
+<p><a href="http://opencv.org/"><code>OpenCV</code></a> is notoriously difficult to compile and install from scratch, especially for people without experience with low level languages. This is where <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> come into play. This package tries as much as possible to cleanly compile <a href="http://opencv.org/"><code>OpenCV</code></a> and to install it in a standardized location that all <a href="https://cran.r-project.org"><code>R</code></a> package developers can easily find.</p>
+</div>
 </div>
 </div>
 </div>
