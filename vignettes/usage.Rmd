@@ -37,9 +37,9 @@ You can find an example of how to set up your package to use
 [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) in our 
 [Rvision](https://github.com/swarm-lab/Rvision) package:
 
-- [DESCRIPTION](https://github.com/swarm-lab/Rvision/blob/master/src/DESCRIPTION)
-- [Makevars](https://github.com/swarm-lab/Rvision/blob/master/src/Makevars)
-- [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/src/Makevars.win)
+- [DESCRIPTION](https://github.com/swarm-lab/Rvision/blob/master/DESCRIPTION)
+- [Makevars](https://github.com/swarm-lab/Rvision/blob/master/Makevars)
+- [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/Makevars.win)
 
 
 
