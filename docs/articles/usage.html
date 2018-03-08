@@ -82,7 +82,6 @@
 <h2 class="hasAnchor">
 <a href="#create-a-package-using-ropencvlite" class="anchor"></a>Create a package using <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a>
 </h2>
-<p>No, but you can use it to develop a computer vision package for R (see our <a href="https://github.com/swarm-lab/Rvision">Rvision</a> package for instance).</p>
 <ol style="list-style-type: decimal">
 <li>Set <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> as a dependency in the DESCRIPTION file of your package.</li>
 <li>Use the <a href="https://swarm-lab.github.io/ROpenCVLite/reference/opencvConfig.html"><code>opencvConfig</code> function</a> provided with <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> to:</li>
@@ -91,7 +90,7 @@
 <li>set the <code>PKG_LIBS</code> value of the Makevars and Makevars.win files of your package (using <code><a href="../reference/opencvConfig.html">opencvConfig("libs")</a></code>).</li>
 <li>set the <code>PKG_CPPFLAGS</code> () value of the Makevars and Makevars.win files of your package (using <code><a href="../reference/opencvConfig.html">opencvConfig("cflags")</a></code>).</li>
 </ul>
-<p>You can find an example of how to set up your package to use <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> in our <a href="https://github.com/swarm-lab/Rvision">Rvision</a> package:</p>
+<p>You can find an example of how to set up your package with <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> in our <a href="https://github.com/swarm-lab/Rvision">Rvision</a> package:</p>
 <ul>
 <li><a href="https://github.com/swarm-lab/Rvision/blob/master/DESCRIPTION">DESCRIPTION</a></li>
 <li><a href="https://github.com/swarm-lab/Rvision/blob/master/Makevars">Makevars</a></li>
