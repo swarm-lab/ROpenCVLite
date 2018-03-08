@@ -21,19 +21,21 @@ library.
 
 ## Create a package using [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite)
 
+Follow these steps to configure your package for [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite):
+
 1. Set [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) as a dependency 
 in the DESCRIPTION file of your package.
 2. Use the [`opencvConfig` function](https://swarm-lab.github.io/ROpenCVLite/reference/opencvConfig.html)
 provided with [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) to:
-  + set the `PKG_LIBS` value of the Makevars and Makevars.win 
+    + set the `PKG_LIBS` value of the Makevars and Makevars.win 
 files of your package (using `opencvConfig("libs")`). 
-  + set the `PKG_CPPFLAGS` () value of the Makevars and Makevars.win 
+    + set the `PKG_CPPFLAGS` () value of the Makevars and Makevars.win 
 files of your package (using `opencvConfig("cflags")`).
 
 You can find an example of how to set up your package with 
 [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) in our 
 [Rvision](https://github.com/swarm-lab/Rvision) package:
 
-- [DESCRIPTION](https://github.com/swarm-lab/Rvision/blob/master/DESCRIPTION)
-- [Makevars](https://github.com/swarm-lab/Rvision/blob/master/Makevars)
-- [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/Makevars.win)
+* [DESCRIPTION](https://github.com/swarm-lab/Rvision/blob/master/DESCRIPTION)
+* [Makevars](https://github.com/swarm-lab/Rvision/blob/master/Makevars)
+* [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/Makevars.win)
