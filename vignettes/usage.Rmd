@@ -21,9 +21,6 @@ library.
 
 ## Create a package using [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite)
 
-No, but you can use it to develop a computer vision package for R (see our
-[Rvision](https://github.com/swarm-lab/Rvision) package for instance). 
-
 1. Set [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) as a dependency 
 in the DESCRIPTION file of your package.
 2. Use the [`opencvConfig` function](https://swarm-lab.github.io/ROpenCVLite/reference/opencvConfig.html)
@@ -33,7 +30,7 @@ files of your package (using `opencvConfig("libs")`).
   + set the `PKG_CPPFLAGS` () value of the Makevars and Makevars.win 
 files of your package (using `opencvConfig("cflags")`).
 
-You can find an example of how to set up your package to use 
+You can find an example of how to set up your package with 
 [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) in our 
 [Rvision](https://github.com/swarm-lab/Rvision) package:
 
