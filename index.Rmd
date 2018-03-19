@@ -19,7 +19,7 @@ find it and compile against it.
 ## Quick start guides
 
 1. [Installing ROpenCVLite](/ROpenCVLite/articles/install.html)
-2. [Using ROpenCVLite"](/ROpenCVLite/articles/usage.html)
+2. [Using ROpenCVLite](/ROpenCVLite/articles/usage.html)
 3. [Function documentation](/ROpenCVLite/reference/)
 
 ---
