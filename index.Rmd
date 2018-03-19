@@ -14,9 +14,13 @@ it does is compiling and installing [`OpenCV`](http://opencv.org/) within your
 [`R`](https://cran.r-project.org) installation so that other packages can easily 
 find it and compile against it. 
 
-- Installation instructions → [Click here](/ROpenCVLite/articles/install.html)
-- Using [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) to develop
-packages → [Click here](/ROpenCVLite/articles/usage.html)
+---
+
+## Quick start guides
+
+1. [Installing ROpenCVLite](/ROpenCVLite/articles/install.html)
+2. [Using ROpenCVLite"](/ROpenCVLite/articles/usage.html)
+3. [Function documentation](/ROpenCVLite/reference/)
 
 ---
 
