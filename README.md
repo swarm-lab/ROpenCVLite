@@ -23,8 +23,8 @@ All information about the functioning of this package can be found on its websit
 
 ## Quick start guides
 
-1. [Installing ROpenCVLite](/ROpenCVLite/articles/install.html)
-2. [Using ROpenCVLite](/ROpenCVLite/articles/usage.html)
-3. [Function documentation](/ROpenCVLite/reference/)
+1. [Installing ROpenCVLite](https://swarm-lab.github.io/ROpenCVLite/articles/install.html)
+2. [Using ROpenCVLite](https://swarm-lab.github.io/ROpenCVLite/articles/usage.html)
+3. [Function documentation](https://swarm-lab.github.io/ROpenCVLite/reference/)
 
 ---
