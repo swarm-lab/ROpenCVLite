@@ -26,7 +26,7 @@ cmake -DWITH_IPP=ON \
 	-DINSTALL_CREATE_DISTRIB=ON \
 	-DCMAKE_BUILD_TYPE=RELEASE \
 	-DCMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ \
-	../opencv-3.4.1
+	../
 cd ../
 # make -j4
 # make install
