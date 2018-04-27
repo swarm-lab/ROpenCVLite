@@ -7,3 +7,5 @@ src/*.so
 src/*.dll
 inst/opencv
 inst/tmp
+src/opencv-*.zip
+src/opencv-*/
