@@ -9,8 +9,8 @@ set -e
 # cd inst/tmp/
 cd ./src
 
-Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.0.zip", "opencv-3.4.0.zip")'
-Rscript -e 'unzip("opencv-3.4.0.zip")'
+${R_HOME}/bin/Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.0.zip", "opencv-3.4.0.zip")'
+${R_HOME}/bin/Rscript -e 'unzip("opencv-3.4.0.zip")'
 
 cp OpenCVModule.cmake opencv-3.4.0/cmake/
 
