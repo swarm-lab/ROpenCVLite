@@ -23,7 +23,7 @@ before_install:
   - cat DESCRIPTION
   - export PACKAGE_NAME=`package_name`
   - export RCHECK_DIR=${PACKAGE_NAME}.Rcheck
-  - export cmake_version="3.4"
+  - export cmake_version="3.11"
   - cmake --version
   - x=`cmake_setup`; echo "${x}"; eval ${x};
   - cmake --version
