@@ -57,10 +57,10 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: ZEZVVLxo1nUeGp74gKiSrA8W95gD/j0FJcnVzkxkVDIiTNaAYNVWZ25KW/ANENW5ZIitsLddYYi1MCnswRAHMoMBaP3Q/X9wnMGs4pgZRXOzEDaMAsB9/5AMyeuoP2nq+xEzUx/4NiItdWxrWCQhoqzkHJpJ8Kr7vUjLDEP/XPjmfPaTA4EewHVIcD7r/sW26zo7n+PHbsN4f0/sFxPqx7iBgbQM6vUtcDgYqRy6KTzFaeFEJm48iyK7tyelz0KRo3vvNYimOG+U/x07+4fgEw4M0kmCPpcJ+Rs3Ve2Z2VRX1lKGEcXj+7WorfuNqIX5OyZsubjoX/g9oJ9Et1sDwg9lIlu9T6I5Rar5gKVui9M4tW/2cuBCxQYOrMJlKFym9myws2PaVUdgyRX1VEu9CKGbuQacpvujxSBCmB2LdyuDSX+z/Qrbd9z8vf/p+lVQBh8qKEaejGIdJ0s+5ppUADK4LkmzaamaUZb/OPm+cYFavbb55agWaaqc/3BEkgd1/wb7tmFkOJkcH8geT8/mLztpp/lVeY21DXnc/9oct5AblvKbQO1/LQ3LuFZZLh/IHup/gbzvARvRfxaD6l4USATXois4Y+oauCwAgP6EL0sJlU0lB5kYzuEElWYSybz4QZbCG2Kl97DTvJm/R7UdPltkn+pCxsKiHDxhUy5XA7Q=
-  file: ROpenCVLite*.t*gz
+  file: ${PACKAGE_NAME}*.t*gz
   file_glob: true    
   on:
-    repo: muschellij2/ROpenCVLite
+    repo: muschellij2/${PACKAGE_NAME}
 
 # so no overwrite of linux build
 before_deploy:
