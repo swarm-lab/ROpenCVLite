@@ -22,8 +22,8 @@ cd build
 cmake -DWITH_IPP=ON \
 	-DBUILD_opencv_world=OFF \
 	-DBUILD_opencv_contrib_world=OFF \
-	-DBUILD_matlab=OFF -DBUILD_PYTHON=OFF \
-	-DINSTALL_CREATE_DISTRIB=ON \
+	-DBUILD_matlab=OFF -DBUILD_opencv_python2=OFF \
+	-DBUILD_opencv_python3=OFF -DINSTALL_CREATE_DISTRIB=ON \
 	-DCMAKE_BUILD_TYPE=RELEASE \
 	-DCMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ \
 	../
