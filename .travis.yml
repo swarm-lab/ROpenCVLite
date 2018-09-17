@@ -12,7 +12,7 @@ os:
 
 env:
   global:
-  - R_BUILD_ARGS=""
+  - R_BUILD_ARGS="--no-manual"
   - R_CHECK_ARGS="--as-cran --install-args=--build"
   - WARNINGS_ARE_ERRORS=1
 
@@ -23,7 +23,7 @@ before_install:
   - cat DESCRIPTION
   - export PACKAGE_NAME=`package_name`
   - export RCHECK_DIR=${PACKAGE_NAME}.Rcheck
-  - export cmake_version="3.4"
+  - export cmake_version="3.12"
   - cmake --version
   - x=`cmake_setup`; echo "${x}"; eval ${x};
   - cmake --version
@@ -33,6 +33,13 @@ script:
   - rm -f travis_wait*.log
   - PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1)
   - travis_wait 100 R CMD check ${R_CHECK_ARGS} "${PKG_TARBALL}"; CHECK_RET=$? ;
+  - echo ${CHECK_RET};
+  - if [[ $CHECK_RET -ne 0 ]];
+    then
+      echo "R CMD check failed"; 
+      check_fail; 
+      exit 1; 
+    fi    
   - rm -f travis_wait*.log
   - check_fail
   - check_warnings
@@ -44,3 +51,20 @@ after_success:
 after_failure:
   - cat ${RCHECK_DIR}/00install.out
   - cat ${RCHECK_DIR}/00check.log
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: ZEZVVLxo1nUeGp74gKiSrA8W95gD/j0FJcnVzkxkVDIiTNaAYNVWZ25KW/ANENW5ZIitsLddYYi1MCnswRAHMoMBaP3Q/X9wnMGs4pgZRXOzEDaMAsB9/5AMyeuoP2nq+xEzUx/4NiItdWxrWCQhoqzkHJpJ8Kr7vUjLDEP/XPjmfPaTA4EewHVIcD7r/sW26zo7n+PHbsN4f0/sFxPqx7iBgbQM6vUtcDgYqRy6KTzFaeFEJm48iyK7tyelz0KRo3vvNYimOG+U/x07+4fgEw4M0kmCPpcJ+Rs3Ve2Z2VRX1lKGEcXj+7WorfuNqIX5OyZsubjoX/g9oJ9Et1sDwg9lIlu9T6I5Rar5gKVui9M4tW/2cuBCxQYOrMJlKFym9myws2PaVUdgyRX1VEu9CKGbuQacpvujxSBCmB2LdyuDSX+z/Qrbd9z8vf/p+lVQBh8qKEaejGIdJ0s+5ppUADK4LkmzaamaUZb/OPm+cYFavbb55agWaaqc/3BEkgd1/wb7tmFkOJkcH8geT8/mLztpp/lVeY21DXnc/9oct5AblvKbQO1/LQ3LuFZZLh/IHup/gbzvARvRfxaD6l4USATXois4Y+oauCwAgP6EL0sJlU0lB5kYzuEElWYSybz4QZbCG2Kl97DTvJm/R7UdPltkn+pCxsKiHDxhUy5XA7Q=
+  file: ${PACKAGE_NAME}*.t*gz
+  file_glob: true    
+  on:
+    repo: muschellij2/${PACKAGE_NAME}
+
+# so no overwrite of linux build
+before_deploy:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ];
+    then
+      rm -f *.tar.gz;
+    fi
