@@ -3,35 +3,24 @@ CXX_STD=CXX11
 set -x
 set -e
 
-# mkdir -p inst/tmp
-# mkdir -p inst/opencv/
-
-# cd inst/tmp/
 cd ./src
 
+${R_HOME}/bin/Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.3.zip", "opencv-3.4.3.zip")'
+${R_HOME}/bin/Rscript -e 'unzip("opencv-3.4.3.zip")'
 
-${R_HOME}/bin/Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.1.zip", "opencv-3.4.1.zip")'
-${R_HOME}/bin/Rscript -e 'unzip("opencv-3.4.1.zip")'
+cp OpenCVModule.3.4.3.cmake opencv-3.4.3/cmake/OpenCVModule.cmake
 
-cp OpenCVModule.cmake opencv-3.4.1/cmake/
-
-cd opencv-3.4.1
+cd opencv-3.4.3
 mkdir build
 cd build
 
 cmake -DWITH_IPP=ON \
-	-DBUILD_opencv_world=OFF \
-	-DBUILD_opencv_contrib_world=OFF \
-	-DBUILD_matlab=OFF -DBUILD_opencv_python2=OFF \
-	-DBUILD_opencv_python3=OFF -DINSTALL_CREATE_DISTRIB=ON \
+	-DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF \
+	-DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF \
+	-DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
+	-DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF \
+	-DINSTALL_CREATE_DISTRIB=ON \
 	-DCMAKE_BUILD_TYPE=RELEASE \
 	-DCMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ \
 	../
 cd ../
-# make -j4
-# make install
-
-# cd ../../..
-
-# rm -rf tmp
-
