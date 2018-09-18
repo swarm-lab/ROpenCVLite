@@ -8,7 +8,7 @@ mkdir inst/opencv/
 
 cd inst/tmp/
 
-${R_HOME}/bin/Rscript.exe -e 'download.file("https://github.com/opencv/opencv/archive/3.4.3.tar.gz", "opencv-3.4.3.tar.gz")'
+${R_HOME}/bin/Rscript.exe -e 'download.file("https://github.com/opencv/opencv/archive/3.4.3.tar.gz", "opencv-3.4.3.tar.gz", method = "wininet")'
 tar zxvf opencv-3.4.3.tar.gz >/dev/null
 
 cp ../cap_dshow.cpp opencv-3.4.3/modules/videoio/src/
