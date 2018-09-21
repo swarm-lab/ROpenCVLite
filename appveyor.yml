@@ -15,6 +15,12 @@ cache:
 
 # Adapt as necessary starting from here
 
+environment:
+  matrix:
+  - R_VERSION: stable
+    RTOOLS_VERSION: 34
+    CRAN: http://cran.rstudio.com
+
 build_script:
   - travis-tool.sh install_deps
 
