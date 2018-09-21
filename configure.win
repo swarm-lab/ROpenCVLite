@@ -30,8 +30,9 @@ if [ -d "$R_HOME/bin/x64" ]; then
     -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
     ../
   cd ../
-  mkdir ../../inst/opencv
-elif [ -d "$R_HOME/bin/i386" ]; then
+fi
+
+if [ -d "$R_HOME/bin/i386" ]; then
   mkdir build32
   cd build32
   cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_32/bin/gcc.exe \
@@ -48,6 +49,7 @@ elif [ -d "$R_HOME/bin/i386" ]; then
     -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
     ../
   cd ../
-  mkdir ../../inst/opencv
 fi
+
+mkdir ../../inst/opencv
 
