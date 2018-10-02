@@ -26,7 +26,7 @@ if [ -d "$R_HOME/bin/x64" ]; then
     -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF \
     -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
     -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF \
-    -DBUILD_opencv_photo=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
+    -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
     ../
   cd ../
@@ -45,7 +45,7 @@ if [ -d "$R_HOME/bin/i386" ]; then
     -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF \
     -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
     -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF \
-    -DBUILD_opencv_photo=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
+    -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
     ../
   cd ../
