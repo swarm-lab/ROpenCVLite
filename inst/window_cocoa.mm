@@ -74,7 +74,6 @@ CV_IMPL int cvWaitKey (int maxWait) {return 0;}
 
 #include <iostream>
 
-const int TOP_BORDER  = 7;
 const int MIN_SLIDER_WIDTH=200;
 
 static NSApplication *application = nil;
@@ -751,21 +750,19 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
     NSPoint mp = [NSEvent mouseLocation];
     //NSRect visible = [[self contentView] frame];
     mp = [self convertScreenToBase: mp];
-    double viewHeight = [self contentView].frame.size.height;
-    double viewWidth = [self contentView].frame.size.width;
-    CVWindow *window = (CVWindow *)[[self contentView] window];
-    if ([window respondsToSelector:@selector(sliders)]) {
-        for(NSString *key in [window sliders]) {
-            NSSlider *slider = [[window sliders] valueForKey:key];
-            viewHeight = std::min(viewHeight, (double)([slider frame].origin.y));
-        }
+    CVView *contentView = [self contentView];
+    NSSize viewSize = contentView.frame.size;
+    if (contentView.imageView) {
+        viewSize = contentView.imageView.frame.size;
     }
-    viewHeight -= TOP_BORDER;
-    mp.y = viewHeight - mp.y;
+    else {
+        viewSize.height -= contentView.sliderHeight;
+    }
+    mp.y = viewSize.height - mp.y;
 
-    NSSize imageSize = [[((CVView*)[self contentView]) image] size];
-    mp.x = mp.x * imageSize.width / std::max(viewWidth, 1.);
-    mp.y = mp.y * imageSize.height / std::max(viewHeight, 1.);
+    NSSize imageSize = contentView.image.size;
+    mp.y *= (imageSize.height / std::max(viewSize.height, 1.));
+    mp.x *= (imageSize.width / std::max(viewSize.width, 1.));
 
     if( mp.x >= 0 && mp.y >= 0 && mp.x < imageSize.width && mp.y < imageSize.height )
         mouseCallback(type, mp.x, mp.y, flags, mouseParam);
@@ -870,7 +867,7 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
 
     // Update slider sizes
     [self contentView].sliderHeight += sliderSize.height;
-    
+
     if ([[self contentView] image] && ![[self contentView] imageView]) {
         [[self contentView] setNeedsDisplay:YES];
     }
@@ -919,7 +916,7 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
     if(image) {
         [image release];
     }*/
-    
+
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
                 pixelsWide:arrMat->cols
                 pixelsHigh:arrMat->rows
@@ -931,7 +928,7 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
                 bitmapFormat: kCGImageAlphaNone
                 bytesPerRow:((arrMat->cols * 3 + 3) & -4)
                 bitsPerPixel:24];
-    
+
     if (bitmap) {
         cvInitMatHeader(&dst, arrMat->rows, arrMat->cols, CV_8UC3, [bitmap bitmapData], [bitmap bytesPerRow]);
         cvConvertImage(arrMat, &dst, CV_CVTIMG_SWAP_RB);
@@ -956,7 +953,7 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
             data[i * 4 + 3] = 0;
         }
     }
-    
+
     if( image ) {
         [image release];
     }
@@ -964,7 +961,7 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
     image = [[NSImage alloc] init];
     [image addRepresentation:bitmap];
     [bitmap release];
-    
+
     // This isn't supported on older versions of macOS
     // The performance issues this solves are mainly on newer versions of macOS, so that's fine
     if( floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_5 ) {
@@ -973,9 +970,9 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
             [[self imageView] setWantsLayer:true];
             [self addSubview:[self imageView]];
         }
-        
+
         [[[self imageView] layer] setContents:image];
-        
+
         NSRect imageViewFrame = [self frame];
         imageViewFrame.size.height -= [self sliderHeight];
         NSRect constrainedFrame = { imageViewFrame.origin, constrainAspectRatio(imageViewFrame.size, [image size]) };
@@ -990,7 +987,7 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
     /*CGColorSpaceRelease(colorspace);
     CGDataProviderRelease(provider);
     CGImageRelease(imageRef);*/
-    
+
     [localpool drain];
 }
 
@@ -1028,12 +1025,9 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
     if ([self image] && ![self imageView]) {
         NSAutoreleasePool* localpool = [[NSAutoreleasePool alloc] init];
 
-        CGRect viewRect = [self frame];
-        CGRect outputRect = {{0, 0}, {viewRect.size.width, viewRect.size.height - [self sliderHeight]}};
-
         if(image != nil) {
-            [image drawInRect: outputRect
-                     fromRect: outputRect
+            [image drawInRect: [self frame]
+                     fromRect: NSZeroRect
                     operation: NSCompositeSourceOver
                      fraction: 1.0];
         }
