@@ -9,7 +9,7 @@ ${R_HOME}/bin/Rscript -e 'download.file("https://github.com/opencv/opencv/archiv
 ${R_HOME}/bin/Rscript -e 'unzip("opencv-3.4.3.zip")'
 
 cp ../inst/window_cocoa.mm opencv-3.4.3/modules/highgui/src/
-cp OpenCVModule.3.4.3.cmake opencv-3.4.3/cmake/OpenCVModule.cmake
+# cp OpenCVModule.3.4.3.cmake opencv-3.4.3/cmake/OpenCVModule.cmake
 
 cd opencv-3.4.3
 mkdir build
