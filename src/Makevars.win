@@ -1,0 +1,7 @@
+.PHONY: all opencv
+
+all: $(SHLIB)
+
+$(SHLIB): opencv
+
+opencv: ; if [ -d "opencv-3.4.3/build64" ]; then cd opencv-3.4.3/build64 && make -j4 && make install && cd ../ && rm -rf build64 && cd ../ ; fi && if [ -d "opencv-3.4.3/build32" ]; then cd opencv-3.4.3/build32 && make -j4 && make install && cd ../ && rm -rf build32 && cd ../ ; fi && rm -rf opencv-*
