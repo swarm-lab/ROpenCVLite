@@ -3,15 +3,13 @@ CXX_STD=CXX11
 set -x
 set -e
 
-mkdir inst/tmp
-mkdir inst/opencv/
+cd ./src
 
-cd inst/tmp/
-
-${R_HOME}/bin/Rscript.exe -e 'download.file("https://github.com/opencv/opencv/archive/3.4.3.tar.gz", "opencv-3.4.3.tar.gz")'
+${R_HOME}/bin/Rscript.exe -e "download.file('https://github.com/opencv/opencv/archive/3.4.3.tar.gz', 'opencv-3.4.3.tar.gz')"
 tar zxvf opencv-3.4.3.tar.gz >/dev/null
 
-cp ../cap_dshow.cpp opencv-3.4.3/modules/videoio/src/
+cp ../inst/cap_dshow.cpp opencv-3.4.3/modules/videoio/src/
+cp ../inst/cap_dshow.hpp opencv-3.4.3/modules/videoio/src/
 
 cd opencv-3.4.3
 
@@ -23,14 +21,14 @@ if [ -d "$R_HOME/bin/x64" ]; then
     -DCMAKE_RC_COMPILER=C:/Rtools/mingw_64/bin/windres.exe \
     -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe \
     -DENABLE_PRECOMPILED_HEADERS=OFF \
+    -DENABLE_CXX11=ON \
     -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF \
     -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF \
     -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
-    -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF \
-    -DBUILD_opencv_photo=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
-    -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../opencv/ ../
-  make -j4
-  make install
+    -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF \
+    -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
+    ../
   cd ../
 fi
 
@@ -42,16 +40,16 @@ if [ -d "$R_HOME/bin/i386" ]; then
     -DCMAKE_RC_COMPILER=C:/Rtools/mingw_32/bin/windres.exe \
     -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe \
     -DENABLE_PRECOMPILED_HEADERS=OFF \
+    -DENABLE_CXX11=ON \
     -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF \
     -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF \
     -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
-    -DBUILD_opencv_photo=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
-    -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../opencv/ ../
-  make -j4
-  make install
+    -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF \
+    -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
+    ../
   cd ../
 fi
 
-cd ../../
+mkdir ../../inst/opencv
 
-rm -rf tmp
