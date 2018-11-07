@@ -7,3 +7,4 @@ appveyor\.yml$
 LICENSE
 docs
 _pkgdown.yaml
+index.Rmd
