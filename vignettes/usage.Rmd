@@ -1,6 +1,6 @@
 ---
 author: "Simon Garnier"
-title: "2. Using ROpenCVLite"
+title: "2 - Using ROpenCVLite"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{pkgdown}
