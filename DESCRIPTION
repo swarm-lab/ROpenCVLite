@@ -25,3 +25,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://swarm-lab.github.io/ROpenCVLite/, https://github.com/swarm-lab/ROpenCVLite
+BugReports: https://github.com/swarm-lab/ROpenCVLite/issues

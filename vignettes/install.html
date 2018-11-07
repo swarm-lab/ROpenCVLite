@@ -13,7 +13,7 @@
 <meta name="author" content="Simon Garnier" />
 
 
-<title></title>
+<title>1 - Installing ROpenCVLite</title>
 
 
 
@@ -67,9 +67,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore"><ol style="list-style-type: decimal">
-<li>Installing ROpenCVLite</li>
-</ol></h1>
+<h1 class="title toc-ignore">1 - Installing ROpenCVLite</h1>
 <h4 class="author"><em>Simon Garnier</em></h4>
 
 
@@ -97,8 +95,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="mac" class="section level3">
 <h3>1.2 - Mac</h3>
-<p>Before installing <code>ROpenCVLite</code>, you will need to install the latest version of <a href="https://cmake.org/"><code>CMake</code></a>.</p>
-<p>Download <code>CMake</code> for Mac at <a href="https://cmake.org/download/" class="uri">https://cmake.org/download/</a>. You can also use <a href="http://brew.sh/"><code>Homebrew</code></a> or <a href="https://www.macports.org/"><code>MacPorts</code></a> if you prefer (I prefer!).</p>
+<p>Before installing <code>ROpenCVLite</code>, you will need to install the latest version of <a href="https://cmake.org/"><code>CMake</code></a>. Hereafter are 3 options to do this on Mac.</p>
+<p><strong>Download installer from cmake.org</strong></p>
+<p>Go to <a href="https://cmake.org/download/" class="uri">https://cmake.org/download/</a>. Scroll down until you reach the “Latest Release” section. Download the installer for Mac OS X (.dmg file). Once the download is complete, double-click on the installer and accept the license agreement. Drag and drop the <code>Cmake</code> app into the <code>Applications</code> folder.</p>
+<p>To make <code>Cmake</code> accessible to <code>R</code>, open a terminal and type:</p>
+<p><code>sudo &quot;/Applications/CMake.app/Contents/bin/cmake-gui&quot; --install</code></p>
+<p>It will ask for your administrator password.</p>
 <p><strong>Homebrew:</strong></p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> install cmake</code></pre></div>
 <p><strong>MacPorts:</strong></p>
@@ -106,9 +108,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="linux" class="section level3">
 <h3>1.3 - Linux</h3>
-<p>Before installing <code>ROpenCVLite</code>, you will need to install the latest version of <a href="https://cmake.org/"><code>CMake</code></a>.</p>
+<p>Before installing <code>ROpenCVLite</code>, you will need to install the latest version of <a href="https://cmake.org/"><code>CMake</code></a>. Hereafter are two options to do this on Linux.</p>
+<p><strong>Download installer from cmake.org</strong></p>
 <p>Download <code>CMake</code> for Linux at <a href="https://cmake.org/download/" class="uri">https://cmake.org/download/</a>. However it is recommended that you install it using your distribution’s package management system.</p>
-<p><strong>Ubuntu:</strong></p>
+<p><strong>Use you distribution’s package management system</strong></p>
+<p><em>Ubuntu:</em></p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install cmake</code></pre></div>
 <p>[TODO: add more Linux install commands]</p>
 </div>
