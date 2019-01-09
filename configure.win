@@ -15,7 +15,7 @@ cd opencv-4.0.1
 
 ARCH=$(${R_HOME}/bin/Rscript.exe -e "cat(gsub('.*-', '', Sys.info()[['machine']]))")
 
-if [ ! -d build$ARCH ]
+if [ ! -d build$ARCH ]; then
   mkdir build$ARCH
 fi
 
@@ -36,6 +36,6 @@ cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_$ARCH/bin/gcc.exe \
   ../
 cd ../
 
-if [ ! -d ../../inst/opencv ]
+if [ ! -d ../../inst/opencv ]; then
   mkdir ../../inst/opencv
 fi
