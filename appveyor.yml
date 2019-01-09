@@ -16,6 +16,11 @@ cache:
 # Adapt as necessary starting from here
 
 environment:
+  global:
+    WARNINGS_ARE_ERRORS: 1.0
+    USE_RTOOLS: yes
+    R_CHECK_INSTALL_ARGS: --install-args=--build --no-multiarch
+
   matrix:
   - R_VERSION: stable
     RTOOLS_VERSION: 34
