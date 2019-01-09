@@ -5,18 +5,22 @@ set -e
 
 cd ./src
 
-${R_HOME}/bin/Rscript.exe -e "download.file('https://github.com/opencv/opencv/archive/3.4.3.tar.gz', 'opencv-3.4.3.tar.gz')"
-tar zxvf opencv-3.4.3.tar.gz >/dev/null
+${R_HOME}/bin/Rscript.exe -e "download.file('https://github.com/opencv/opencv/archive/4.0.1.tar.gz', 'opencv-4.0.1.tar.gz')"
+tar zxvf opencv-4.0.1.tar.gz >/dev/null
 
-cp ../inst/cap_dshow.cpp opencv-3.4.3/modules/videoio/src/
-cp ../inst/cap_dshow.hpp opencv-3.4.3/modules/videoio/src/
+cp ../inst/cap_dshow.cpp opencv-4.0.1/modules/videoio/src/
+cp ../inst/cap_dshow.hpp opencv-4.0.1/modules/videoio/src/
 
-cd opencv-3.4.3
+cd opencv-4.0.1
 
 ARCH=$(${R_HOME}/bin/Rscript.exe -e "cat(gsub('.*-', '', Sys.info()[['machine']]))")
 
-mkdir build$ARCH
+if [ ! -d build$ARCH ]
+  mkdir build$ARCH
+fi
+
 cd build$ARCH
+
 cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_$ARCH/bin/gcc.exe \
   -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_$ARCH/bin/g++.exe \
   -DCMAKE_RC_COMPILER=C:/Rtools/mingw_$ARCH/bin/windres.exe \
@@ -32,4 +36,6 @@ cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_$ARCH/bin/gcc.exe \
   ../
 cd ../
 
-mkdir ../../inst/opencv
+if [ ! -d ../../inst/opencv ]
+  mkdir ../../inst/opencv
+fi

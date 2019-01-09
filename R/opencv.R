@@ -16,9 +16,9 @@ opencvVersion <- function() {
     pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
     paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
   } else {
-    pcPath <- "/opencv/lib/pkgconfig/opencv.pc"
-    pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")$V1
-    as.character(pc[grepl("Version", pc)])
+    pcPath <- "/opencv/lib/cmake/opencv4/OpenCVConfig-version.cmake"
+    pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
+    paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
   }
 }
 
@@ -64,10 +64,11 @@ opencvConfig <- function(output = "libs", arch = NULL) {
     } else {
       execPrefix <- prefix
       libDir <- paste0(execPrefix, "/lib")
-      pcPath <- "/opencv/lib/pkgconfig/opencv.pc"
-      pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")$V1
-      libs <- gsub(".*\\/lib ", "", as.character(pc[grepl("Libs:", pc)]))
-      libs <- c(libs, gsub(".*\\Libs.private: ", "", as.character(pc[grepl("Libs.private:", pc)])))
+      libs <- gsub("libopencv", "opencv", list.files(libDir, "lib*"))
+      libs <- gsub("\\.so", "", libs)
+      libs <- gsub("\\.dylib", "", libs)
+      libs <- libs[!grepl("\\.", libs)]
+      libs <- paste0("-l", libs)
       if (Sys.info()[1] == "Darwin") {
         cat(paste0("-L", libDir, " ", paste0(libs, collapse = " ")))
       } else {
@@ -75,7 +76,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       }
     }
   } else if (output == "cflags") {
-    includedirOld <- paste0(prefix, "/include/opencv")
+    includedirOld <- paste0(prefix, "/include/opencv4")
     includedirNew <- paste0(prefix, "/include")
 
     if (.Platform$OS.type == "windows") {
