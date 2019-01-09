@@ -5,13 +5,12 @@ set -e
 
 cd ./src
 
-${R_HOME}/bin/Rscript -e 'download.file("https://github.com/opencv/opencv/archive/3.4.3.zip", "opencv-3.4.3.zip")'
-${R_HOME}/bin/Rscript -e 'unzip("opencv-3.4.3.zip")'
+${R_HOME}/bin/Rscript -e 'download.file("https://github.com/opencv/opencv/archive/4.0.1.zip", "opencv-4.0.1.zip")'
+${R_HOME}/bin/Rscript -e 'unzip("opencv-4.0.1.zip")'
 
-cp ../inst/window_cocoa.mm opencv-3.4.3/modules/highgui/src/
-cp OpenCVModule.3.4.3.cmake opencv-3.4.3/cmake/OpenCVModule.cmake
+cp OpenCVModule.4.0.1.cmake opencv-4.0.1/cmake/OpenCVModule.cmake
 
-cd opencv-3.4.3
+cd opencv-4.0.1
 mkdir build
 cd build
 
