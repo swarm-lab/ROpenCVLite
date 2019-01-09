@@ -76,10 +76,10 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       }
     }
   } else if (output == "cflags") {
-    includedirOld <- paste0(prefix, "/include/opencv4")
-    includedirNew <- paste0(prefix, "/include")
-
     if (.Platform$OS.type == "windows") {
+      includedirOld <- paste0(prefix, "/include/opencv2")
+      includedirNew <- paste0(prefix, "/include")
+
       if (is.null(arch)) {
         arch = R.version$arch
       }
@@ -93,6 +93,9 @@ opencvConfig <- function(output = "libs", arch = NULL) {
                  utils::shortPathName(includedirNew), '" -I"',
                  utils::shortPathName(execdir), '"'))
     } else {
+      includedirOld <- paste0(prefix, "/include/opencv4")
+      includedirNew <- paste0(prefix, "/include")
+
       cat(paste0("-I", includedirOld, " -I", includedirNew))
     }
   } else {
