@@ -13,36 +13,55 @@ cp ../inst/cap_dshow.hpp opencv-4.0.1/modules/videoio/src/
 
 cd opencv-4.0.1
 
-# ARCH=$(${R_HOME}/bin/Rscript.exe -e "cat(gsub('.*-', '', Sys.info()[['machine']]))")
-
 if [ -d "$R_HOME/bin/x64" ]; then
   ARCH=64
+
+  if [ ! -d build$ARCH ]; then
+    mkdir build$ARCH
+  fi
+
+  cd build$ARCH
+
+  cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_$ARCH/bin/gcc.exe \
+    -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_$ARCH/bin/g++.exe \
+    -DCMAKE_RC_COMPILER=C:/Rtools/mingw_$ARCH/bin/windres.exe \
+    -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe \
+    -DENABLE_PRECOMPILED_HEADERS=OFF \
+    -DENABLE_CXX11=ON \
+    -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF \
+    -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF \
+    -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
+    -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF \
+    -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
+    ../
+  cd ../
 fi
 
 if [ -d "$R_HOME/bin/i386" ]; then
   ARCH=32
+
+  if [ ! -d build$ARCH ]; then
+    mkdir build$ARCH
+  fi
+
+  cd build$ARCH
+
+  cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_$ARCH/bin/gcc.exe \
+    -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_$ARCH/bin/g++.exe \
+    -DCMAKE_RC_COMPILER=C:/Rtools/mingw_$ARCH/bin/windres.exe \
+    -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe \
+    -DENABLE_PRECOMPILED_HEADERS=OFF \
+    -DENABLE_CXX11=ON \
+    -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF \
+    -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF \
+    -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
+    -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF \
+    -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
+    ../
+  cd ../
 fi
-
-if [ ! -d build$ARCH ]; then
-  mkdir build$ARCH
-fi
-
-cd build$ARCH
-
-cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_$ARCH/bin/gcc.exe \
-  -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_$ARCH/bin/g++.exe \
-  -DCMAKE_RC_COMPILER=C:/Rtools/mingw_$ARCH/bin/windres.exe \
-  -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe \
-  -DENABLE_PRECOMPILED_HEADERS=OFF \
-  -DENABLE_CXX11=ON \
-  -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF \
-  -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF \
-  -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
-  -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF \
-  -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
-  -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
-  ../
-cd ../
 
 if [ ! -d ../../inst/opencv ]; then
   mkdir ../../inst/opencv
