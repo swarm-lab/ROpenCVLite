@@ -13,7 +13,15 @@ cp ../inst/cap_dshow.hpp opencv-4.0.1/modules/videoio/src/
 
 cd opencv-4.0.1
 
-ARCH=$(${R_HOME}/bin/Rscript.exe -e "cat(gsub('.*-', '', Sys.info()[['machine']]))")
+# ARCH=$(${R_HOME}/bin/Rscript.exe -e "cat(gsub('.*-', '', Sys.info()[['machine']]))")
+
+if [ -d "$R_HOME/bin/x64" ]; then
+  ARCH=64
+fi
+
+if [ -d "$R_HOME/bin/i386" ]; then
+  ARCH=32
+fi
 
 if [ ! -d build$ARCH ]; then
   mkdir build$ARCH
