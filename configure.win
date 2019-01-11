@@ -40,8 +40,6 @@ if [ -d "$R_HOME/bin/x64" ]; then
     -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
     ../
 
-  make -j4
-
   cd ../
 fi
 
@@ -68,8 +66,6 @@ if [ -d "$R_HOME/bin/i386" ]; then
     -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=../../../inst/opencv/ \
     ../
-
-  make -j4
 
   cd ../
 fi
