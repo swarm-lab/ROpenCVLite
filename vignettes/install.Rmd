@@ -108,7 +108,7 @@ install.package("devtools")
 ## 2 - Installing `ROpenCVLite`
 
 ```r
-devtools::install_github("swarm-lab/ROpenCVLite", INSTALL_opts = c("--no-multiarch"))
+devtools::install_github("swarm-lab/ROpenCVLite")
 ```
 
 This step can take some time. Go make yourself a cup of coffee or two.
