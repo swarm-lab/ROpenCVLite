@@ -58,7 +58,6 @@ if [ -d "$R_HOME/bin/i386" ]; then
     -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe \
     -DENABLE_PRECOMPILED_HEADERS=OFF \
     -DENABLE_CXX11=ON -DBUILD_ZLIB=ON \
-    -DBUILD_opencv_gapi=OFF -DBUILD_opencv_features2d=OFF \
     -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF \
     -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF \
     -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
