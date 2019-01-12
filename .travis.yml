@@ -1,16 +1,18 @@
 language: R
 sudo: false
+cran: http://cran.rstudio.com
 cache: packages
 warnings_are_errors: true
-cran: http://cran.rstudio.com
 os:
   - linux
   - osx
+
 env:
   global:
     - R_BUILD_ARGS="--no-manual"
     - R_CHECK_ARGS="--as-cran --install-args=--build"
     - WARNINGS_ARE_ERRORS=1
+
 before_install:
   - fname=travis_helpers.sh
   - wget -O ${fname} http://bit.ly/travis_helpers
@@ -22,6 +24,7 @@ before_install:
   - cmake --version
   - x=`cmake_setup`; echo "${x}"; eval ${x};
   - cmake --version
+
 script:
   - travis_wait 100 R CMD build ${R_BUILD_ARGS} .
   - rm -f travis_wait*.log
@@ -32,20 +35,28 @@ script:
   - rm -f travis_wait*.log
   - check_fail
   - check_warnings
+
 after_success:
   - cat ${RCHECK_DIR}/00install.out
   - cat ${RCHECK_DIR}/00check.log
+  - |
+
+       $(npm bin)/set-up-ssh --key "$encrypted_451d1c6426bf_key" \
+                             --iv "$encrypted_451d1c6426bf_iv" \
+                             --path-encrypted-key "github_deploy_key.enc"
+
 after_failure:
   - cat ${RCHECK_DIR}/00install.out
   - cat ${RCHECK_DIR}/00check.log
+
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: ZEZVVLxo1nUeGp74gKiSrA8W95gD/j0FJcnVzkxkVDIiTNaAYNVWZ25KW/ANENW5ZIitsLddYYi1MCnswRAHMoMBaP3Q/X9wnMGs4pgZRXOzEDaMAsB9/5AMyeuoP2nq+xEzUx/4NiItdWxrWCQhoqzkHJpJ8Kr7vUjLDEP/XPjmfPaTA4EewHVIcD7r/sW26zo7n+PHbsN4f0/sFxPqx7iBgbQM6vUtcDgYqRy6KTzFaeFEJm48iyK7tyelz0KRo3vvNYimOG+U/x07+4fgEw4M0kmCPpcJ+Rs3Ve2Z2VRX1lKGEcXj+7WorfuNqIX5OyZsubjoX/g9oJ9Et1sDwg9lIlu9T6I5Rar5gKVui9M4tW/2cuBCxQYOrMJlKFym9myws2PaVUdgyRX1VEu9CKGbuQacpvujxSBCmB2LdyuDSX+z/Qrbd9z8vf/p+lVQBh8qKEaejGIdJ0s+5ppUADK4LkmzaamaUZb/OPm+cYFavbb55agWaaqc/3BEkgd1/wb7tmFkOJkcH8geT8/mLztpp/lVeY21DXnc/9oct5AblvKbQO1/LQ3LuFZZLh/IHup/gbzvARvRfxaD6l4USATXois4Y+oauCwAgP6EL0sJlU0lB5kYzuEElWYSybz4QZbCG2Kl97DTvJm/R7UdPltkn+pCxsKiHDxhUy5XA7Q=
-  file: "${PACKAGE_NAME}*.t*gz"
+    secure: "gIwZQy3u1vaYRy+sRmD7wFdNUwHvefnUuMqy/KVrFZImQrv3aVMAkVFEu5US4iBN2e0vwa0dwwP2VkT/In3iraRtBBjxcc0wZHS19e+xPmPS4Qr/cgx32SRbli+LC3vEhCUiRVKPy+Zw7fz6A4IxlHC20QkAKt0IhW/xMQb4aIUEIlULBuZF1BD1lwxBQTeTh2Gx93F+RApnfYsKzMOSvwlAjkPtGSpkuHqpeDnq5vAZl0xGtJQlQzRnWpoc3UljLOTlAxzGDmTbW3/syYkDAVl7+tAwB5fn1pPqzwqq2PDX2g9PlN3NJiAMiqUUGfeCfMs105yIzt2uEHVEz7jY9iYJUxk8zmQZekRcKwi01nk71mp/nfqaBZ6QAAje/NukPijnLIvMFzD1vHpccudxYOrPZ9mQfJRsbqM4RZ2vok0GpnaOWiHfd2fparATsb7/LEposIn7e0HKxckE4omdxsCMRQEA6bW3JMlC7kOYU4G7jre9Z+dSSX9ib7sIxn2cnHsL8TOqaiFlOsGY3X2jFPytR7steWGiW+7ro7llKkC6/zsnYGOxz15oXIk9VgSjFXoAYcI0KuLJFKJ0yHk8wH4kdWq+fk7Nx0PgVwRbKGvR8YUsrIX2cwn6eANr8c7wfpzr6La93jSR24U5jSbkOr4K6+ID3rMxCEcIJDug5Sc="  file: "${PACKAGE_NAME}*.t*gz"
   file_glob: true
   on:
-    repo: muschellij2/${PACKAGE_NAME}
+    repo: swarm-lab/${PACKAGE_NAME}
+
 before_deploy:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then rm -f *.tar.gz; fi
