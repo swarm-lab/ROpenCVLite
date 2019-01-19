@@ -3,7 +3,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/swarm-lab/ROpenCVLite.svg?branch=master)](https://travis-ci.org/swarm-lab/ROpenCVLite)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/swarm-lab/ROpenCVLite?branch=master&svg=true)](https://ci.appveyor.com/project/swarm-lab/ROpenCVLite)
 
-## Description
+## Description <img src="reference/figures/logo.png" align="right" alt="" width="120" />
 
 [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) is a utility package 
 that installs [`OpenCV`](http://opencv.org/) within [`R`](https://cran.r-project.org) 
