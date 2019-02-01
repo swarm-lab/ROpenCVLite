@@ -8,3 +8,5 @@ LICENSE
 docs
 _pkgdown.yaml
 index.Rmd
+logo.*
+pkgdown
