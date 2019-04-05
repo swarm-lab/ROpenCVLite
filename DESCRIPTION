@@ -1,12 +1,12 @@
 Package: ROpenCVLite
 Type: Package
 Title: Install OpenCV Within R
-Version: 0.1.34.3
-Authors@R: c(person(given = "Simon", family = "Garnier", 
-    email = "garnier@njit.edu", role = c("aut", "cre")),
-    person(given = "John", family = "Muschelli", 
-    role = "ctb")
-    )
+Version: 0.2.40.1
+Authors@R: c(
+    person("Simon", "Garnier", email = "garnier@njit.edu", role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0002-3886-3974")),
+    person("Muschelli", "John", email = "muschellij2@gmail.com", role = c("ctb"))
+  )
 Maintainer: Simon Garnier <garnier@njit.edu>
 Description: This is a utility package that installs OpenCV within R for
     use by other packages. This Lite version does not contain any of
@@ -17,11 +17,16 @@ Imports:
     Rcpp (>= 0.12.5),
     utils
 LinkingTo: Rcpp
-SystemRequirements: cmake
+SystemRequirements: 
+  cmake,
+  C++11
 NeedsCompilation: yes
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
+Biarch: true
 Encoding: UTF-8
 Suggests: 
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://swarm-lab.github.io/ROpenCVLite/, https://github.com/swarm-lab/ROpenCVLite
+BugReports: https://github.com/swarm-lab/ROpenCVLite/issues

@@ -5,6 +5,5 @@
 #'  modules of OpenCV.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
-#'
 "_PACKAGE"
 #> [1] "_PACKAGE"

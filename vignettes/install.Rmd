@@ -1,6 +1,6 @@
 ---
 author: "Simon Garnier"
-title: "1. Installing ROpenCVLite"
+title: "1 - Installing ROpenCVLite"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{pkgdown}
@@ -45,11 +45,21 @@ your "PATH".
 ### 1.2 - Mac
 
 Before installing `ROpenCVLite`, you will need to install the latest version of
-[`CMake`](https://cmake.org/).
+[`CMake`](https://cmake.org/). Hereafter are 3 options to do this on Mac.
 
-Download `CMake` for Mac at [https://cmake.org/download/](https://cmake.org/download/).
-You can also use [`Homebrew`](http://brew.sh/) or [`MacPorts`](https://www.macports.org/)
-if you prefer (I prefer!).
+**Download installer from cmake.org** 
+
+Go to [https://cmake.org/download/](https://cmake.org/download/). Scroll down 
+until you reach the "Latest Release" section. Download the installer for Mac OS X
+(.dmg file). Once the download is complete, double-click on the installer and 
+accept the license agreement. Drag and drop the `Cmake` app into the `Applications`
+folder. 
+
+To make `Cmake` accessible to `R`, open a terminal and type:
+
+`sudo "/Applications/CMake.app/Contents/bin/cmake-gui" --install`
+
+It will ask for your administrator password. 
 
 **Homebrew:**
 
@@ -66,13 +76,17 @@ sudo port install cmake
 ### 1.3 - Linux
 
 Before installing `ROpenCVLite`, you will need to install the latest version of
-[`CMake`](https://cmake.org/).
+[`CMake`](https://cmake.org/). Hereafter are two options to do this on Linux.
+
+**Download installer from cmake.org** 
 
 Download `CMake` for Linux at [https://cmake.org/download/](https://cmake.org/download/).
 However it is recommended that you install it using your distribution's package
 management system.
 
-**Ubuntu:**
+**Use you distribution's package management system**
+
+*Ubuntu:*
 
 ```bash
 sudo apt-get install cmake

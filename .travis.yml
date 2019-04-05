@@ -1,20 +1,17 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
 language: R
 sudo: false
+cran: http://cran.rstudio.com
 cache: packages
 warnings_are_errors: true
-cran: http://cran.rstudio.com
-
 os:
   - linux
   - osx
 
 env:
   global:
-  - R_BUILD_ARGS="--no-manual"
-  - R_CHECK_ARGS="--as-cran --install-args=--build"
-  - WARNINGS_ARE_ERRORS=1
+    - R_BUILD_ARGS="--no-manual"
+    - R_CHECK_ARGS="--as-cran --install-args=--build"
+    - WARNINGS_ARE_ERRORS=1
 
 before_install:
   - fname=travis_helpers.sh
@@ -34,12 +31,7 @@ script:
   - PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1)
   - travis_wait 100 R CMD check ${R_CHECK_ARGS} "${PKG_TARBALL}"; CHECK_RET=$? ;
   - echo ${CHECK_RET};
-  - if [[ $CHECK_RET -ne 0 ]];
-    then
-      echo "R CMD check failed"; 
-      check_fail; 
-      exit 1; 
-    fi    
+  - if [[ $CHECK_RET -ne 0 ]]; then echo "R CMD check failed"; check_fail; exit 1; fi
   - rm -f travis_wait*.log
   - check_fail
   - check_warnings
@@ -52,19 +44,33 @@ after_failure:
   - cat ${RCHECK_DIR}/00install.out
   - cat ${RCHECK_DIR}/00check.log
 
+before_deploy:
+  - if [ "$TRAVIS_OS_NAME" = "osx" ];
+    then
+      PKG_TARBALL=$(ls -1t *.tgz | head -n 1);
+      PKG_TARBALL_WITH_R=`echo $PKG_TARBALL | sed 's/.tgz/_'"R${rver}"'.tgz/'` ;
+      mv ${PKG_TARBALL} ${PKG_TARBALL_WITH_R} ;
+      echo "Built tarball is ${PKG_TARBALL_WITH_R}" ;
+    fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ];
+    then
+      PKG_TARBALL=$(ls -1t *.tar.gz | head -n 1);
+      PKG_TARBALL_WITH_R=`echo $PKG_TARBALL | sed 's/.tar.gz/_'"R${rver}"'.tar.gz/'` ;
+      mv ${PKG_TARBALL} ${PKG_TARBALL_WITH_R} ;
+      echo "Built tarball is ${PKG_TARBALL_WITH_R}" ;
+    fi
+  - if [[ "${TRAVIS_OS_NAME}" = "osx" ]];
+    then
+      rm -f *.tar.gz;
+    fi
+
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: ZEZVVLxo1nUeGp74gKiSrA8W95gD/j0FJcnVzkxkVDIiTNaAYNVWZ25KW/ANENW5ZIitsLddYYi1MCnswRAHMoMBaP3Q/X9wnMGs4pgZRXOzEDaMAsB9/5AMyeuoP2nq+xEzUx/4NiItdWxrWCQhoqzkHJpJ8Kr7vUjLDEP/XPjmfPaTA4EewHVIcD7r/sW26zo7n+PHbsN4f0/sFxPqx7iBgbQM6vUtcDgYqRy6KTzFaeFEJm48iyK7tyelz0KRo3vvNYimOG+U/x07+4fgEw4M0kmCPpcJ+Rs3Ve2Z2VRX1lKGEcXj+7WorfuNqIX5OyZsubjoX/g9oJ9Et1sDwg9lIlu9T6I5Rar5gKVui9M4tW/2cuBCxQYOrMJlKFym9myws2PaVUdgyRX1VEu9CKGbuQacpvujxSBCmB2LdyuDSX+z/Qrbd9z8vf/p+lVQBh8qKEaejGIdJ0s+5ppUADK4LkmzaamaUZb/OPm+cYFavbb55agWaaqc/3BEkgd1/wb7tmFkOJkcH8geT8/mLztpp/lVeY21DXnc/9oct5AblvKbQO1/LQ3LuFZZLh/IHup/gbzvARvRfxaD6l4USATXois4Y+oauCwAgP6EL0sJlU0lB5kYzuEElWYSybz4QZbCG2Kl97DTvJm/R7UdPltkn+pCxsKiHDxhUy5XA7Q=
+    secure: G9QWujPpDwEjmCI9kSewP075HtvpD1dTIAo/QJhw5v6H7/XBe1tLDGzKBpLwW0eZa2h+6/7QsCqoBcsaU/edK6qI62eWXQuO3M33BKi5RS1r1Lk2yb3sdwdStlG/Xa9UgD5TMEyhs6Gcl27ULE9J+iAJIioTOtCR9nAneq8U1tSwnfUltlq/9OZPwY+bRM9ZRGUjdGlIMf4cJ27QJ/wjUbxNbEt/nuy87dejOG7kk4dw5fUzZRui9K4BDgljRSPxEz9+bWCaPcTB0g2w8X2jFnAw3gJnkg5hYUMhl+7Xv43mN81AMlCSP3XAYKsuo1TDWtHPuFM7NKgaBQWpR/w9jgYxQv5u7hVwWnmrFbxnJftJX2oSZdcYM0obvN4V6Uu2E7aPHVzWZ3OGdtwqCeExIqhoY4Vs551z4ry3WySD74r9+gOpemnOWGQ6qrulJNzFZJhywaWWs0ELeF+04MbTC5YDVmaFBj99uWGCMNSL7Z8/U8pLdZdjUuG2DqULuTeSOpDo6bRkacU6h04T+VaFl4tegHjqHvBeZY65cGY1R0r5od+42VJHPhUjpW7u9KW9cDpBT1xHJjPLl6+VqMy4Q2C7914zAU/+95z+8vhYs0E/1KkOv1l++CQmrww7m8t6IkHmf8jSI/Xy/Gk8hMTZMwmrYVKL/bNzPrtu1lcRrtQ=
+  file_glob: true
   file: ${PACKAGE_NAME}*.t*gz
-  file_glob: true    
   on:
-    repo: muschellij2/${PACKAGE_NAME}
-
-# so no overwrite of linux build
-before_deploy:
-  - if [ "$TRAVIS_OS_NAME" = "osx" ];
-    then
-      rm -f *.tar.gz;
-    fi
+    repo: swarm-lab/${PACKAGE_NAME}
+    tags: true
