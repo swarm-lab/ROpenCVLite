@@ -10,6 +10,15 @@ This is a utility package that installs OpenCV within R for use
  by other packages. This Lite version does not contain any of the contributed
  modules of OpenCV.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://swarm-lab.github.io/ROpenCVLite/}
+  \item \url{https://github.com/swarm-lab/ROpenCVLite}
+  \item Report bugs at \url{https://github.com/swarm-lab/ROpenCVLite/issues}
+}
+
+}
 \author{
 Simon Garnier, \email{garnier@njit.edu}
 }

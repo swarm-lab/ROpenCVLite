@@ -931,7 +931,7 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
 
     if (bitmap) {
         cvInitMatHeader(&dst, arrMat->rows, arrMat->cols, CV_8UC3, [bitmap bitmapData], [bitmap bytesPerRow]);
-        cvConvertImage(arrMat, &dst, CV_CVTIMG_SWAP_RB);
+        cvConvertImage(arrMat, &dst, CVTIMG_SWAP_RB);
     }
     else {
         // It's not guaranteed to like the bitsPerPixel:24, but this is a lot slower so we'd rather not do it
@@ -947,7 +947,7 @@ static NSSize constrainAspectRatio(NSSize base, NSSize constraint) {
             bitsPerPixel:32];
         uint8_t *data = [bitmap bitmapData];
         cvInitMatHeader(&dst, arrMat->rows, arrMat->cols, CV_8UC3, data, (arrMat->cols * 3));
-        cvConvertImage(arrMat, &dst, CV_CVTIMG_SWAP_RB);
+        cvConvertImage(arrMat, &dst, CVTIMG_SWAP_RB);
         for (int i = (arrMat->rows * arrMat->cols) - 1; i >= 0; i--) {
             memmove(data + i * 4, data + i * 3, 3);
             data[i * 4 + 3] = 0;
