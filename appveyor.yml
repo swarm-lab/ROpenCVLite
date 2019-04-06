@@ -7,10 +7,10 @@ init:
 
 install:
   ps: Bootstrap
+  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
 
 cache:
   - C:\RLibrary
-
 
 # Adapt as necessary starting from here
 environment:
@@ -18,6 +18,10 @@ environment:
     WARNINGS_ARE_ERRORS: 1.0
     USE_RTOOLS: yes
     R_CHECK_INSTALL_ARGS: --install-args=--build
+    NOT_CRAN: true    
+    R_REMOTES_NO_ERRORS_FROM_WARNINGS: true    
+    PYTHON_VERSION: 3.6
+    MINICONDA: C:\Miniconda3-x64
 
   matrix:
   - R_VERSION: stable
