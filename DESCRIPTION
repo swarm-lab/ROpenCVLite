@@ -19,6 +19,7 @@ Imports:
 LinkingTo: Rcpp
 SystemRequirements: 
   cmake,
+  GNU make,
   C++11
 NeedsCompilation: yes
 RoxygenNote: 6.1.1
