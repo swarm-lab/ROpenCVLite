@@ -4,4 +4,4 @@ all: $(SHLIB)
 
 $(SHLIB): opencv
 
-opencv: ; ls && if [ ${R_ARCH_BIN} = "/x64" ]; then cd opencv-4.0.1/build64; fi && if [ ${R_ARCH_BIN} = "/i386" ]; then cd opencv-4.0.1/build32 ; fi && make -j4 && make install && cd ../ && rm -rf build64 && rm -rf build32 && cd ../ && rm -rf opencv-4.0.1/samples ;
+opencv: ; ls && if [ ${R_ARCH_BIN} = "/x64" ]; then cd opencv-4.0.1/build64; ls ; fi && if [ ${R_ARCH_BIN} = "/i386" ]; then cd opencv-4.0.1/build32 ;  ls ; fi && make -j4 && make install && cd ../ && ls && rm -rf build64 && rm -rf build32 && cd ../ && ls && rm -rf opencv-4.0.1/samples ;
