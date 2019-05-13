@@ -3,7 +3,7 @@ author: "Simon Garnier"
 title: "1 - Installing ROpenCVLite"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{pkgdown}
+  %\VignetteIndexEntry{install}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
