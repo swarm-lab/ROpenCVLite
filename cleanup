@@ -1,5 +1,5 @@
 #!/bin/bash
-rm -rf inst/tmp/
-rm -rf inst/opencv/
-rm -rf src/opencv-*
-rm -rf src/opencv-*/*
+# rm -rf inst/tmp/
+# rm -rf inst/opencv/
+# rm -rf src/opencv-*
+# rm -rf src/opencv-*/*

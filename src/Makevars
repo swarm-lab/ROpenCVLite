@@ -1,7 +1,7 @@
-.PHONY: all opencv
+# .PHONY: all opencv
 
-all: $(SHLIB)
+# all: $(SHLIB)
 
-$(SHLIB): opencv
+# $(SHLIB): opencv
 
-opencv: ; cd opencv-4.1.0/build && make -j4 && make all install && cd ../ && rm -rf build && cd ../ && rm -rf opencv-*
+# opencv: ; cd opencv-4.1.0/build && make -j4 && make all install && cd ../ && rm -rf build && cd ../ && rm -rf opencv-*
