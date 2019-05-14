@@ -30,7 +30,7 @@ installOpenCV <- function(force = FALSE) {
       setwd("tmp")
       download.file("https://github.com/opencv/opencv/archive/4.1.0.tar.gz",
                     "opencv-4.1.0.tar.gz")
-      system("tar zxvf opencv-4.1.0.tar.gz >/dev/null")
+      untar("opencv-4.1.0.tar.gz")
       file.copy("../cap_dshow.cpp", "opencv-4.1.0/modules/videoio/src/cap_dshow.cpp",
                 overwrite = TRUE)
       file.copy("../cap_dshow.hpp", "opencv-4.1.0/modules/videoio/src/cap_dshow.hpp",
