@@ -15,7 +15,8 @@ License: GPL-3
 LazyData: TRUE
 Imports:
     Rcpp (>= 0.12.5),
-    utils
+    utils,
+    devtools
 LinkingTo: Rcpp
 SystemRequirements: 
   cmake,
