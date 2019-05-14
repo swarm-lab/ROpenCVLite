@@ -38,4 +38,6 @@
     libPath <- paste0(pkgPath, "/opencv/lib")
     Sys.setenv(LD_LIBRARY_PATH = paste0(Sys.getenv("LD_LIBRARY_PATH"), ":", libPath))
   }
+
+  installOpenCV()
 }

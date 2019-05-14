@@ -1,7 +1,7 @@
-.PHONY: all opencv
+# .PHONY: all opencv
 
-all: $(SHLIB)
+# all: $(SHLIB)
 
-$(SHLIB): opencv
+# $(SHLIB): opencv
 
-opencv: ; if [ ${R_ARCH_BIN} = "/x64" ]; then cd ../src/opencv-4.1.0/build64 && make -j4 && make install && cd ../ && rm -rf build64 && cd ../ ; fi && if [ ${R_ARCH_BIN} = "/i386" ]; then cd ../src/opencv-4.1.0/build32 && make -j4 && make install && cd ../ && rm -rf build32 && cd ../ ; fi
+# opencv: ; if [ ${R_ARCH_BIN} = "/x64" ]; then cd ../src/opencv-4.1.0/build64 && make -j4 && make install && cd ../ && rm -rf build64 && cd ../ ; fi && if [ ${R_ARCH_BIN} = "/i386" ]; then cd ../src/opencv-4.1.0/build32 && make -j4 && make install && cd ../ && rm -rf build32 && cd ../ ; fi

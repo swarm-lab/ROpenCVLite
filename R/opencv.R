@@ -1,3 +1,87 @@
+.isOpenCVInstalled <- function() {
+  pkgPath <- find.package("ROpenCVLite")
+  dir.exists(paste0(pkgPath, "/opencv/lib/"))
+}
+
+
+#' @export
+installOpenCV <- function(force = FALSE) {
+  pkgPath <- find.package("ROpenCVLite")
+  openCVPath <- paste0(pkgPath, "/opencv")
+
+  install <- 0
+
+  if (!.isOpenCVInstalled()) {
+    if (interactive()) {
+      install <- menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
+    }
+  } else if (force) {
+    if (interactive()) {
+      install <- menu(c("yes", "no"), title = "Do you want to reinstall OpenCV on this system? This will take several minutes.")
+    }
+  }
+
+  if (install == 1) {
+    if (.Platform$OS.type == "windows") {
+      origDir <- getwd()
+      setwd(pkgPath)
+      dir.create("opencv")
+      dir.create("tmp")
+      setwd("tmp")
+      download.file("https://github.com/opencv/opencv/archive/4.1.0.tar.gz",
+                    "opencv-4.1.0.tar.gz")
+      system("tar zxvf opencv-4.1.0.tar.gz >/dev/null")
+      file.copy("../cap_dshow.cpp", "opencv-4.1.0/modules/videoio/src/cap_dshow.cpp",
+                overwrite = TRUE)
+      file.copy("../cap_dshow.hpp", "opencv-4.1.0/modules/videoio/src/cap_dshow.hpp",
+                overwrite = TRUE)
+
+      setwd("opencv-4.1.0")
+
+      arch <- c("64", "32")
+      arch_avail <- c(dir.exists(paste0(R.home(), "/bin/x64")),
+                       dir.exists(paste0(R.home(), "/bin/i386")))
+
+      if (any(arch_avail)) {
+        for (i in 1:2) {
+          if (arch_avail[i]) {
+            dir.create(paste0("build", arch[i]))
+            setwd(paste0("build", arch[i]))
+            system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=C:/Rtools/mingw_', arch[i], '/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Rtools/mingw_', arch[i], '/bin/g++.exe -DCMAKE_RC_COMPILER=C:/Rtools/mingw_', arch[i], '/bin/windres.exe -DCMAKE_MAKE_PROGRAM=C:/Rtools/bin/make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DENABLE_CXX11=ON -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', openCVPath, ' ../'))
+            system("make -j4; make install")
+            setwd("../")
+          }
+        }
+      }
+      setwd(pkgPath)
+      unlink("tmp", recursive = TRUE)
+      setwd(origDir)
+    } else {
+      origDir <- getwd()
+      setwd(pkgPath)
+      dir.create("opencv")
+      dir.create("tmp")
+      setwd("tmp")
+      download.file("https://github.com/opencv/opencv/archive/4.1.0.zip",
+                    "opencv-4.1.0.zip")
+      unzip("opencv-4.1.0.zip")
+      file.copy("../OpenCVModule.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVModule.cmake",
+                overwrite = TRUE)
+      setwd("opencv-4.1.0")
+      dir.create("build")
+      setwd("build")
+      system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " ../"))
+      system("make -j4; make all install")
+      setwd(pkgPath)
+      unlink("tmp", recursive = TRUE)
+      setwd(origDir)
+    }
+  } else {
+    message("You can install OpenCV at any time by using the installOpenCV() function.")
+  }
+}
+
+
 #' @title OpenCV version
 #'
 #' @description Determines the version of OpenCV installed within R.
@@ -9,16 +93,20 @@
 #'
 #' @export
 opencvVersion <- function() {
-  pkgPath <- find.package("ROpenCVLite")
+  if (.isOpenCVInstalled()) {
+    pkgPath <- find.package("ROpenCVLite")
 
-  if (.Platform$OS.type == "windows") {
-    pcPath <- "/opencv/OpenCVConfig-version.cmake"
-    pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
-    paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
+    if (.Platform$OS.type == "windows") {
+      pcPath <- "/opencv/OpenCVConfig-version.cmake"
+      pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
+      paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
+    } else {
+      pcPath <- "/opencv/lib/cmake/opencv4/OpenCVConfig-version.cmake"
+      pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
+      paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
+    }
   } else {
-    pcPath <- "/opencv/lib/cmake/opencv4/OpenCVConfig-version.cmake"
-    pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
-    paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
+    stop("OpenCV is not installed on this system. Please use installOpenCV() to install it.")
   }
 }
 
@@ -41,6 +129,9 @@ opencvVersion <- function() {
 #' @importFrom utils read.table
 #' @export
 opencvConfig <- function(output = "libs", arch = NULL) {
+  if (!.isOpenCVInstalled())
+    stop("OpenCV is not installed on this system. Please use installOpenCV() to install it.")
+
   pkgPath <- find.package("ROpenCVLite")
   prefix <- paste0(pkgPath, "/opencv")
 
