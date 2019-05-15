@@ -37,6 +37,10 @@ installOpenCV <- function(force = FALSE) {
                 overwrite = TRUE)
       file.copy("../cap_dshow.hpp", "opencv-4.1.0/modules/videoio/src/cap_dshow.hpp",
                 overwrite = TRUE)
+      file.copy("../OpenCVDetectDirectX.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVDetectDirectX.cmake",
+                overwrite = TRUE)
+      file.copy("../OpenCVDetectOpenCL.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVDetectOpenCL.cmake",
+                overwrite = TRUE)
 
       setwd("opencv-4.1.0")
 
