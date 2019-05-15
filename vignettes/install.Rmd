@@ -36,7 +36,7 @@ Before installing `ROpenCVLite`, you will need to install the latest versions of
 
 Download `CMake` for Windows at [https://cmake.org/download/](https://cmake.org/download/).
 
-Download the latest "frozen" version of `Rtools` at 
+Download the latest "recommended" version of `Rtools` at 
 [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/).
 
 In both cases, make sure to tell the installer to add `CMake` and `Rtools` to 
@@ -107,8 +107,25 @@ install.package("devtools")
 
 ## 2 - Installing `ROpenCVLite`
 
+You can install `ROpenCVLite` from its Github repository as follows:
+
 ```r
 devtools::install_github("swarm-lab/ROpenCVLite")
 ```
 
-This step can take some time. Go make yourself a cup of coffee or two.
+This will not install `OpenCV` yet. You will be asked whether you want to install
+it the first time you load the package. 
+
+```r
+library(ROpenCVLite)
+```
+
+This step can take some time. Go make yourself a cup of coffee or two while 
+`ROpenCVLite` downloads, compiles and installs `OpenCV` on your system. 
+
+In addition, you can also request the (re)installation of `OpenCV` at any time
+as follows:
+
+```r
+ROpenCVLite::installOpenCV()
+```
