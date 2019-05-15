@@ -3,7 +3,20 @@
   dir.exists(paste0(pkgPath, "/opencv/include/"))
 }
 
-
+#' @title Install OpenCV
+#'
+#' @description This function will attempt to download, compile and install
+#'  OpenCV on the system. This process will take several minutes.
+#'
+#' @param force A logical indicating whether the interactive dialogs preceding
+#'  the installation should be skipped or not. If `TRUE` then the installation
+#'  will begin immediately. If `FALSE` (the default), then a confirmation dialog
+#'  will be displayed before the installation starts.
+#'
+#' @return A boolean indicating whether OpenCV was or not installed on the system.
+#'
+#' @author Simon Garnier, \email{garnier@@njit.edu}
+#'
 #' @export
 installOpenCV <- function(force = FALSE) {
   pkgPath <- find.package("ROpenCVLite")
@@ -11,13 +24,15 @@ installOpenCV <- function(force = FALSE) {
 
   install <- 0
 
-  if (!.isOpenCVInstalled()) {
-    if (interactive()) {
-      install <- menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
-    }
-  } else if (force) {
+  if (force) {
+    install <- 1
+  } else if (.isOpenCVInstalled()) {
     if (interactive()) {
       install <- menu(c("yes", "no"), title = "Do you want to reinstall OpenCV on this system? This will take several minutes.")
+    }
+  } else {
+    if (interactive()) {
+      install <- menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
     }
   }
 
@@ -86,8 +101,10 @@ installOpenCV <- function(force = FALSE) {
       setwd(origDir)
     }
   } else {
-    message("You can install OpenCV at any time by using the installOpenCV() function.")
+    message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
   }
+
+  .isOpenCVInstalled()
 }
 
 
