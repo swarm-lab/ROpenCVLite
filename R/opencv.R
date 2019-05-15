@@ -1,6 +1,6 @@
 .isOpenCVInstalled <- function() {
   pkgPath <- find.package("ROpenCVLite")
-  dir.exists(paste0(pkgPath, "/opencv/lib/"))
+  dir.exists(paste0(pkgPath, "/opencv/include/"))
 }
 
 
@@ -33,10 +33,7 @@ installOpenCV <- function(force = FALSE) {
       download.file("https://github.com/opencv/opencv/archive/4.1.0.tar.gz",
                     "opencv-4.1.0.tar.gz")
       untar("opencv-4.1.0.tar.gz")
-      file.copy("../cap_dshow.cpp", "opencv-4.1.0/modules/videoio/src/cap_dshow.cpp",
-                overwrite = TRUE)
-      file.copy("../cap_dshow.hpp", "opencv-4.1.0/modules/videoio/src/cap_dshow.hpp",
-                overwrite = TRUE)
+
       file.copy("../OpenCVDetectDirectX.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVDetectDirectX.cmake",
                 overwrite = TRUE)
       file.copy("../OpenCVDetectOpenCL.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVDetectOpenCL.cmake",
@@ -75,8 +72,10 @@ installOpenCV <- function(force = FALSE) {
       download.file("https://github.com/opencv/opencv/archive/4.1.0.zip",
                     "opencv-4.1.0.zip")
       unzip("opencv-4.1.0.zip")
+
       file.copy("../OpenCVModule.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVModule.cmake",
                 overwrite = TRUE)
+
       setwd("opencv-4.1.0")
       dir.create("build")
       setwd("build")
