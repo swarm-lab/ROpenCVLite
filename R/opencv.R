@@ -124,11 +124,11 @@ opencvVersion <- function() {
 
     if (.Platform$OS.type == "windows") {
       pcPath <- "/opencv/OpenCVConfig-version.cmake"
-      pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
+      pc <- utils::read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     } else {
       pcPath <- "/opencv/lib/cmake/opencv4/OpenCVConfig-version.cmake"
-      pc <- read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
+      pc <- utils::read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     }
   } else {
@@ -152,7 +152,7 @@ opencvVersion <- function() {
 #'  configuration options.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
-#' @importFrom utils read.table
+#'
 #' @export
 opencvConfig <- function(output = "libs", arch = NULL) {
   if (!.isOpenCVInstalled())
