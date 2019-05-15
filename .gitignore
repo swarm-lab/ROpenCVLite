@@ -9,6 +9,5 @@ inst/opencv
 inst/tmp
 src/opencv-*.zip
 src/opencv-*/
-src/.DS_Store
-inst/.DS_Store
+.DS_Store
 old
