@@ -11,3 +11,4 @@ src/opencv-*.zip
 src/opencv-*/
 src/.DS_Store
 inst/.DS_Store
+old

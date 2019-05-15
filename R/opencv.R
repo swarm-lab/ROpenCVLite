@@ -22,6 +22,8 @@ installOpenCV <- function(force = FALSE) {
   }
 
   if (install == 1) {
+    Sys.setenv(CXX_STD = "CXX11")
+
     if (.Platform$OS.type == "windows") {
       origDir <- getwd()
       setwd(pkgPath)
