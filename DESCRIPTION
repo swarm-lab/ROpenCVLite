@@ -14,10 +14,9 @@ Description: This is a utility package that installs OpenCV within R for
 License: GPL-3
 LazyData: TRUE
 Imports:
-    Rcpp (>= 0.12.5),
     utils,
-    devtools
-LinkingTo: Rcpp
+    devtools,
+    pkgbuild
 SystemRequirements: 
   cmake,
   C++11
