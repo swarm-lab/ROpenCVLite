@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ROpenCVLite: A package to install OpenCV within R — ROpenCVLite-package • ROpenCVLite</title>
+<title>Install OpenCV — installOpenCV • ROpenCVLite</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -43,11 +43,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="ROpenCVLite: A package to install OpenCV within R — ROpenCVLite-package" />
+<meta property="og:title" content="Install OpenCV — installOpenCV" />
 
-<meta property="og:description" content="This is a utility package that installs OpenCV within R for use
- by other packages. This Lite version does not contain any of the contributed
- modules of OpenCV." />
+<meta property="og:description" content="This function will attempt to download, compile and install
+ OpenCV on the system. This process will take several minutes." />
 
 <meta property="og:image" content="https://swarm-lab.github.io/ROpenCVLite/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -137,35 +136,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>ROpenCVLite: A package to install OpenCV within R</h1>
-    <small class="dont-index">Source: <a href='https://github.com/swarm-lab/ROpenCVLite/blob/master/R/ROpenCVLite.R'><code>R/ROpenCVLite.R</code></a></small>
-    <div class="hidden name"><code>ROpenCVLite-package.Rd</code></div>
+    <h1>Install OpenCV</h1>
+    <small class="dont-index">Source: <a href='https://github.com/swarm-lab/ROpenCVLite/blob/master/R/opencv.R'><code>R/opencv.R</code></a></small>
+    <div class="hidden name"><code>installOpenCV.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This is a utility package that installs OpenCV within R for use
- by other packages. This Lite version does not contain any of the contributed
- modules of OpenCV.</p>
+    <p>This function will attempt to download, compile and install
+ OpenCV on the system. This process will take several minutes.</p>
     
     </div>
 
-        
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <pre class="usage"><span class='fu'>installOpenCV</span>(<span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>force</th>
+      <td><p>A logical indicating whether the interactive dialogs preceding
+the installation should be skipped or not. If `TRUE` then the installation
+will begin immediately. If `FALSE` (the default), then a confirmation dialog
+will be displayed before the installation starts.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://swarm-lab.github.io/ROpenCVLite/'>https://swarm-lab.github.io/ROpenCVLite/</a></p></li>
-<li><p><a href='https://github.com/swarm-lab/ROpenCVLite'>https://github.com/swarm-lab/ROpenCVLite</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/swarm-lab/ROpenCVLite/issues'>https://github.com/swarm-lab/ROpenCVLite/issues</a></p></li>
-</ul></div>
+    <p>A boolean indicating whether OpenCV was or not installed on the system.</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
     <h2>Author</h2>

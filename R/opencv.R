@@ -28,11 +28,11 @@ installOpenCV <- function(force = FALSE) {
     install <- 1
   } else if (.isOpenCVInstalled()) {
     if (interactive()) {
-      install <- menu(c("yes", "no"), title = "Do you want to reinstall OpenCV on this system? This will take several minutes.")
+      install <- utils::menu(c("yes", "no"), title = "Do you want to reinstall OpenCV on this system? This will take several minutes.")
     }
   } else {
     if (interactive()) {
-      install <- menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
+      install <- utils::menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
     }
   }
 
@@ -45,9 +45,9 @@ installOpenCV <- function(force = FALSE) {
       dir.create("opencv")
       dir.create("tmp")
       setwd("tmp")
-      download.file("https://github.com/opencv/opencv/archive/4.1.0.tar.gz",
+      utils::download.file("https://github.com/opencv/opencv/archive/4.1.0.tar.gz",
                     "opencv-4.1.0.tar.gz")
-      untar("opencv-4.1.0.tar.gz")
+      utils::untar("opencv-4.1.0.tar.gz")
 
       file.copy("../OpenCVDetectDirectX.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVDetectDirectX.cmake",
                 overwrite = TRUE)
@@ -84,9 +84,9 @@ installOpenCV <- function(force = FALSE) {
       dir.create("opencv")
       dir.create("tmp")
       setwd("tmp")
-      download.file("https://github.com/opencv/opencv/archive/4.1.0.zip",
+      utils::download.file("https://github.com/opencv/opencv/archive/4.1.0.zip",
                     "opencv-4.1.0.zip")
-      unzip("opencv-4.1.0.zip")
+      utils::unzip("opencv-4.1.0.zip")
 
       file.copy("../OpenCVModule.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVModule.cmake",
                 overwrite = TRUE)
