@@ -1,7 +1,18 @@
-.isOpenCVInstalled <- function() {
+#' @title Check OpenCV Installation
+#'
+#' @description This functions checks that OpenCV is installed within the R
+#'  library.
+#'
+#' @return A boolean indicating whether OpenCV was or not installed on the system.
+#'
+#' @author Simon Garnier, \email{garnier@@njit.edu}
+#'
+#' @export
+isOpenCVInstalled <- function() {
   pkgPath <- find.package("ROpenCVLite")
   dir.exists(paste0(pkgPath, "/opencv/include/"))
 }
+
 
 #' @title Install OpenCV
 #'
@@ -26,7 +37,7 @@ installOpenCV <- function(force = FALSE) {
 
   if (force) {
     install <- 1
-  } else if (.isOpenCVInstalled()) {
+  } else if (isOpenCVInstalled()) {
     if (interactive()) {
       install <- utils::menu(c("yes", "no"), title = "Do you want to reinstall OpenCV on this system? This will take several minutes.")
     }
@@ -104,7 +115,7 @@ installOpenCV <- function(force = FALSE) {
     message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
   }
 
-  .isOpenCVInstalled()
+  isOpenCVInstalled()
 }
 
 
@@ -119,7 +130,7 @@ installOpenCV <- function(force = FALSE) {
 #'
 #' @export
 opencvVersion <- function() {
-  if (.isOpenCVInstalled()) {
+  if (isOpenCVInstalled()) {
     pkgPath <- find.package("ROpenCVLite")
 
     if (.Platform$OS.type == "windows") {
@@ -155,7 +166,7 @@ opencvVersion <- function() {
 #'
 #' @export
 opencvConfig <- function(output = "libs", arch = NULL) {
-  if (!.isOpenCVInstalled())
+  if (!isOpenCVInstalled())
     stop("OpenCV is not installed on this system. Please use installOpenCV() to install it.")
 
   pkgPath <- find.package("ROpenCVLite")

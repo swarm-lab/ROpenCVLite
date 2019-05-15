@@ -325,7 +325,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h3>1.1 - Windows</h3>
 <p>Before installing <code>ROpenCVLite</code>, you will need to install the latest versions of <a href="https://cmake.org/"><code>CMake</code></a> and <a href="https://cran.r-project.org/bin/windows/Rtools/"><code>Rtools</code></a>.</p>
 <p>Download <code>CMake</code> for Windows at <a href="https://cmake.org/download/">https://cmake.org/download/</a>.</p>
-<p>Download the latest “frozen” version of <code>Rtools</code> at <a href="https://cran.r-project.org/bin/windows/Rtools/">https://cran.r-project.org/bin/windows/Rtools/</a>.</p>
+<p>Download the latest “recommended” version of <code>Rtools</code> at <a href="https://cran.r-project.org/bin/windows/Rtools/">https://cran.r-project.org/bin/windows/Rtools/</a>.</p>
 <p>In both cases, make sure to tell the installer to add <code>CMake</code> and <code>Rtools</code> to your “PATH”.</p>
 </div>
 <div id="mac" class="section level3">
@@ -360,8 +360,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </div>
 <div id="installing-ropencvlite" class="section level2">
 <h2>2 - Installing <code>ROpenCVLite</code></h2>
+<p>You can install <code>ROpenCVLite</code> from its Github repository as follows:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;swarm-lab/ROpenCVLite&quot;</span>)</a></code></pre></div>
-<p>This step can take some time. Go make yourself a cup of coffee or two.</p>
+<p>This will not install <code>OpenCV</code> yet. You will be asked whether you want to install it the first time you load the package.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(ROpenCVLite)</a></code></pre></div>
+<p>This step can take some time. Go make yourself a cup of coffee or two while <code>ROpenCVLite</code> downloads, compiles and installs <code>OpenCV</code> on your system.</p>
+<p>In addition, you can also request the (re)installation of <code>OpenCV</code> at any time as follows:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ROpenCVLite<span class="op">::</span><span class="kw">installOpenCV</span>()</a></code></pre></div>
 </div>
 
 
