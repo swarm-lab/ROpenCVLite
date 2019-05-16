@@ -170,13 +170,15 @@
 <h2 class="hasAnchor">
 <a href="#installing-ropencvlite" class="anchor"></a>2 - Installing <code>ROpenCVLite</code>
 </h2>
-<p>You can install <code>ROpenCVLite</code> from its Github repository as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"swarm-lab/ROpenCVLite"</span>)</a></code></pre></div>
+<p>You can install the latest tested version of <code>ROpenCVLite</code> from its Github repository as follows:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"swarm-lab/ROpenCVLite"</span>, <span class="dt">ref =</span> <span class="st">"v0.3.410"</span>)</a></code></pre></div>
+<p>The latest development version (not necessarily tested) can be installed as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"swarm-lab/ROpenCVLite"</span>)</a></code></pre></div>
 <p>This will not install <code>OpenCV</code> yet. You will be asked whether you want to install it the first time you load the package.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ROpenCVLite)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ROpenCVLite)</a></code></pre></div>
 <p>This step can take some time. Go make yourself a cup of coffee or two while <code>ROpenCVLite</code> downloads, compiles and installs <code>OpenCV</code> on your system.</p>
 <p>In addition, you can also request the (re)installation of <code>OpenCV</code> at any time as follows:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ROpenCVLite<span class="op">::</span><span class="kw"><a href="https://swarm-lab.github.io/ROpenCVLite//reference/installOpenCV.html">installOpenCV</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">ROpenCVLite<span class="op">::</span><span class="kw"><a href="https://swarm-lab.github.io/ROpenCVLite//reference/installOpenCV.html">installOpenCV</a></span>()</a></code></pre></div>
 </div>
   </div>
 
