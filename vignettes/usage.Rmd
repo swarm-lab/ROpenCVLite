@@ -37,5 +37,5 @@ You can find an example of how to set up your package with
 [Rvision](https://github.com/swarm-lab/Rvision) package:
 
 * [DESCRIPTION](https://github.com/swarm-lab/Rvision/blob/master/DESCRIPTION)
-* [Makevars](https://github.com/swarm-lab/Rvision/blob/master/Makevars)
-* [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/Makevars.win)
+* [Makevars](https://github.com/swarm-lab/Rvision/blob/master/src/Makevars)
+* [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/src/Makevars.win)
