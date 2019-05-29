@@ -21,6 +21,14 @@ A concatenated character string (with \code{\link{cat}}) of the
 Determines the configuration options for compiling C/C++-based
  packages against OpenCV installed by \code{\link{ROpenCVLite}}.
 }
+\examples{
+\dontrun{
+  opencvConfig()
+  opencvConfig(output = "cflags")
+  opencvConfig(arch = R.version$arch)
+}
+
+}
 \author{
 Simon Garnier, \email{garnier@njit.edu}
 }

@@ -7,6 +7,9 @@
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
+#' @examples
+#' isOpenCVInstalled()
+#'
 #' @export
 isOpenCVInstalled <- function() {
   pkgPath <- find.package("ROpenCVLite")
@@ -27,6 +30,12 @@ isOpenCVInstalled <- function() {
 #' @return A boolean indicating whether OpenCV was or not installed on the system.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
+#'
+#' @examples
+#' \dontrun{
+#'  installOpenCV()
+#'  installOpenCV(force = TRUE)
+#' }
 #'
 #' @export
 installOpenCV <- function(force = FALSE) {
@@ -128,6 +137,11 @@ installOpenCV <- function(force = FALSE) {
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
+#' @examples
+#' \dontrun{
+#'   opencvVersion()
+#' }
+#'
 #' @export
 opencvVersion <- function() {
   if (isOpenCVInstalled()) {
@@ -163,6 +177,13 @@ opencvVersion <- function() {
 #'  configuration options.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
+#'
+#' @examples
+#' \dontrun{
+#'   opencvConfig()
+#'   opencvConfig(output = "cflags")
+#'   opencvConfig(arch = R.version$arch)
+#' }
 #'
 #' @export
 opencvConfig <- function(output = "libs", arch = NULL) {
