@@ -13,6 +13,10 @@ A boolean indicating whether OpenCV was or not installed on the system.
 This functions checks that OpenCV is installed within the R
  library.
 }
+\examples{
+isOpenCVInstalled()
+
+}
 \author{
 Simon Garnier, \email{garnier@njit.edu}
 }

@@ -19,6 +19,13 @@ A boolean indicating whether OpenCV was or not installed on the system.
 This function will attempt to download, compile and install
  OpenCV on the system. This process will take several minutes.
 }
+\examples{
+\dontrun{
+ installOpenCV()
+ installOpenCV(force = TRUE)
+}
+
+}
 \author{
 Simon Garnier, \email{garnier@njit.edu}
 }
