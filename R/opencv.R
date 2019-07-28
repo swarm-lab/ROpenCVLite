@@ -13,7 +13,8 @@
 #' @export
 isOpenCVInstalled <- function() {
   pkgPath <- find.package("ROpenCVLite")
-  dir.exists(paste0(pkgPath, "/opencv/include/"))
+  installPath <- gsub("ROpenCVLite", "", pkgPath)
+  dir.exists(paste0(installPath, "/opencv/include/"))
 }
 
 
@@ -22,11 +23,6 @@ isOpenCVInstalled <- function() {
 #' @description This function will attempt to download, compile and install
 #'  OpenCV on the system. This process will take several minutes.
 #'
-#' @param force A logical indicating whether the interactive dialogs preceding
-#'  the installation should be skipped or not. If `TRUE` then the installation
-#'  will begin immediately. If `FALSE` (the default), then a confirmation dialog
-#'  will be displayed before the installation starts.
-#'
 #' @return A boolean indicating whether OpenCV was or not installed on the system.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
@@ -34,51 +30,60 @@ isOpenCVInstalled <- function() {
 #' @examples
 #' \dontrun{
 #'  installOpenCV()
-#'  installOpenCV(force = TRUE)
 #' }
 #'
 #' @export
-installOpenCV <- function(force = FALSE) {
-  pkgPath <- find.package("ROpenCVLite")
-  openCVPath <- paste0(pkgPath, "/opencv")
-
+installOpenCV <- function() {
   install <- 0
 
-  if (force) {
-    install <- 1
-  } else if (isOpenCVInstalled()) {
-    if (interactive()) {
-      install <- utils::menu(c("yes", "no"), title = "Do you want to reinstall OpenCV on this system? This will take several minutes.")
-    }
-  } else {
-    if (interactive()) {
+  if (interactive()) {
+    if (isOpenCVInstalled()) {
+      pkgVersion <- unlist(strsplit(as.character(utils::packageVersion("ROpenCVLite")), "\\."))[3]
+      cvVersion <- gsub("\\D+", "", opencvVersion())
+
+      if (pkgVersion == cvVersion) {
+        install <- utils::menu(c("yes", "no"), title = "OpenCV is already installed on this system. Would you like to reinstall it now? This will take several minutes.")
+      } else {
+        install <- utils::menu(c("yes", "no"), title = "A new version of OpenCV is available. Would you like to install it now? This will take several minutes.")
+      }
+    } else {
       install <- utils::menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
     }
+  } else {
+    warning("OpenCV can only be installed in interactive mode.")
   }
 
   if (install == 1) {
+    pkgPath <- find.package("ROpenCVLite")
+    installPath <- gsub("ROpenCVLite", "", pkgPath)
+    openCVPath <- paste0(installPath, "opencv")
+    message(paste0("OpenCV will be installed in ", openCVPath))
+
     Sys.setenv(CXX_STD = "CXX11")
 
     if (.Platform$OS.type == "windows") {
       origDir <- getwd()
-      setwd(pkgPath)
+      setwd(installPath)
       dir.create("opencv")
-      dir.create("tmp")
-      setwd("tmp")
+      tmpDir <- base::tempdir()
+      dir.create(tmpDir)
+      setwd(tmpDir)
       utils::download.file("https://github.com/opencv/opencv/archive/4.1.0.tar.gz",
-                    "opencv-4.1.0.tar.gz")
+                           "opencv-4.1.0.tar.gz")
       utils::untar("opencv-4.1.0.tar.gz")
 
-      file.copy("../OpenCVDetectDirectX.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVDetectDirectX.cmake",
+      file.copy(paste0(pkgPath, "/OpenCVDetectDirectX.4.1.0.cmake"),
+                "opencv-4.1.0/cmake/OpenCVDetectDirectX.cmake",
                 overwrite = TRUE)
-      file.copy("../OpenCVDetectOpenCL.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVDetectOpenCL.cmake",
+      file.copy(paste0(pkgPath, "/OpenCVDetectOpenCL.4.1.0.cmake"),
+                "opencv-4.1.0/cmake/OpenCVDetectOpenCL.cmake",
                 overwrite = TRUE)
 
       setwd("opencv-4.1.0")
 
       arch <- c("64", "32")
       archAvail <- c(dir.exists(paste0(R.home(), "/bin/x64")),
-                       dir.exists(paste0(R.home(), "/bin/i386")))
+                     dir.exists(paste0(R.home(), "/bin/i386")))
 
       if (any(archAvail)) {
         pkgbuild::check_rtools()
@@ -95,20 +100,21 @@ installOpenCV <- function(force = FALSE) {
           }
         }
       }
-      setwd(pkgPath)
-      unlink("tmp", recursive = TRUE)
       setwd(origDir)
+      unlink(tmpDir, recursive = TRUE)
     } else {
       origDir <- getwd()
-      setwd(pkgPath)
+      setwd(installPath)
       dir.create("opencv")
-      dir.create("tmp")
-      setwd("tmp")
+      tmpDir <- base::tempdir()
+      dir.create(tmpDir)
+      setwd(tmpDir)
       utils::download.file("https://github.com/opencv/opencv/archive/4.1.0.zip",
-                    "opencv-4.1.0.zip")
+                           "opencv-4.1.0.zip")
       utils::unzip("opencv-4.1.0.zip")
 
-      file.copy("../OpenCVModule.4.1.0.cmake", "opencv-4.1.0/cmake/OpenCVModule.cmake",
+      file.copy(paste0(pkgPath, "/OpenCVModule.4.1.0.cmake"),
+                "opencv-4.1.0/cmake/OpenCVModule.cmake",
                 overwrite = TRUE)
 
       setwd("opencv-4.1.0")
@@ -116,12 +122,11 @@ installOpenCV <- function(force = FALSE) {
       setwd("build")
       system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " ../"))
       system("make -j4; make all install")
-      setwd(pkgPath)
-      unlink("tmp", recursive = TRUE)
       setwd(origDir)
+      unlink(tmpDir, recursive = TRUE)
     }
   } else {
-    message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
+    message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function in interactive mode.")
   }
 
   isOpenCVInstalled()
@@ -138,7 +143,7 @@ installOpenCV <- function(force = FALSE) {
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
 #' @examples
-#' \dontrun{
+#' if (isOpenCVInstalled()) {
 #'   opencvVersion()
 #' }
 #'
@@ -146,14 +151,15 @@ installOpenCV <- function(force = FALSE) {
 opencvVersion <- function() {
   if (isOpenCVInstalled()) {
     pkgPath <- find.package("ROpenCVLite")
+    installPath <- gsub("ROpenCVLite", "", pkgPath)
 
     if (.Platform$OS.type == "windows") {
       pcPath <- "/opencv/OpenCVConfig-version.cmake"
-      pc <- utils::read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
+      pc <- utils::read.table(paste0(installPath, pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     } else {
       pcPath <- "/opencv/lib/cmake/opencv4/OpenCVConfig-version.cmake"
-      pc <- utils::read.table(paste0(pkgPath, pcPath), sep = "\t")[1, 1]
+      pc <- utils::read.table(paste0(installPath, pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     }
   } else {
@@ -179,7 +185,7 @@ opencvVersion <- function() {
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
 #' @examples
-#' \dontrun{
+#' if (isOpenCVInstalled()) {
 #'   opencvConfig()
 #'   opencvConfig(output = "cflags")
 #'   opencvConfig(arch = R.version$arch)
@@ -191,7 +197,8 @@ opencvConfig <- function(output = "libs", arch = NULL) {
     stop("OpenCV is not installed on this system. Please use installOpenCV() to install it.")
 
   pkgPath <- find.package("ROpenCVLite")
-  prefix <- paste0(pkgPath, "/opencv")
+  installPath <- gsub("ROpenCVLite", "", pkgPath)
+  prefix <- paste0(installPath, "opencv")
 
   if (output == "libs") {
     if (.Platform$OS.type == "windows") {

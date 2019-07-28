@@ -22,7 +22,7 @@ Determines the configuration options for compiling C/C++-based
  packages against OpenCV installed by \code{\link{ROpenCVLite}}.
 }
 \examples{
-\dontrun{
+if (isOpenCVInstalled()) {
   opencvConfig()
   opencvConfig(output = "cflags")
   opencvConfig(arch = R.version$arch)
