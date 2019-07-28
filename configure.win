@@ -1,0 +1,17 @@
+#!/bin/bash
+set -x
+set -e
+
+if hash cmake 2>/dev/null; then
+  exit 0
+else
+  echo "------------------ CMAKE NOT FOUND --------------------"
+  echo ""
+  echo "CMake was not found on the PATH."
+  echo ""
+  echo "Please install cmake from: <https://cmake.org/>"
+  echo ""
+  echo "-------------------------------------------------------"
+  echo ""
+  exit 1
+fi
