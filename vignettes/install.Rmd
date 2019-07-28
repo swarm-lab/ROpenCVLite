@@ -99,7 +99,7 @@ sudo apt-get install cmake
 Before installing `ROpenCVLite`, you will need to install the `devtools` package 
 in `R`. 
 
-```r
+```{r eval=FALSE}
 install.package("devtools")
 ```
 
@@ -110,21 +110,21 @@ install.package("devtools")
 You can install the latest tested version of `ROpenCVLite` from its Github 
 repository as follows:
 
-```r
+```{r eval=FALSE}
 devtools::install_github("swarm-lab/ROpenCVLite", ref = "v0.3.410")
 ```
 
 The latest development version (not necessarily tested) can be installed as 
 follows: 
 
-```r
+```{r eval=FALSE}
 devtools::install_github("swarm-lab/ROpenCVLite")
 ```
 
 This will not install `OpenCV` yet. You will be asked whether you want to install
 it the first time you load the package. 
 
-```r
+```{r eval=FALSE}
 library(ROpenCVLite)
 ```
 
@@ -134,6 +134,6 @@ This step can take some time. Go make yourself a cup of coffee or two while
 In addition, you can also request the (re)installation of `OpenCV` at any time
 as follows:
 
-```r
+```{r eval=FALSE}
 ROpenCVLite::installOpenCV()
 ```

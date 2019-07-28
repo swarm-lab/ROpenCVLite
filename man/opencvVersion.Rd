@@ -14,7 +14,7 @@ A character string with the version of OpenCV installed by
 Determines the version of OpenCV installed within R.
 }
 \examples{
-\dontrun{
+if (isOpenCVInstalled()) {
   opencvVersion()
 }
 
