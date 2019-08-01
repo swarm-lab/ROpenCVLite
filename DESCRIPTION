@@ -1,6 +1,6 @@
 Package: ROpenCVLite
 Type: Package
-Title: Install OpenCV
+Title: Install 'OpenCV'
 Version: 0.3.410
 Authors@R: c(
     person("Simon", "Garnier", email = "garnier@njit.edu", role = c("aut", "cre"),
@@ -8,16 +8,17 @@ Authors@R: c(
     person("Muschelli", "John", email = "muschellij2@gmail.com", role = c("ctb"))
   )
 Maintainer: Simon Garnier <garnier@njit.edu>
-Description: Installs OpenCV for use by other packages. OpenCV <https://opencv.org/> 
+Description: Installs 'OpenCV' for use by other packages. 'OpenCV' <https://opencv.org/> 
     is library of programming functions mainly aimed at real-time computer 
-    vision. This Lite version contains the stable base version of OpenCV and 
+    vision. This 'Lite' version contains the stable base version of 'OpenCV' and 
     does not contain any of its externally contributed modules.
 License: GPL-3
 LazyData: TRUE
 Imports:
     utils,
     devtools,
-    pkgbuild
+    pkgbuild,
+    parallel
 SystemRequirements: 
     cmake,
     C++11

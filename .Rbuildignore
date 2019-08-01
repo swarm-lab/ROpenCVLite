@@ -12,3 +12,4 @@ logo.*
 pkgdown
 old
 cran-comments.md
+^CRAN-RELEASE$
