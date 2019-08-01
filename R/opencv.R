@@ -62,9 +62,9 @@ installOpenCV <- function() {
     Sys.setenv(CXX_STD = "CXX11")
 
     if (.Platform$OS.type == "windows") {
-      dir.create(openCVPath)
+      dir.create(openCVPath, showWarnings = FALSE)
       tmpDir <- base::tempdir()
-      dir.create(tmpDir)
+      dir.create(tmpDir, showWarnings = FALSE)
 
       utils::download.file("https://github.com/opencv/opencv/archive/4.1.0.tar.gz",
                            paste0(tmpDir, "/opencv-4.1.0.tar.gz"))
@@ -90,7 +90,7 @@ installOpenCV <- function() {
           if (archAvail[i]) {
             sourceDir <- paste0(tmpDir, "/opencv-4.1.0/")
             buildDir <- paste0(sourceDir, "build", arch[i])
-            dir.create(buildDir)
+            dir.create(buildDir, showWarnings = FALSE)
             system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', rtoolsPath, '/mingw_', arch[i], '/bin/gcc.exe -DCMAKE_CXX_COMPILER=', rtoolsPath, '/mingw_', arch[i], '/bin/g++.exe -DCMAKE_RC_COMPILER=', rtoolsPath, '/mingw_', arch[i], '/bin/windres.exe -DCMAKE_MAKE_PROGRAM=', rtoolsPath, '/mingw_', arch[i], '/bin/mingw32-make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DENABLE_CXX11=ON -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_MSMF=OFF -DBUILD_PROTOBUF=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', openCVPath, ' -B', buildDir, ' -H', sourceDir))
             system(paste0(rtoolsPath, "/mingw_", arch[i], "/bin/mingw32-make.exe -j",
                           parallel::detectCores(), " -C ", buildDir))
@@ -99,11 +99,10 @@ installOpenCV <- function() {
           }
         }
       }
-      unlink(tmpDir, recursive = TRUE)
     } else {
-      dir.create(openCVPath)
+      dir.create(openCVPath, showWarnings = FALSE)
       tmpDir <- base::tempdir()
-      dir.create(tmpDir)
+      dir.create(tmpDir, showWarnings = FALSE)
 
       utils::download.file("https://github.com/opencv/opencv/archive/4.1.0.zip",
                            paste0(tmpDir, "/opencv-4.1.0.zip"))
@@ -116,11 +115,10 @@ installOpenCV <- function() {
 
       sourceDir <- paste0(tmpDir, "/opencv-4.1.0/")
       buildDir <- paste0(sourceDir, "build")
-      dir.create(buildDir)
+      dir.create(buildDir, showWarnings = FALSE)
       system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " -B", buildDir, ' -H', sourceDir))
       system(paste0("make -j", parallel::detectCores(), " -C ", buildDir))
       system(paste0("make -C ", buildDir, " all install"))
-      unlink(tmpDir, recursive = TRUE)
     }
   } else {
     message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function in interactive mode.")
