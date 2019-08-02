@@ -107,15 +107,14 @@ install.package("devtools")
 
 ## 2 - Installing `ROpenCVLite`
 
-You can install the latest tested version of `ROpenCVLite` from its Github 
-repository as follows:
+You can install `ROpenCVLite` from CRAN as follows:
 
 ```{r eval=FALSE}
-devtools::install_github("swarm-lab/ROpenCVLite", ref = "v0.3.410")
+install.packages("ROpenCVLite")
 ```
 
-The latest development version (not necessarily tested) can be installed as 
-follows: 
+Or you can install the latest latest development version (not necessarily tested) 
+as follows: 
 
 ```{r eval=FALSE}
 devtools::install_github("swarm-lab/ROpenCVLite")
