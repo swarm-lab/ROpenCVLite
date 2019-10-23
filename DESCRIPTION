@@ -1,7 +1,7 @@
 Package: ROpenCVLite
 Type: Package
 Title: Install 'OpenCV'
-Version: 0.3.410
+Version: 0.3.411
 Authors@R: c(
     person("Simon", "Garnier", email = "garnier@njit.edu", role = c("aut", "cre"),
       comment = c(ORCID = "0000-0002-3886-3974")),
