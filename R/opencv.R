@@ -50,7 +50,8 @@ installOpenCV <- function() {
       install <- utils::menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
     }
   } else {
-    warning("OpenCV can only be installed in interactive mode.")
+    warning("OpenCV being installed in non-interactive mode!")
+    install = 1
   }
 
   if (install == 1) {
