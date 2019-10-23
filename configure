@@ -1,26 +1,21 @@
 #!/bin/bash
-CXX_STD=CXX11
 set -x
 set -e
 
-cd ./src
-
-${R_HOME}/bin/Rscript -e 'download.file("https://github.com/opencv/opencv/archive/4.0.1.zip", "opencv-4.0.1.zip")'
-${R_HOME}/bin/Rscript -e 'unzip("opencv-4.0.1.zip")'
-
-cp OpenCVModule.4.0.1.cmake opencv-4.0.1/cmake/OpenCVModule.cmake
-
-cd opencv-4.0.1
-mkdir build
-cd build
-
-cmake -DWITH_IPP=ON \
-	-DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF \
-	-DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF \
-	-DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF \
-	-DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF \
-	-DINSTALL_CREATE_DISTRIB=ON \
-	-DCMAKE_BUILD_TYPE=RELEASE \
-	-DCMAKE_INSTALL_PREFIX=${R_PACKAGE_DIR}/opencv/ \
-	../ > cmake_build.log
-cd ../
+if hash cmake 2>/dev/null; then
+  exit 0
+else
+  echo "------------------ CMAKE NOT FOUND --------------------"
+  echo ""
+  echo "CMake was not found on the PATH. Please install CMake:"
+  echo ""
+  echo " - yum install cmake          (Fedora/CentOS)"
+  echo " - apt install cmake          (Debian/Ubuntu)"
+  echo " - brew install cmake         (MacOS)"
+  echo ""
+  echo "Alternatively install CMake from: <https://cmake.org/>"
+  echo ""
+  echo "-------------------------------------------------------"
+  echo ""
+  exit 1
+fi
