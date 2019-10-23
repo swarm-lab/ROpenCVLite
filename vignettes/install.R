@@ -2,7 +2,7 @@
 #  install.package("devtools")
 
 ## ----eval=FALSE----------------------------------------------------------
-#  devtools::install_github("swarm-lab/ROpenCVLite", ref = "v0.3.410")
+#  install.packages("ROpenCVLite")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  devtools::install_github("swarm-lab/ROpenCVLite")
