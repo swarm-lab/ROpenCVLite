@@ -13,6 +13,12 @@ A character string with the version of OpenCV installed by
 \description{
 Determines the version of OpenCV installed within R.
 }
+\examples{
+if (isOpenCVInstalled()) {
+  opencvVersion()
+}
+
+}
 \author{
 Simon Garnier, \email{garnier@njit.edu}
 }

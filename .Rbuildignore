@@ -10,3 +10,6 @@ _pkgdown.yaml
 index.Rmd
 logo.*
 pkgdown
+old
+cran-comments.md
+^CRAN-RELEASE$
