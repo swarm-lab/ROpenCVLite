@@ -22,7 +22,7 @@ isOpenCVInstalled <- function() {
 #'
 #' @description This function will attempt to download, compile and install
 #'  OpenCV on the system. This process will take several minutes.
-#'
+#' @param allow_batch should batch mode installation be allowed?
 #' @return A boolean indicating whether OpenCV was or not installed on the system.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
@@ -33,7 +33,7 @@ isOpenCVInstalled <- function() {
 #' }
 #'
 #' @export
-installOpenCV <- function() {
+installOpenCV <- function(allow_batch = FALSE) {
   install <- 0
 
   if (interactive()) {
@@ -51,7 +51,9 @@ installOpenCV <- function() {
     }
   } else {
     warning("OpenCV being installed in non-interactive mode!")
-    install = 1
+    if (allow_batch) {
+      install = 1
+    }
   }
 
   if (install == 1) {
