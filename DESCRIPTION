@@ -22,7 +22,6 @@ Imports:
 SystemRequirements: 
   cmake,
   C++11
-NeedsCompilation: yes
 RoxygenNote: 6.1.1
 Biarch: true
 Encoding: UTF-8
