@@ -1,9 +1,0 @@
-.PHONY: all opencv
-
-all: $(SHLIB)
-
-$(SHLIB): opencv
-
-# opencv: ; ls && if [ ${R_ARCH_BIN} = "/x64" ]; then echo "64 build" ; cd ../src/opencv-4.0.1/build64; ls ; fi && if [ ${R_ARCH_BIN} = "/i386" ]; then echo "32 build" ; cd ../src/opencv-4.0.1/build32 ;  ls ; fi && make -j4 && make install && cd ../ && echo "after make build" && ls && rm -rf build64 && rm -rf build32 && cd ../ && echo "after rm build" && ls && rm -rf opencv-4.0.1/samples ;
-
-opencv: ; if [ ${R_ARCH_BIN} = "/x64" ]; then cd ../src/opencv-4.0.1/build64 && make -j4 && make install && cd ../ && rm -rf build64 && cd ../ ; fi && if [ ${R_ARCH_BIN} = "/i386" ]; then cd ../src/opencv-4.0.1/build32 && make -j4 && make install && cd ../ && rm -rf build32 && cd ../ && rm -rf opencv-4.0.1/samples ; fi 
