@@ -55,9 +55,11 @@ installOpenCV <- function(batch = FALSE) {
       install <- utils::menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
     }
   } else {
-    warning("OpenCV being installed in non-interactive mode!")
-    if (allow_batch) {
+    if (batch) {
+      warning("OpenCV being installed in non-interactive mode!")
       install = 1
+    } else {
+      warning("OpenCV can only be installed in interactive mode or if the batch mode is activated.")
     }
   }
 
