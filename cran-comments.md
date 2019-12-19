@@ -11,7 +11,9 @@ There were no ERRORs or WARNINGs.
 
 There was 1 NOTE:
 
-* ‘configure’: /bin/bash is not portable
+* checking top-level files ... NOTE
+  possible bashism in configure line 5 (hash):
+  if hash cmake 2>/dev/null; then
   
   Fixed
 
