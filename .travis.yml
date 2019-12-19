@@ -24,6 +24,7 @@ before_install:
   - cmake --version
   - x=`cmake_setup`; echo "${x}"; eval ${x};
   - cmake --version
+  - chmod +x configure
 
 script:
   - travis_wait 100 R CMD build ${R_BUILD_ARGS} .
