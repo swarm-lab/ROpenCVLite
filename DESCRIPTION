@@ -22,7 +22,7 @@ Imports:
 SystemRequirements: 
   cmake,
   C++11
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Biarch: true
 Encoding: UTF-8
 Suggests: 

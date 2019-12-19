@@ -4,10 +4,13 @@
 \alias{installOpenCV}
 \title{Install OpenCV}
 \usage{
-installOpenCV(allow_batch = FALSE)
+installOpenCV(batch = FALSE)
 }
 \arguments{
-\item{allow_batch}{should batch mode installation be allowed?}
+\item{batch}{A boolean indicating whether to skip (\code{TRUE}) or not (\code{FALSE}, 
+the default) the interactive installation dialog. This is useful when OpenCV needs  
+to be installed in a non-interactive environment (e.g., during a batch installation 
+on a server).}
 }
 \value{
 A boolean indicating whether OpenCV was or not installed on the system.
