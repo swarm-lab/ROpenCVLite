@@ -7,15 +7,7 @@
 * appveyor Windows Server 2012 R2, R 3.6.2
 
 ## R CMD check results
-There were no ERRORs or WARNINGs.
-
-There was 1 NOTE:
-
-* checking top-level files ... NOTE
-  possible bashism in configure line 5 (hash):
-  if hash cmake 2>/dev/null; then
-  
-  Fixed
+There were no ERRORs, WARNINGs or NOTEs.
 
 ## Downstream dependencies
 
@@ -23,4 +15,18 @@ There are currently no downstream dependencies for this package.
 
 ## CRAN team comments
 
-N/A
+On Debian: 
+
+* checking top-level files ... NOTE
+  possible bashism in configure line 5 ('command' with option other than -p):
+  if command -v cmake 2>/dev/null; then
+  
+  Fixed
+  
+On Windows:
+
+* checking whether package 'ROpenCVLite' can be installed ... ERROR
+  Installation failed.
+  See 'd:/RCompile/CRANincoming/R-devel/ROpenCVLite.Rcheck/00install.out' for details.
+  
+  Fixed
