@@ -37,7 +37,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -338,9 +338,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p><code>sudo &quot;/Applications/CMake.app/Contents/bin/cmake-gui&quot; --install</code></p>
 <p>It will ask for your administrator password.</p>
 <p><strong>Homebrew:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">brew</span> install cmake</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">brew</span> install cmake</a></code></pre></div>
 <p><strong>MacPorts:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">sudo</span> port install cmake</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">sudo</span> port install cmake</a></code></pre></div>
 </div>
 <div id="linux" class="section level3">
 <h3>1.3 - Linux</h3>
@@ -349,27 +349,27 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Download <code>CMake</code> for Linux at <a href="https://cmake.org/download/">https://cmake.org/download/</a>. However it is recommended that you install it using your distribution’s package management system.</p>
 <p><strong>Use you distribution’s package management system</strong></p>
 <p><em>Ubuntu:</em></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">sudo</span> apt-get install cmake</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">sudo</span> apt-get install cmake</a></code></pre></div>
 <p>[TODO: add more Linux install commands]</p>
 </div>
 <div id="mac-linux-and-windows" class="section level3">
 <h3>1.4 - Mac, Linux and Windows</h3>
 <p>Before installing <code>ROpenCVLite</code>, you will need to install the <code>devtools</code> package in <code>R</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">install.package</span>(<span class="st">&quot;devtools&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">install.package</span>(<span class="st">&quot;devtools&quot;</span>)</a></code></pre></div>
 <hr />
 </div>
 </div>
 <div id="installing-ropencvlite" class="section level2">
 <h2>2 - Installing <code>ROpenCVLite</code></h2>
-<p>You can install the latest tested version of <code>ROpenCVLite</code> from its Github repository as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;swarm-lab/ROpenCVLite&quot;</span>, <span class="dt">ref =</span> <span class="st">&quot;v0.3.410&quot;</span>)</a></code></pre></div>
-<p>The latest development version (not necessarily tested) can be installed as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;swarm-lab/ROpenCVLite&quot;</span>)</a></code></pre></div>
+<p>You can install <code>ROpenCVLite</code> from CRAN as follows:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ROpenCVLite&quot;</span>)</a></code></pre></div>
+<p>Or you can install the latest latest development version (not necessarily tested) as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;swarm-lab/ROpenCVLite&quot;</span>)</a></code></pre></div>
 <p>This will not install <code>OpenCV</code> yet. You will be asked whether you want to install it the first time you load the package.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(ROpenCVLite)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(ROpenCVLite)</a></code></pre></div>
 <p>This step can take some time. Go make yourself a cup of coffee or two while <code>ROpenCVLite</code> downloads, compiles and installs <code>OpenCV</code> on your system.</p>
 <p>In addition, you can also request the (re)installation of <code>OpenCV</code> at any time as follows:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">ROpenCVLite<span class="op">::</span><span class="kw">installOpenCV</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">ROpenCVLite<span class="op">::</span><span class="kw">installOpenCV</span>()</a></code></pre></div>
 </div>
 
 
