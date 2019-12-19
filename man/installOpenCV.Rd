@@ -7,9 +7,9 @@
 installOpenCV(batch = FALSE)
 }
 \arguments{
-\item{batch}{A boolean indicating whether to skip (\code{TRUE}) or not (\code{FALSE}, 
-the default) the interactive installation dialog. This is useful when OpenCV needs  
-to be installed in a non-interactive environment (e.g., during a batch installation 
+\item{batch}{A boolean indicating whether to skip (\code{TRUE}) or not (\code{FALSE},
+the default) the interactive installation dialog. This is useful when OpenCV needs
+to be installed in a non-interactive environment (e.g., during a batch installation
 on a server).}
 }
 \value{
