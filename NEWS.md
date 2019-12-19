@@ -2,7 +2,7 @@
 
 ## New features
 
-* Package update to use the latest OpenCV release (4.1.2). 
+* Package updated to use the latest OpenCV release (4.1.2). 
 
 ## Minor improvements and fixes
 
