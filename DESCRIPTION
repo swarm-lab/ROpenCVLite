@@ -16,7 +16,6 @@ License: GPL-3
 LazyData: TRUE
 Imports:
     utils,
-    devtools,
     pkgbuild,
     parallel
 SystemRequirements: 
