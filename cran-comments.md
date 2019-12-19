@@ -1,17 +1,19 @@
 ## Test environments
-* local OS X install, R 3.6.1
-* ubuntu 16.04 (on travis-ci), R 3.6.1
-* win-builder (release)
+* local OS X 10.14.6, R 3.6.2
+* local Windows 10, R 3.6.2
+* local Ubuntu 19.10, R 3.6.2
+* travis CI Ubuntu 16.04, R 3.6.1
+* travis CI OS X 10.13.6, R 3.6.1
+* appveyor Windows Server 2012 R2, R 3.6.2
 
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
 There was 1 NOTE:
 
-* Possibly mis-spelled words in DESCRIPTION:
-  OpenCV (3:16, 11:23, 11:57, 13:67)
-
-  OpenCV is not mis-spelled.
+* ‘configure’: /bin/bash is not portable
+  
+  Fixed
 
 ## Downstream dependencies
 
@@ -19,15 +21,4 @@ There are currently no downstream dependencies for this package.
 
 ## CRAN team comments
 
-"Please write package names, software names and API names in 
-single quotes (e.g. 'OpenCV') in Title and Description."
-
-Fixed. 
-
-"Please do not change the working directory in your functions.
-If you really have to, please always ensure by an immediate call of 
-on.exit() (e.g. on.exit(setwd(origDir))) that the old working directory 
-is reset."
-
-Calls to setwd() were removed. The functions do not change the working directory
-anymore. 
+N/A

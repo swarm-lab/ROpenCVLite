@@ -1,3 +1,15 @@
+# ROpenCVLite 0.3.412
+
+## New features
+
+* Package update to use the latest OpenCV release (4.1.2). 
+
+## Minor improvements and fixes
+
+N/A
+
+---
+
 # ROpenCVLite 0.3.410
 
 ## New features
