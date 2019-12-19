@@ -18,6 +18,42 @@ isOpenCVInstalled <- function() {
 }
 
 
+#' @title Check Cmake Installation
+#'
+#' @description This functions checks that Cmake is installed on the system.
+#'
+#' @return A boolean indicating whether Cmake was or not installed on the system.
+#'
+#' @author Simon Garnier, \email{garnier@@njit.edu}
+#'
+#' @examples
+#' isCmakeInstalled()
+#'
+#' @export
+isCmakeInstalled <- function() {
+  cmake <- system("cmake --version", ignore.stdout = TRUE) == 0
+
+  if (cmake) {
+    cmake
+  } else {
+    cat("------------------ CMAKE NOT FOUND --------------------\n")
+    cat("\n")
+    cat("CMake was not found on the PATH. Please install CMake:\n")
+    cat("\n")
+    cat(" - installr::install.cmake()  (Windows; inside the R console)\n")
+    cat(" - yum install cmake          (Fedora/CentOS; inside a terminal)\n")
+    cat(" - apt install cmake          (Debian/Ubuntu; inside a terminal)\n")
+    cat(" - brew install cmake         (MacOS; inside a terminal with homebrew)\n")
+    cat("\n")
+    cat("Alternatively install CMake from: <https://cmake.org/>\n")
+    cat("\n")
+    cat("-------------------------------------------------------\n")
+    cat("\n")
+    cmake
+  }
+}
+
+
 #' @title Install OpenCV
 #'
 #' @description This function will attempt to download, compile and install
@@ -57,11 +93,14 @@ installOpenCV <- function(batch = FALSE) {
   } else {
     if (batch) {
       warning("OpenCV being installed in non-interactive mode!")
-      install = 1
+      install <- 1
     } else {
       warning("OpenCV can only be installed in interactive mode or if the batch mode is activated.")
     }
   }
+
+  if (!isCmakeInstalled())
+    install <- 0
 
   if (install == 1) {
     pkgPath <- find.package("ROpenCVLite")
@@ -124,7 +163,7 @@ installOpenCV <- function(batch = FALSE) {
       system(paste0("make -C ", buildDir, " all install"))
     }
   } else {
-    message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function in interactive mode.")
+    message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
   }
 
   isOpenCVInstalled()
