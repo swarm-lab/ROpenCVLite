@@ -18,8 +18,8 @@ There are currently no downstream dependencies for this package.
 On Debian: 
 
 * checking top-level files ... NOTE
-  possible bashism in configure line 5 ('command' with option other than -p):
-  if command -v cmake 2>/dev/null; then
+  possible bashism in configure line 5 (type):
+  if type cmake >/dev/null 2>&1; then
   
   Fixed
   
