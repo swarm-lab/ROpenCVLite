@@ -2,7 +2,7 @@
 set -x
 set -e
 
-if command -p cmake >/dev/null 2>&1; then
+if command cmake >/dev/null 2>&1; then
   exit 0
 else
   echo "------------------ CMAKE NOT FOUND --------------------"
