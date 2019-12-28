@@ -108,6 +108,11 @@ installOpenCV <- function(batch = FALSE) {
     openCVPath <- paste0(installPath, "opencv")
     message(paste0("OpenCV will be installed in ", openCVPath))
 
+    if (dir.exists(openCVPath)) {
+      message("Removing old OpenCV installation.")
+      unlink(openCVPath, recursive = TRUE)
+    }
+
     Sys.setenv(CXX_STD = "CXX11")
 
     if (.Platform$OS.type == "windows") {
