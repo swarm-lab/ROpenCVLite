@@ -1,3 +1,15 @@
+# ROpenCVLite 0.3.412.1
+
+## New features
+
+N/A
+
+## Minor improvements and fixes
+
+* If an old installation exists, it is deleted before upgrading/reinstalling OpenCV. 
+
+---
+
 # ROpenCVLite 0.3.412
 
 ## New features
