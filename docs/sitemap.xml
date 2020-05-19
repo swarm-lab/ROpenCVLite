@@ -4,6 +4,9 @@
     <loc>https://swarm-lab.github.io/ROpenCVLite//index.html</loc>
   </url>
   <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite//reference/ROpenCVLite-package.html</loc>
+  </url>
+  <url>
     <loc>https://swarm-lab.github.io/ROpenCVLite//reference/installOpenCV.html</loc>
   </url>
   <url>
@@ -17,9 +20,6 @@
   </url>
   <url>
     <loc>https://swarm-lab.github.io/ROpenCVLite//reference/opencvVersion.html</loc>
-  </url>
-  <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//reference/ROpenCVLite-package.html</loc>
   </url>
   <url>
     <loc>https://swarm-lab.github.io/ROpenCVLite//articles/install.html</loc>

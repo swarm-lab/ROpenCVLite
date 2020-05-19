@@ -1,3 +1,16 @@
+# ROpenCVLite 0.4.430.0
+
+## New features
+
+* Package updated to use the latest OpenCV release (4.3.0).
+* Package updated to work with RTools 4.0 (Windows only).
+
+## Minor improvements and fixes
+
+* A CMake check is now made during the package installation.
+
+---
+
 # ROpenCVLite 0.3.412.1
 
 ## New features
