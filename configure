@@ -1,4 +1,4 @@
-if ! cmake_loc="$(type -p "cmake")" || [ -z cmake_loc ]
+if ! cmake_loc="$(type 'cmake')" || [ -z cmake_loc ]
 then
   echo ""
   echo "------------------ CMAKE NOT FOUND --------------------"
