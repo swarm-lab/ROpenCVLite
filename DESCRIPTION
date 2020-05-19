@@ -1,7 +1,7 @@
 Package: ROpenCVLite
 Type: Package
 Title: Install 'OpenCV'
-Version: 0.3.412.1
+Version: 0.4.430.0
 Authors@R: c(
     person("Simon", "Garnier", email = "garnier@njit.edu", role = c("aut", "cre"),
       comment = c(ORCID = "0000-0002-3886-3974")),
@@ -21,7 +21,7 @@ Imports:
 SystemRequirements: 
   cmake,
   C++11
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Biarch: true
 Encoding: UTF-8
 Suggests: 
