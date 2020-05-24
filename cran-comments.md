@@ -18,6 +18,5 @@ There are currently no downstream dependencies for this package.
 ## CRAN team comments
 
 The package has "SystemRequirements: cmake". A check was added during 
-installation to make sure CMake is on the path. The installation fails if CMake
-is not found and an error message is displayed with instructions on how to 
-install CMake. 
+installation to make sure CMake is on the path. A warning message is displayed 
+if CMake is not found with instructions on how to install CMake. 
