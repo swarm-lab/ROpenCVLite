@@ -1,3 +1,15 @@
+# ROpenCVLite 0.4.430.1
+
+## New features
+
+N/A
+
+## Minor improvements and fixes
+
+* Fix an issue with detecting Rtools with R 3.x on Windows.
+
+---
+
 # ROpenCVLite 0.4.430.0
 
 ## New features

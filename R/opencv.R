@@ -131,10 +131,15 @@ installOpenCV <- function(batch = FALSE) {
                      dir.exists(paste0(R.home(), "/bin/i386")))
 
       if (any(archAvail)) {
-        pkgbuild::check_rtools()
-        rtoolsPath <- gsub("/bin", "", pkgbuild::rtools_path())
-        rtoolsPath <- gsub("\\\\", "/", rtoolsPath)
-        rtools4 <- grepl("usr", rtoolsPath)
+        if (R.Version()$major >= "4") {
+          rtools4 <- TRUE
+          rtools4Path <- gsub("\\\\", "/", gsub("/usr/bin", "", pkgbuild::rtools_path()))
+
+        } else {
+          rtools4 <- FALSE
+          chk_rtools <- utils::capture.output(pkgbuild::check_rtools(debug = TRUE))
+          rtoolsPath <- gsub(" ", "", gsub("install_path: ", "", chk_rtools[grepl("install_path", chk_rtools)]))
+        }
 
         for (i in 1:2) {
           if (archAvail[i] == TRUE) {
@@ -143,7 +148,6 @@ installOpenCV <- function(batch = FALSE) {
             dir.create(buildDir, showWarnings = FALSE)
 
             if (rtools4) {
-              rtools4Path <- gsub("/usr", "", rtoolsPath)
               gcc_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/gcc.exe")
               gpp_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/g++.exe")
               windres_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/windres.exe")
