@@ -11,3 +11,4 @@ src/opencv-*.zip
 src/opencv-*/
 .DS_Store
 old
+*.insyncdl
