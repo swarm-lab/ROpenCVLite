@@ -80,7 +80,7 @@ installOpenCV <- function(batch = FALSE) {
 
   if (interactive()) {
     if (isOpenCVInstalled()) {
-      pkgVersion <- unlist(strsplit(as.character(utils::packageVersion("ROpenCVLite")), "\\."))[3]
+      pkgVersion <- cat(strsplit(as.character(utils::packageVersion("ROpenCVLite")), "\\.")[[1]][1:2], sep = "")
       cvVersion <- gsub("\\D+", "", opencvVersion())
 
       if (pkgVersion == cvVersion) {
