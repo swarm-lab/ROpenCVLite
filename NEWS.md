@@ -1,3 +1,15 @@
+# ROpenCVLite 0.4.430.2
+
+## New features
+
+N/A
+
+## Minor improvements and fixes
+
+* Fix an issue with detecting when a new version of OpenCV is available.
+
+---
+
 # ROpenCVLite 0.4.430.1
 
 ## New features
