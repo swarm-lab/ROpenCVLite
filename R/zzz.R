@@ -18,8 +18,6 @@
     libPath <- paste0(installPath, "/opencv/lib")
     Sys.setenv(LD_LIBRARY_PATH = paste0(Sys.getenv("LD_LIBRARY_PATH"), ":", libPath))
   }
-
-  invisible(NULL)
 }
 
 .onAttach <- function(lib, pkg) {
@@ -46,7 +44,7 @@
   if (!ROpenCVLite::isOpenCVInstalled()) {
     installOpenCV()
   } else {
-    pkgVersion <- cat(strsplit(as.character(utils::packageVersion("ROpenCVLite")), "\\.")[[1]][1:2], sep = "")
+    pkgVersion <- paste0(strsplit(as.character(utils::packageVersion("ROpenCVLite")), "\\.")[[1]][1:2], collapse = "")
     cvVersion <- gsub("\\D+", "", ROpenCVLite::opencvVersion())
 
     if (!is.null(pkgVersion)) {
@@ -55,6 +53,4 @@
       }
     }
   }
-
-  invisible(NULL)
 }
