@@ -10,6 +10,7 @@
 * r-hub Windows Server 2008 R2 SP1, R-devel, 32/64 bit
 * r-hub Ubuntu Linux 16.04 LTS, R-release, GCC
 * r-hub Fedora Linux, R-devel, clang, gfortran
+* win-builder.r-project.org
 
 ## R CMD check results
 
