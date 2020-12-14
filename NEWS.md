@@ -1,3 +1,16 @@
+# ROpenCVLite 0.4.50.0
+
+## New features
+
+* Upgrade package to OpenCV 4.5.
+* OpenCV compiles  with OpenMP supports when possible. 
+
+## Minor improvements and fixes
+
+* N/A.
+
+---
+
 # ROpenCVLite 0.4.430.2
 
 ## New features
