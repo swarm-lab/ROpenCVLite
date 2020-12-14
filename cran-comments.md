@@ -1,11 +1,12 @@
 ## Test environments
 
-* local OS X 10.15.4, R 4.0.0
-* local Windows 10, R 4.0.0
-* local Ubuntu 20.04, R 4.0.0
-* travis CI Ubuntu 16.04, R 3.6.1
-* travis CI OS X 10.13.6, R 3.6.1
-* appveyor Windows Server 2012 R2, R 4.0.0
+* local OS X 11.0.1, R 4.0.3
+* local Windows 10, R 4.0.3
+* local Ubuntu 20.04, R 4.0.3
+* Github Actions, "windows-latest (release)"
+* Github Actions, "macOS-latest (release)"
+* Github Actions, "ubuntu-20.04-latest (release)"
+* Github Actions, "ubuntu-20.04-latest (devel)"
 
 ## R CMD check results
 
