@@ -4,8 +4,6 @@
 ![CRAN](https://www.r-pkg.org/badges/version/ROpenCVLite)
 ![CRANLOGS](https://cranlogs.r-pkg.org/badges/ROpenCVLite)
 
----
-
 ## Description
 
 [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) is a utility package 
