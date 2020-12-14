@@ -1,7 +1,6 @@
 # ROpenCVLite
 
-[![Travis-CI Build Status](https://travis-ci.org/swarm-lab/ROpenCVLite.svg?branch=master)](https://travis-ci.org/swarm-lab/ROpenCVLite)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/swarm-lab/ROpenCVLite?branch=master&svg=true)](https://ci.appveyor.com/project/swarm-lab/ROpenCVLite)
+[![R-CMD-check](https://github.com/swarm-lab/ROpenCVLite/workflows/R-CMD-check/badge.svg)](https://github.com/swarm-lab/ROpenCVLite/actions)
 
 ---
 
