@@ -1,6 +1,8 @@
 # ROpenCVLite
 
 [![R-CMD-check](https://github.com/swarm-lab/ROpenCVLite/workflows/R-CMD-check/badge.svg)](https://github.com/swarm-lab/ROpenCVLite/actions)
+https://www.r-pkg.org/badges/version/ROpenCVLite
+https://cranlogs.r-pkg.org/badges/ROpenCVLite
 
 ---
 
