@@ -12,7 +12,7 @@ Installing [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) should go
 smoothly on all major operating systems (Mac, Windows, "Ubuntu-like" Linux). 
 There are a few steps to follow before installing the package itself in order to
 install all the necessary external (i.e. non-R) dependencies for 
-[`OpenCV`](http://opencv.org/). 
+[`OpenCV`](https://opencv.org/). 
 
 All installation steps are described below. 
 

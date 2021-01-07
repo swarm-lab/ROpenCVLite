@@ -22,4 +22,16 @@ There are currently no downstream dependencies for this package.
 
 ## CRAN team comments
 
-N/A
+* Version jumps in minor (submitted: 4.50.0, existing: 4.30.2). Is this intended?
+
+Yes. The version numbering follows that of the OpenCV version that is installed 
+by the package (4.5 in this particular case). 
+
+* Found the following (possibly) invalid URLs:
+  URL: http://opencv.org/ (moved to https://opencv.org/)
+  From: inst/doc/install.html
+        inst/doc/usage.html
+        README.md
+       
+Fixed. 
+
