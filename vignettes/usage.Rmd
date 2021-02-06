@@ -10,10 +10,10 @@ vignette: >
 
 The goal of [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) is to 
 enable developers to create their own packages for [`R`](https://cran.r-project.org) 
-based on [`OpenCV`](http://opencv.org/). Computer vision is just one of the 
-possible applications for [`OpenCV`](http://opencv.org/). It can do many more 
+based on [`OpenCV`](https://opencv.org/). Computer vision is just one of the 
+possible applications for [`OpenCV`](https://opencv.org/). It can do many more 
 things, such as fast matrix processing and GPU computing. By providing access to 
-a standardized installation of [`OpenCV`](http://opencv.org/), we hope to help 
+a standardized installation of [`OpenCV`](https://opencv.org/), we hope to help 
 the [`R`](https://cran.r-project.org) community take advantage of this fantastic 
 library. 
 

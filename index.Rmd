@@ -38,7 +38,7 @@ algorithms, you pretty much have to use [`OpenCV`](https://opencv.org/) nowadays
 
 There are no computer vision package available for [`R`](https://cran.r-project.org) 
 currently. There are some very good image processing packages (see 
-[imager](http://dahtah.github.io/imager/) for instance) but none of them can 
+[imager](https://dahtah.github.io/imager/) for instance) but none of them can 
 handle fast processing of large videos.
 
 The goal of [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) is to 
