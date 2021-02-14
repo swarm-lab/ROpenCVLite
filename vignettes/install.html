@@ -135,7 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>Installing <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> should go smoothly on all major operating systems (Mac, Windows, “Ubuntu-like” Linux). There are a few steps to follow before installing the package itself in order to install all the necessary external (i.e. non-R) dependencies for <a href="https://opencv.org/"><code>OpenCV</code></a>.</p>
+<p>Installing <a href="https://github.com/swarm-lab/ROpenCVLite"><code>ROpenCVLite</code></a> should go smoothly on all major operating systems (Mac, Windows, and “Ubuntu-like” Linux). There are a few steps to follow before installing the package itself in order to prepare all the necessary external (i.e. non-R) dependencies for <a href="https://opencv.org/"><code>OpenCV</code></a>.</p>
 <p>All installation steps are described below.</p>
 <hr />
 <ul>
@@ -154,51 +154,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="windows" class="section level3">
 <h3>1.1 - Windows</h3>
 <p>Before installing <code>ROpenCVLite</code>, you will need to install the latest versions of <a href="https://cmake.org/"><code>CMake</code></a> and <a href="https://cran.r-project.org/bin/windows/Rtools/"><code>Rtools</code></a>.</p>
-<p>Download <code>CMake</code> for Windows at <a href="https://cmake.org/download/">https://cmake.org/download/</a>.</p>
-<p>Download the latest “recommended” version of <code>Rtools</code> at <a href="https://cran.r-project.org/bin/windows/Rtools/">https://cran.r-project.org/bin/windows/Rtools/</a>.</p>
-<p>In both cases, make sure to tell the installer to add <code>CMake</code> and <code>Rtools</code> to your “PATH”.</p>
+<div id="cmake" class="section level4">
+<h4>1.1.1 - Cmake</h4>
+<p><strong>+ Option 1</strong></p>
+<p>Use the convenience function provided by the <code>installr</code> library:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;installr&quot;</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;installr&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>installr<span class="sc">::</span><span class="fu">install.CMake</span>()</span></code></pre></div>
+<p>During the installation process, make sure to tell the installer to add <code>CMake</code> to your “PATH”.</p>
+<p><strong>+ Option 2</strong></p>
+<p>Download the <code>CMake</code> installer for Windows at <a href="https://cmake.org/download/">https://cmake.org/download/</a>. Make sure to tell the installer to add <code>CMake</code> to your “PATH”.</p>
+</div>
+<div id="rtools" class="section level4">
+<h4>1.1.2 - Rtools</h4>
+<p><strong>+ Option 1</strong></p>
+<p>Use the convenience function provided by the <code>installr</code> library:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;installr&quot;</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;installr&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>installr<span class="sc">::</span><span class="fu">install.Rtools</span>()</span></code></pre></div>
+<p>During the installation process, make sure to tell the installer to add <code>Rtools</code> to your “PATH”.</p>
+<p><strong>+ Option 2</strong></p>
+<p>Download the latest “recommended” version of <code>Rtools</code> at <a href="https://cran.r-project.org/bin/windows/Rtools/">https://cran.r-project.org/bin/windows/Rtools/</a>. Make sure to tell the installer to add <code>Rtools</code> to your “PATH”.</p>
+<hr />
+</div>
 </div>
 <div id="mac" class="section level3">
 <h3>1.2 - Mac</h3>
-<p>Before installing <code>ROpenCVLite</code>, you will need to install the latest version of <a href="https://cmake.org/"><code>CMake</code></a>. Hereafter are 3 options to do this on Mac.</p>
-<p><strong>Download installer from cmake.org</strong></p>
-<p>Go to <a href="https://cmake.org/download/">https://cmake.org/download/</a>. Scroll down until you reach the “Latest Release” section. Download the installer for Mac OS X (.dmg file). Once the download is complete, double-click on the installer and accept the license agreement. Drag and drop the <code>Cmake</code> app into the <code>Applications</code> folder.</p>
+<p>Before installing <code>ROpenCVLite</code>, you will need to install the latest version of <a href="https://cmake.org/"><code>CMake</code></a>.</p>
+<p><strong>+ Option 1</strong></p>
+<p>Go to <a href="https://cmake.org/download/">https://cmake.org/download/</a>. Scroll down until you reach the “Latest Release” section. Download the installer for Mac OS X (.dmg file). Once the download is complete, double-click on the installer and accept the license agreement. Drag and drop the <code>Cmake</code> app into your <code>Applications</code> folder.</p>
 <p>To make <code>Cmake</code> accessible to <code>R</code>, open a terminal and type:</p>
 <p><code>sudo &quot;/Applications/CMake.app/Contents/bin/cmake-gui&quot; --install</code></p>
 <p>It will ask for your administrator password.</p>
-<p><strong>Homebrew:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install cmake</span></code></pre></div>
-<p><strong>MacPorts:</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> port install cmake</span></code></pre></div>
+<p><strong>+ Option 2</strong></p>
+<p>If you have <a href="https://brew.sh/"><code>homebrew</code></a> installed, run the following command in your terminal:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install cmake</span></code></pre></div>
+<p><strong>+ Option 3</strong></p>
+<p>If you have <a href="https://www.macports.org/"><code>MacPorts</code></a> installed, run the following command in your terminal:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> port install cmake</span></code></pre></div>
+<hr />
 </div>
 <div id="linux" class="section level3">
 <h3>1.3 - Linux</h3>
 <p>Before installing <code>ROpenCVLite</code>, you will need to install the latest version of <a href="https://cmake.org/"><code>CMake</code></a>. Hereafter are two options to do this on Linux.</p>
-<p><strong>Download installer from cmake.org</strong></p>
+<p><strong>+ Option 1</strong></p>
+<p>Use your distribution’s package management system. For instance on Ubuntu-like systems, you can install Cmake by typing the following command in your terminal:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install cmake</span></code></pre></div>
+<p>Other distributions will have different package managers. Refer to the documentation of your distribution for finding the proper way to install Cmake on your system.</p>
+<p><strong>+ Option 2</strong></p>
 <p>Download <code>CMake</code> for Linux at <a href="https://cmake.org/download/">https://cmake.org/download/</a>. However it is recommended that you install it using your distribution’s package management system.</p>
-<p><strong>Use you distribution’s package management system</strong></p>
-<p><em>Ubuntu:</em></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install cmake</span></code></pre></div>
-<p>[TODO: add more Linux install commands]</p>
+<hr />
 </div>
 <div id="mac-linux-and-windows" class="section level3">
 <h3>1.4 - Mac, Linux and Windows</h3>
 <p>Before installing <code>ROpenCVLite</code>, you will need to install the <code>devtools</code> package in <code>R</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.package</span>(<span class="st">&quot;devtools&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.package</span>(<span class="st">&quot;devtools&quot;</span>)</span></code></pre></div>
 <hr />
 </div>
 </div>
 <div id="installing-ropencvlite" class="section level2">
 <h2>2 - Installing <code>ROpenCVLite</code></h2>
 <p>You can install <code>ROpenCVLite</code> from CRAN as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ROpenCVLite&quot;</span>)</span></code></pre></div>
-<p>Or you can install the latest latest development version (not necessarily tested) as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;swarm-lab/ROpenCVLite&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ROpenCVLite&quot;</span>)</span></code></pre></div>
+<p>Or you can install the latest latest development version (not recommended) as follows:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;swarm-lab/ROpenCVLite&quot;</span>)</span></code></pre></div>
 <p>This will not install <code>OpenCV</code> yet. You will be asked whether you want to install it the first time you load the package.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ROpenCVLite)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ROpenCVLite)</span></code></pre></div>
 <p>This step can take some time. Go make yourself a cup of coffee or two while <code>ROpenCVLite</code> downloads, compiles and installs <code>OpenCV</code> on your system.</p>
 <p>In addition, you can also request the (re)installation of <code>OpenCV</code> at any time as follows:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ROpenCVLite<span class="sc">::</span><span class="fu">installOpenCV</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ROpenCVLite<span class="sc">::</span><span class="fu">installOpenCV</span>()</span></code></pre></div>
+<p><code>ROpenCVLite</code> will also automatically detect when a new version of OpenCV is available and will offer to update it for you.</p>
 </div>
 
 
