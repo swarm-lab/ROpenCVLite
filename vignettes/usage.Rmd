@@ -3,7 +3,7 @@ author: "Simon Garnier"
 title: "2 - Using ROpenCVLite"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{usage}
+  %\VignetteIndexEntry{2 - Using ROpenCVLite}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
