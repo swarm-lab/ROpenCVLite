@@ -1,4 +1,4 @@
-# ROpenCVLite <img src="reference/figures/logo.png" align="right" alt="" width="120" />
+# ROpenCVLite - Helper package for installing OpenCV with R <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![R-CMD-check](https://github.com/swarm-lab/ROpenCVLite/workflows/R-CMD-check/badge.svg)](https://github.com/swarm-lab/ROpenCVLite/actions)
 ![CRAN](https://www.r-pkg.org/badges/version/ROpenCVLite)
@@ -79,5 +79,3 @@ because most of these extra modules are (1) too specific for most applications o
 
 We will work toward providing a mechanism to install the extra modules, but this 
 is not part of our immediate plans. 
-
----
