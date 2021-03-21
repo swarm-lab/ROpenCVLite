@@ -2,7 +2,7 @@ url: https://swarm-lab.github.io/ROpenCVLite/
 
 template:
   params:
-    bootswatch: yeti
+    bootswatch: simplex
     docsearch:
       api_key: 80e85520871df24fbc8d18329bebf124
       index_name: swarm-lab-ropencvlite

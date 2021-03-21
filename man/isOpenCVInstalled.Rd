@@ -2,7 +2,7 @@
 % Please edit documentation in R/opencv.R
 \name{isOpenCVInstalled}
 \alias{isOpenCVInstalled}
-\title{Check OpenCV Installation}
+\title{Check OpenCV Installation#' @title Check OpenCV Installation}
 \usage{
 isOpenCVInstalled()
 }
