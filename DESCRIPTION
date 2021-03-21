@@ -1,6 +1,6 @@
 Package: ROpenCVLite
 Type: Package
-Title: Helper package for installing OpenCV with R
+Title: Helper Package for Installing OpenCV with R
 Version: 4.51.0
 Date: 2021-03-21
 Authors@R: c(
