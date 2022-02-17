@@ -1,30 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//index.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/404.html</loc>
   </url>
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//reference/ROpenCVLite-package.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//reference/installOpenCV.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//reference/isCmakeInstalled.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/README.html</loc>
   </url>
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//reference/isOpenCVInstalled.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//reference/opencvConfig.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/articles/install.html</loc>
   </url>
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//reference/opencvVersion.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/articles/usage.html</loc>
   </url>
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//articles/install.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/articles/web/install.html</loc>
   </url>
   <url>
-    <loc>https://swarm-lab.github.io/ROpenCVLite//articles/usage.html</loc>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/index.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/ROpenCVLite-package.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/installOpenCV.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/isCmakeInstalled.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/isOpenCVInstalled.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/opencvConfig.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/opencvVersion.html</loc>
   </url>
 </urlset>
