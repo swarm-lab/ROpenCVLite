@@ -1,3 +1,15 @@
+# ROpenCVLite 0.4.52.1
+
+## New features
+
+* N/A.
+
+## Minor improvements and fixes
+
+* Fix installation bug on Windows after upgrade to latest pkgbuild version.
+
+---
+
 # ROpenCVLite 0.4.52.0
 
 ## New features
