@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   install: install.html
   usage: usage.html
-last_built: 2022-04-12T22:05Z
+last_built: 2022-04-12T23:22Z
 urls:
   reference: https://swarm-lab.github.io/ROpenCVLite/reference
   article: https://swarm-lab.github.io/ROpenCVLite/articles
