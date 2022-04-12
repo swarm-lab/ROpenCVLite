@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ROpenCVLite</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">4.52.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">4.55.0</span>
       </span>
     </div>
 
@@ -52,7 +52,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -97,7 +97,8 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>2 - Using ROpenCVLite</h1>
-                        <h4 data-toc-skip class="author">Simon Garnier</h4>
+                        <h4 data-toc-skip class="author">Simon
+Garnier</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/swarm-lab/ROpenCVLite/blob/HEAD/vignettes/usage.Rmd" class="external-link"><code>vignettes/usage.Rmd</code></a></small>
@@ -107,22 +108,36 @@
 
     
     
-<p>The goal of <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> is to enable developers to create their own packages for <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> based on <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>. Computer vision is just one of the possible applications for <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>. It can do many more things, such as fast matrix processing and GPU computing. By providing access to a standardized installation of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>, we hope to help the <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> community take advantage of this fantastic library.</p>
+<p>The goal of <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
+is to enable developers to create their own packages for <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> based on <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>. Computer vision is
+just one of the possible applications for <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>. It can do many more
+things, such as fast matrix processing and GPU computing. By providing
+access to a standardized installation of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>, we hope to help the
+<a href="https://cran.r-project.org" class="external-link"><code>R</code></a> community take
+advantage of this fantastic library.</p>
 <hr>
 <div class="section level2">
 <h2 id="create-a-package-using-ropencvlite">Create a package using <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a><a class="anchor" aria-label="anchor" href="#create-a-package-using-ropencvlite"></a>
 </h2>
 <p>Follow these steps to configure your package for <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>:</p>
 <ol style="list-style-type: decimal">
-<li>Set <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> as a dependency in the DESCRIPTION file of your package.</li>
-<li>Use the <a href="https://swarm-lab.github.io/ROpenCVLite/reference/opencvConfig.html"><code>opencvConfig</code> function</a> provided with <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> to:
+<li>Set <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
+as a dependency in the DESCRIPTION file of your package.</li>
+<li>Use the <a href="https://swarm-lab.github.io/ROpenCVLite/reference/opencvConfig.html"><code>opencvConfig</code>
+function</a> provided with <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
+to:
 <ul>
-<li>set the <code>PKG_LIBS</code> value of the Makevars and Makevars.win files of your package (using <code>opencvConfig("libs")</code>).</li>
-<li>set the <code>PKG_CPPFLAGS</code> () value of the Makevars and Makevars.win files of your package (using <code>opencvConfig("cflags")</code>).</li>
+<li>set the <code>PKG_LIBS</code> value of the Makevars and Makevars.win
+files of your package (using <code>opencvConfig("libs")</code>).</li>
+<li>set the <code>PKG_CPPFLAGS</code> () value of the Makevars and
+Makevars.win files of your package (using
+<code>opencvConfig("cflags")</code>).</li>
 </ul>
 </li>
 </ol>
-<p>You can find an example of how to set up your package with <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> in our <a href="https://github.com/swarm-lab/Rvision" class="external-link">Rvision</a> package:</p>
+<p>You can find an example of how to set up your package with <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
+in our <a href="https://github.com/swarm-lab/Rvision" class="external-link">Rvision</a>
+package:</p>
 <ul>
 <li><a href="https://github.com/swarm-lab/Rvision/blob/master/DESCRIPTION" class="external-link">DESCRIPTION</a></li>
 <li><a href="https://github.com/swarm-lab/Rvision/blob/master/src/Makevars" class="external-link">Makevars</a></li>
@@ -143,12 +158,14 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.theswarmlab.com" class="external-link">Simon Garnier</a>.</p>
+<p>Developed by <a href="https://www.theswarmlab.com" class="external-link">Simon
+Garnier</a>.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>

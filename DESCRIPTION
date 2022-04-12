@@ -1,7 +1,7 @@
 Package: ROpenCVLite
 Type: Package
 Title: Helper Package for Installing OpenCV with R
-Version: 4.52.1
+Version: 4.55.0
 Date: 2022-02-16
 Authors@R: c(
     person("Simon", "Garnier", email = "garnier@njit.edu", role = c("aut", "cre"),

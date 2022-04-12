@@ -121,9 +121,9 @@ installOpenCV <- function(batch = FALSE) {
       tmpDir <- gsub("\\\\", "/", base::tempdir())
       dir.create(tmpDir, showWarnings = FALSE)
 
-      utils::download.file("https://github.com/opencv/opencv/archive/4.5.2.tar.gz",
-                           paste0(tmpDir, "/opencv-4.5.2.tar.gz"))
-      utils::untar(paste0(tmpDir, "/opencv-4.5.2.tar.gz"),
+      utils::download.file("https://github.com/opencv/opencv/archive/4.5.5.tar.gz",
+                           paste0(tmpDir, "/opencv-4.5.5.tar.gz"))
+      utils::untar(paste0(tmpDir, "/opencv-4.5.5.tar.gz"),
                    exdir = tmpDir)
 
       arch <- c("64", "32")
@@ -142,7 +142,7 @@ installOpenCV <- function(batch = FALSE) {
 
         for (i in 1:2) {
           if (archAvail[i] == TRUE) {
-            sourceDir <- paste0(tmpDir, "/opencv-4.5.2/")
+            sourceDir <- paste0(tmpDir, "/opencv-4.5.5/")
             buildDir <- paste0(sourceDir, "build", arch[i])
             dir.create(buildDir, showWarnings = FALSE)
             openCVArch <- if (arch[i] == 64) "x64" else "x86"
@@ -173,21 +173,25 @@ installOpenCV <- function(batch = FALSE) {
       tmpDir <- base::tempdir()
       dir.create(tmpDir, showWarnings = FALSE)
 
-      utils::download.file("https://github.com/opencv/opencv/archive/4.5.2.zip",
-                           paste0(tmpDir, "/opencv-4.5.2.zip"))
-      utils::unzip(paste0(tmpDir, "/opencv-4.5.2.zip"),
+      utils::download.file("https://github.com/opencv/opencv/archive/4.5.5.zip",
+                           paste0(tmpDir, "/opencv-4.5.5.zip"))
+      utils::unzip(paste0(tmpDir, "/opencv-4.5.5.zip"),
                    exdir = tmpDir)
 
-      file.copy(paste0(pkgPath, "/OpenCVModule.4.5.2.cmake"),
-                paste0(tmpDir, "/opencv-4.5.2/cmake/OpenCVModule.cmake"),
+      file.copy(paste0(pkgPath, "/OpenCVModule.4.5.5.cmake"),
+                paste0(tmpDir, "/opencv-4.5.5/cmake/OpenCVModule.cmake"),
                 overwrite = TRUE)
 
-      sourceDir <- paste0(tmpDir, "/opencv-4.5.2/")
+      sourceDir <- paste0(tmpDir, "/opencv-4.5.5/")
       buildDir <- paste0(sourceDir, "build")
       dir.create(buildDir, showWarnings = FALSE)
 
       if (grepl("Apple clang", system("c++ --version", intern = TRUE))[1]) {
-        system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_AVFOUNDATION=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " -B", buildDir, ' -H', sourceDir))
+        if (grepl("arm64-apple", system("c++ --version", intern = TRUE))[2]) {
+          system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_AVFOUNDATION=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -D BUILD_ZLIB=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " -B", buildDir, ' -H', sourceDir))
+        } else {
+          system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_AVFOUNDATION=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " -B", buildDir, ' -H', sourceDir))
+        }
       } else {
         system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_V4L=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " -B", buildDir, ' -H', sourceDir))
       }
