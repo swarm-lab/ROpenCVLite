@@ -24,4 +24,5 @@ There are currently no downstream dependencies for this package.
 
 ## CRAN team comments
 
-N/A
+The version jump is intended. The versioning follows that of the version of
+OpenCV (4.5.5) provided by the package. 
