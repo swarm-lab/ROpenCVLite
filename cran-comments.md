@@ -10,7 +10,7 @@
 * Github Actions "ubuntu-latest (devel)"
 * Github Actions "ubuntu-latest (oldrel-1)"
 * r-hub Windows Server 2022, R-devel, 64 bit
-* r-hub Ubuntu Linux 16.04 LTS, R-release, GCC
+* r-hub Ubuntu Linux 20.04.1 LTS, R-release, GCC
 * r-hub Fedora Linux, R-devel, clang, gfortran
 * win-builder.r-project.org
 
