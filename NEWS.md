@@ -1,3 +1,15 @@
+# ROpenCVLite 0.4.55.0
+
+## New features
+
+* Upgrade package to OpenCV 4.5.5
+
+## Minor improvements and fixes
+
+* N/A.
+
+---
+
 # ROpenCVLite 0.4.52.1
 
 ## New features
