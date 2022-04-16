@@ -1,8 +1,21 @@
-# ROpenCVLite 0.4.55.0
+# ROpenCVLite 4.55.1
 
 ## New features
 
-* Upgrade package to OpenCV 4.5.5
+* Add possibility to install OpenCV in custom directory.
+* Change default installation directory.
+
+## Minor improvements and fixes
+
+* Fix documentation.
+
+---
+
+# ROpenCVLite 4.55.0
+
+## New features
+
+* Upgrade package to OpenCV 4.5.5.
 
 ## Minor improvements and fixes
 
@@ -10,7 +23,7 @@
 
 ---
 
-# ROpenCVLite 0.4.52.1
+# ROpenCVLite 4.52.1
 
 ## New features
 
@@ -22,7 +35,7 @@
 
 ---
 
-# ROpenCVLite 0.4.52.0
+# ROpenCVLite 4.52.0
 
 ## New features
 
@@ -34,7 +47,7 @@
 
 ---
 
-# ROpenCVLite 0.4.51.0
+# ROpenCVLite 4.51.0
 
 ## New features
 
@@ -47,7 +60,7 @@
 
 ---
 
-# ROpenCVLite 0.4.50.0
+# ROpenCVLite 4.50.0
 
 ## New features
 
@@ -60,7 +73,7 @@
 
 ---
 
-# ROpenCVLite 0.4.430.2
+# ROpenCVLite 4.430.2
 
 ## New features
 
@@ -72,7 +85,7 @@ N/A
 
 ---
 
-# ROpenCVLite 0.4.430.1
+# ROpenCVLite 4.430.1
 
 ## New features
 
@@ -84,7 +97,7 @@ N/A
 
 ---
 
-# ROpenCVLite 0.4.430.0
+# ROpenCVLite 4.430.0
 
 ## New features
 
@@ -97,7 +110,7 @@ N/A
 
 ---
 
-# ROpenCVLite 0.3.412.1
+# ROpenCVLite 3.412.1
 
 ## New features
 

@@ -10,16 +10,16 @@ opencvConfig(output = "libs", arch = NULL)
 \item{output}{Either 'libs' for library configuration options or 'cflags' for
 C/C++ configuration flags.}
 
-\item{arch}{architecture relevant for Windows.  If \code{NULL},
-then \code{R.version$arch} will be used.}
+\item{arch}{architecture relevant for Windows.  If \code{NULL}, then
+\code{R.version$arch} will be used.}
 }
 \value{
 A concatenated character string (with \code{\link{cat}}) of the
  configuration options.
 }
 \description{
-Determines the configuration options for compiling C/C++-based
- packages against OpenCV installed by \code{\link{ROpenCVLite}}.
+This function returns the configuration options for compiling
+ C/C++-based packages against OpenCV installed by \code{\link{ROpenCVLite}}.
 }
 \examples{
 if (isOpenCVInstalled()) {

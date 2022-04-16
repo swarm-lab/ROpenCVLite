@@ -1,9 +1,59 @@
-#' @title Check OpenCV Installation#' @title Check OpenCV Installation
+#' @title Default Install Location of OpenCV
 #'
-#' @description This functions checks that OpenCV is installed within the R
-#'  library.
+#' @description This function returns the location at which OpenCV should be
+#'  installed by default.
 #'
-#' @return A boolean indicating whether OpenCV was or not installed on the system.
+#' @return A character string.
+#'
+#' @author Simon Garnier, \email{garnier@@njit.edu}
+#'
+#' @examples
+#' defaultOpenCVPath()
+#'
+#' @export
+defaultOpenCVPath <- function() {
+  pkgPath <- find.package("ROpenCVLite")
+  paste0(gsub("ROpenCVLite", "", pkgPath), "ROpenCV")
+}
+
+
+#' @title Install Location of OpenCV
+#'
+#' @description This function returns the location at which OpenCV is installed.
+#'
+#' @return A character string.
+#'
+#' @author Simon Garnier, \email{garnier@@njit.edu}
+#'
+#' @examples
+#' OpenCVPath()
+#'
+#' @export
+OpenCVPath <- function() {
+  pkgPath <- find.package("ROpenCVLite")
+
+  if (file.exists(paste0(pkgPath, "/path"))) {
+    path <- readLines(paste0(pkgPath, "/path"), 1)
+  } else {
+    path <- character()
+  }
+
+  if (length(path) == 0)
+    path <- defaultOpenCVPath()
+
+  if (dir.exists(paste0(path, "/include/"))) {
+    path
+  } else {
+    stop("OpenCV is not installed on this system. Please use installOpenCV() to install it.")
+  }
+}
+
+
+#' @title Check OpenCV Installation
+#'
+#' @description This function checks that OpenCV is installed and accessible.
+#'
+#' @return A boolean.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
@@ -12,17 +62,21 @@
 #'
 #' @export
 isOpenCVInstalled <- function() {
-  pkgPath <- find.package("ROpenCVLite")
-  installPath <- gsub("ROpenCVLite", "", pkgPath)
-  dir.exists(paste0(installPath, "/opencv/include/"))
+  path <- try(OpenCVPath(), silent = TRUE)
+
+  if (class(path) == "try-error") {
+    FALSE
+  } else {
+    dir.exists(paste0(path, "/include/"))
+  }
 }
 
 
 #' @title Check Cmake Installation
 #'
-#' @description This functions checks that Cmake is installed on the system.
+#' @description This function checks that Cmake is installed on the system.
 #'
-#' @return A boolean indicating whether Cmake was or not installed on the system.
+#' @return A boolean.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
@@ -57,15 +111,19 @@ isCmakeInstalled <- function() {
 
 #' @title Install OpenCV
 #'
-#' @description This function will attempt to download, compile and install
-#'  OpenCV on the system. This process will take several minutes.
+#' @description This function attempts to download, compile and install OpenCV
+#'  on the system. This process will take several minutes.
 #'
-#' @param batch A boolean indicating whether to skip (\code{TRUE}) or not (\code{FALSE},
-#'  the default) the interactive installation dialog. This is useful when OpenCV needs
-#'  to be installed in a non-interactive environment (e.g., during a batch installation
-#'  on a server).
+#' @param path A character string indicating the location at which OpenCV should
+#'  be installed. By default, it is the value returned by
+#'  \code{\link{defaultOpenCVPath}}.
 #'
-#' @return A boolean indicating whether OpenCV was or not installed on the system.
+#' @param batch A boolean indicating whether to skip (\code{TRUE}) or not
+#'  (\code{FALSE}, the default) the interactive installation dialog. This is
+#'  useful when OpenCV needs to be installed in a non-interactive environment
+#'  (e.g., during a batch installation on a server).
+#'
+#' @return A boolean.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
@@ -75,8 +133,9 @@ isCmakeInstalled <- function() {
 #' }
 #'
 #' @export
-installOpenCV <- function(batch = FALSE) {
+installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
   install <- 0
+  path <- normalizePath(path, mustWork = FALSE)
 
   if (interactive()) {
     if (isOpenCVInstalled()) {
@@ -105,19 +164,25 @@ installOpenCV <- function(batch = FALSE) {
 
   if (install == 1) {
     pkgPath <- find.package("ROpenCVLite")
-    installPath <- gsub("ROpenCVLite", "", pkgPath)
-    openCVPath <- paste0(installPath, "opencv")
-    message(paste0("OpenCV will be installed in ", openCVPath))
+    message(paste0("OpenCV will be installed in ", path))
+    old <- try(OpenCVPath(), silent = TRUE)
 
-    if (dir.exists(openCVPath)) {
-      message("Removing old OpenCV installation.")
-      unlink(openCVPath, recursive = TRUE)
+    if (dir.exists(path)) {
+      message("Clearing install path.")
+      unlink(path, recursive = TRUE)
+    }
+
+    if (class(path) != "try-error") {
+      if (dir.exists(old)) {
+        message("Removing old OpenCV installation.")
+        unlink(old, recursive = TRUE)
+      }
     }
 
     Sys.setenv(CXX_STD = "CXX11")
 
     if (.Platform$OS.type == "windows") {
-      dir.create(openCVPath, showWarnings = FALSE)
+      dir.create(path, showWarnings = FALSE)
       tmpDir <- gsub("\\\\", "/", base::tempdir())
       dir.create(tmpDir, showWarnings = FALSE)
 
@@ -153,14 +218,14 @@ installOpenCV <- function(batch = FALSE) {
               windres_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/windres.exe")
               make_path <- paste0(rtools4Path, "/usr/bin/make.exe")
 
-              system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', gcc_path, ' -DCMAKE_CXX_COMPILER=', gpp_path, ' -DCMAKE_RC_COMPILER=', windres_path, ' -DCMAKE_MAKE_PROGRAM=', make_path, ' -DENABLE_PRECOMPILED_HEADERS=OFF -DOpenCV_ARCH=', openCVArch, ' -DOpenCV_RUNTIME=mingw -DENABLE_CXX11=ON -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_DSHOW=ON -DBUILD_PROTOBUF=OFF -DOPENCV_ENABLE_ALLOCATOR_STATS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', openCVPath, ' -B', buildDir, ' -H', sourceDir))
+              system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', gcc_path, ' -DCMAKE_CXX_COMPILER=', gpp_path, ' -DCMAKE_RC_COMPILER=', windres_path, ' -DCMAKE_MAKE_PROGRAM=', make_path, ' -DENABLE_PRECOMPILED_HEADERS=OFF -DOpenCV_ARCH=', openCVArch, ' -DOpenCV_RUNTIME=mingw -DENABLE_CXX11=ON -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_DSHOW=ON -DBUILD_PROTOBUF=OFF -DOPENCV_ENABLE_ALLOCATOR_STATS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', path, ' -B', buildDir, ' -H', sourceDir))
             } else {
               gcc_path <- paste0(rtoolsPath, "/mingw_", arch[i], "/bin/gcc.exe")
               gpp_path <- paste0(rtoolsPath, "/mingw_", arch[i], "/bin/g++.exe")
               windres_path <- paste0(rtoolsPath, "/mingw_", arch[i], "/bin/windres.exe")
               make_path <- paste0(rtoolsPath, "/mingw_", arch[i], "/bin/mingw32-make.exe")
 
-              system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', gcc_path, ' -DCMAKE_CXX_COMPILER=', gpp_path, ' -DCMAKE_RC_COMPILER=', windres_path, ' -DCMAKE_MAKE_PROGRAM=', make_path, ' -DENABLE_PRECOMPILED_HEADERS=OFF -DOpenCV_ARCH=', openCVArch, ' -DOpenCV_RUNTIME=mingw -DENABLE_CXX11=ON -DBUILD_opencv_gapi=OFF -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_DSHOW=ON -DBUILD_PROTOBUF=OFF -DOPENCV_ENABLE_ALLOCATOR_STATS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', openCVPath, ' -B', buildDir, ' -H', sourceDir))
+              system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', gcc_path, ' -DCMAKE_CXX_COMPILER=', gpp_path, ' -DCMAKE_RC_COMPILER=', windres_path, ' -DCMAKE_MAKE_PROGRAM=', make_path, ' -DENABLE_PRECOMPILED_HEADERS=OFF -DOpenCV_ARCH=', openCVArch, ' -DOpenCV_RUNTIME=mingw -DENABLE_CXX11=ON -DBUILD_opencv_gapi=OFF -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_DSHOW=ON -DBUILD_PROTOBUF=OFF -DOPENCV_ENABLE_ALLOCATOR_STATS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', path, ' -B', buildDir, ' -H', sourceDir))
             }
 
             system(paste0(make_path, " -j", parallel::detectCores(), " -C ", buildDir))
@@ -169,7 +234,7 @@ installOpenCV <- function(batch = FALSE) {
         }
       }
     } else {
-      dir.create(openCVPath, showWarnings = FALSE)
+      dir.create(path, showWarnings = FALSE)
       tmpDir <- base::tempdir()
       dir.create(tmpDir, showWarnings = FALSE)
 
@@ -187,14 +252,16 @@ installOpenCV <- function(batch = FALSE) {
       dir.create(buildDir, showWarnings = FALSE)
 
       if (grepl("Apple clang", system("c++ --version", intern = TRUE))[1]) {
-        system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_AVFOUNDATION=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -D BUILD_ZLIB=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " -B", buildDir, ' -H', sourceDir))
+        system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_AVFOUNDATION=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -D BUILD_ZLIB=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", path, " -B", buildDir, ' -H', sourceDir))
       } else {
-        system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_V4L=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", openCVPath, " -B", buildDir, ' -H', sourceDir))
+        system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_V4L=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", path, " -B", buildDir, ' -H', sourceDir))
       }
 
       system(paste0("make -j", parallel::detectCores(), " -C ", buildDir))
       system(paste0("make -C ", buildDir, " all install"))
     }
+
+    writeLines(path, con = paste0(pkgPath, "/path"))
   } else {
     message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
   }
@@ -203,12 +270,12 @@ installOpenCV <- function(batch = FALSE) {
 }
 
 
-#' @title OpenCV version
+#' @title OpenCV Version
 #'
-#' @description Determines the version of OpenCV installed within R.
+#' @description This function determines the version of OpenCV installed within
+#'  R.
 #'
-#' @return A character string with the version of OpenCV installed by
-#'  \code{\link{ROpenCVLite}}.
+#' @return A character string.
 #'
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
@@ -220,16 +287,13 @@ installOpenCV <- function(batch = FALSE) {
 #' @export
 opencvVersion <- function() {
   if (isOpenCVInstalled()) {
-    pkgPath <- find.package("ROpenCVLite")
-    installPath <- gsub("ROpenCVLite", "", pkgPath)
-
     if (.Platform$OS.type == "windows") {
-      pcPath <- "/opencv/OpenCVConfig-version.cmake"
-      pc <- utils::read.table(paste0(installPath, pcPath), sep = "\t")[1, 1]
+      pcPath <- "/OpenCVConfig-version.cmake"
+      pc <- utils::read.table(paste0(OpenCVPath(), pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     } else {
-      pcPath <- "/opencv/lib/cmake/opencv4/OpenCVConfig-version.cmake"
-      pc <- utils::read.table(paste0(installPath, pcPath), sep = "\t")[1, 1]
+      pcPath <- "/lib/cmake/opencv4/OpenCVConfig-version.cmake"
+      pc <- utils::read.table(paste0(OpenCVPath(), pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     }
   } else {
@@ -240,14 +304,14 @@ opencvVersion <- function() {
 
 #' @title C/C++ configuration options
 #'
-#' @description Determines the configuration options for compiling C/C++-based
-#'  packages against OpenCV installed by \code{\link{ROpenCVLite}}.
+#' @description This function returns the configuration options for compiling
+#'  C/C++-based packages against OpenCV installed by \code{\link{ROpenCVLite}}.
 #'
 #' @param output Either 'libs' for library configuration options or 'cflags' for
 #'  C/C++ configuration flags.
 #'
-#' @param arch architecture relevant for Windows.  If \code{NULL},
-#' then \code{R.version$arch} will be used.
+#' @param arch architecture relevant for Windows.  If \code{NULL}, then
+#'  \code{R.version$arch} will be used.
 #'
 #' @return A concatenated character string (with \code{\link{cat}}) of the
 #'  configuration options.
@@ -266,9 +330,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
   if (!isOpenCVInstalled())
     stop("OpenCV is not installed on this system. Please use installOpenCV() to install it.")
 
-  pkgPath <- find.package("ROpenCVLite")
-  installPath <- gsub("ROpenCVLite", "", pkgPath)
-  prefix <- paste0(installPath, "opencv")
+  prefix <- OpenCVPath()
 
   if (output == "libs") {
     if (.Platform$OS.type == "windows") {
