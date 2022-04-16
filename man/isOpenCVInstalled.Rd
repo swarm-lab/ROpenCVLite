@@ -2,16 +2,15 @@
 % Please edit documentation in R/opencv.R
 \name{isOpenCVInstalled}
 \alias{isOpenCVInstalled}
-\title{Check OpenCV Installation#' @title Check OpenCV Installation}
+\title{Check OpenCV Installation}
 \usage{
 isOpenCVInstalled()
 }
 \value{
-A boolean indicating whether OpenCV was or not installed on the system.
+A boolean.
 }
 \description{
-This functions checks that OpenCV is installed within the R
- library.
+This function checks that OpenCV is installed and accessible.
 }
 \examples{
 isOpenCVInstalled()

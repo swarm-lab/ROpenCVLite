@@ -7,10 +7,10 @@
 isCmakeInstalled()
 }
 \value{
-A boolean indicating whether Cmake was or not installed on the system.
+A boolean.
 }
 \description{
-This functions checks that Cmake is installed on the system.
+This function checks that Cmake is installed on the system.
 }
 \examples{
 isCmakeInstalled()

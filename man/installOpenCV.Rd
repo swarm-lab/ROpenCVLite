@@ -4,20 +4,24 @@
 \alias{installOpenCV}
 \title{Install OpenCV}
 \usage{
-installOpenCV(batch = FALSE)
+installOpenCV(path = defaultOpenCVPath(), batch = FALSE)
 }
 \arguments{
-\item{batch}{A boolean indicating whether to skip (\code{TRUE}) or not (\code{FALSE},
-the default) the interactive installation dialog. This is useful when OpenCV needs
-to be installed in a non-interactive environment (e.g., during a batch installation
-on a server).}
+\item{path}{A character string indicating the location at which OpenCV should
+be installed. By default, it is the value returned by
+\code{\link{defaultOpenCVPath}}.}
+
+\item{batch}{A boolean indicating whether to skip (\code{TRUE}) or not
+(\code{FALSE}, the default) the interactive installation dialog. This is
+useful when OpenCV needs to be installed in a non-interactive environment
+(e.g., during a batch installation on a server).}
 }
 \value{
-A boolean indicating whether OpenCV was or not installed on the system.
+A boolean.
 }
 \description{
-This function will attempt to download, compile and install
- OpenCV on the system. This process will take several minutes.
+This function attempts to download, compile and install OpenCV
+ on the system. This process will take several minutes.
 }
 \examples{
 \dontrun{

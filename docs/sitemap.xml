@@ -34,7 +34,13 @@
     <loc>https://swarm-lab.github.io/ROpenCVLite/news/index.html</loc>
   </url>
   <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/OpenCVPath.html</loc>
+  </url>
+  <url>
     <loc>https://swarm-lab.github.io/ROpenCVLite/reference/ROpenCVLite-package.html</loc>
+  </url>
+  <url>
+    <loc>https://swarm-lab.github.io/ROpenCVLite/reference/defaultOpenCVPath.html</loc>
   </url>
   <url>
     <loc>https://swarm-lab.github.io/ROpenCVLite/reference/index.html</loc>
