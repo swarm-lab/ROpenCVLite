@@ -13,7 +13,9 @@ A character string.
 This function returns the location at which OpenCV is installed.
 }
 \examples{
-OpenCVPath()
+\dontrun{
+ OpenCVPath()
+}
 
 }
 \author{
