@@ -26,7 +26,9 @@ defaultOpenCVPath <- function() {
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
 #' @examples
-#' OpenCVPath()
+#' \dontrun{
+#'  OpenCVPath()
+#' }
 #'
 #' @export
 OpenCVPath <- function() {
