@@ -215,23 +215,36 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
             openCVArch <- if (arch[i] == 64) "x64" else "x86"
 
             if (rtools4) {
-              gcc_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/gcc.exe")
-              gpp_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/g++.exe")
-              windres_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/windres.exe")
-              make_path <- paste0(rtools4Path, "/usr/bin/make.exe")
-
-              system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', gcc_path, ' -DCMAKE_CXX_COMPILER=', gpp_path, ' -DCMAKE_RC_COMPILER=', windres_path, ' -DCMAKE_MAKE_PROGRAM=', make_path, ' -DENABLE_PRECOMPILED_HEADERS=OFF -DOpenCV_ARCH=', openCVArch, ' -DOpenCV_RUNTIME=mingw -DENABLE_CXX11=ON -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_DSHOW=ON -DBUILD_PROTOBUF=OFF -DOPENCV_ENABLE_ALLOCATOR_STATS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', path, ' -B', buildDir, ' -H', sourceDir))
+              if (R.Version()$minor >= "2") {
+                if (openCVArch == "x64") {
+                  gcc_path <- paste0(rtools4Path, "/x86_64-w64-mingw32.static.posix", "/bin/gcc.exe")
+                  gpp_path <- paste0(rtools4Path, "/x86_64-w64-mingw32.static.posix", "/bin/g++.exe")
+                  windres_path <- paste0(rtools4Path, "/x86_64-w64-mingw32.static.posix", "/bin/windres.exe")
+                  make_path <- paste0(rtools4Path, "/usr/bin/make.exe")
+                  system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', gcc_path, ' -DCMAKE_CXX_COMPILER=', gpp_path, ' -DCMAKE_RC_COMPILER=', windres_path, ' -DCMAKE_MAKE_PROGRAM=', make_path, ' -DENABLE_PRECOMPILED_HEADERS=OFF -DOpenCV_ARCH=', openCVArch, ' -DOpenCV_RUNTIME=mingw -DENABLE_CXX11=ON -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_DSHOW=ON -DBUILD_PROTOBUF=ON -DOPENCV_ENABLE_ALLOCATOR_STATS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', path, ' -B', buildDir, ' -H', sourceDir))
+                  system(paste0(make_path, " -j", parallel::detectCores(), " -C ", buildDir))
+                  system(paste0(make_path, " -C", buildDir, " install"))
+                } else {
+                  message("RTools >= 4.2 does not support 32bit builds. Skipping compilation for this architecture.")
+                }
+              } else {
+                gcc_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/gcc.exe")
+                gpp_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/g++.exe")
+                windres_path <- paste0(rtools4Path, "/mingw", arch[i], "/bin/windres.exe")
+                make_path <- paste0(rtools4Path, "/usr/bin/make.exe")
+                system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', gcc_path, ' -DCMAKE_CXX_COMPILER=', gpp_path, ' -DCMAKE_RC_COMPILER=', windres_path, ' -DCMAKE_MAKE_PROGRAM=', make_path, ' -DENABLE_PRECOMPILED_HEADERS=OFF -DOpenCV_ARCH=', openCVArch, ' -DOpenCV_RUNTIME=mingw -DENABLE_CXX11=ON -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_DSHOW=ON -DBUILD_PROTOBUF=OFF -DOPENCV_ENABLE_ALLOCATOR_STATS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', path, ' -B', buildDir, ' -H', sourceDir))
+                system(paste0(make_path, " -j", parallel::detectCores(), " -C ", buildDir))
+                system(paste0(make_path, " -C", buildDir, " install"))
+              }
             } else {
               gcc_path <- paste0(rtoolsPath, "/mingw_", arch[i], "/bin/gcc.exe")
               gpp_path <- paste0(rtoolsPath, "/mingw_", arch[i], "/bin/g++.exe")
               windres_path <- paste0(rtoolsPath, "/mingw_", arch[i], "/bin/windres.exe")
               make_path <- paste0(rtoolsPath, "/mingw_", arch[i], "/bin/mingw32-make.exe")
-
               system(paste0('cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER=', gcc_path, ' -DCMAKE_CXX_COMPILER=', gpp_path, ' -DCMAKE_RC_COMPILER=', windres_path, ' -DCMAKE_MAKE_PROGRAM=', make_path, ' -DENABLE_PRECOMPILED_HEADERS=OFF -DOpenCV_ARCH=', openCVArch, ' -DOpenCV_RUNTIME=mingw -DENABLE_CXX11=ON -DBUILD_opencv_gapi=OFF -DBUILD_ZLIB=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DWITH_DSHOW=ON -DBUILD_PROTOBUF=OFF -DOPENCV_ENABLE_ALLOCATOR_STATS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=', path, ' -B', buildDir, ' -H', sourceDir))
+              system(paste0(make_path, " -j", parallel::detectCores(), " -C ", buildDir))
+              system(paste0(make_path, " -C", buildDir, " install"))
             }
-
-            system(paste0(make_path, " -j", parallel::detectCores(), " -C ", buildDir))
-            system(paste0(make_path, " -C", buildDir, " install"))
           }
         }
       }
