@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ROpenCVLite</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">4.55.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">4.55.2</span>
       </span>
     </div>
 
@@ -99,32 +99,22 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="ropencvlite---install-opencv-with-r-">ROpenCVLite - Install OpenCV with R
-<img src="reference/figures/logo.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#ropencvlite---install-opencv-with-r-"></a>
+<div class="page-header"><h1 id="ropencvlite---install-opencv-with-r-">ROpenCVLite - Install OpenCV with R <img src="reference/figures/logo.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#ropencvlite---install-opencv-with-r-"></a>
 </h1></div>
 
 <div class="section level2">
 <h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
 </h2>
-<p><a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
-is a utility package that installs <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> within <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> for use by other
-packages. This package is not a wrapper around <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> (it does not provide
-access to <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>
-functions in R), not is it a computer vision package for <a href="https://cran.r-project.org" class="external-link"><code>R</code></a>. All it does is
-compiling and installing <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> within your <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> installation so
-that other packages can easily find it and compile against it.</p>
+<p><a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> is a utility package that installs <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> within <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> for use by other packages. This package is not a wrapper around <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> (it does not provide access to <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> functions in R), not is it a computer vision package for <a href="https://cran.r-project.org" class="external-link"><code>R</code></a>. All it does is compiling and installing <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> within your <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> installation so that other packages can easily find it and compile against it.</p>
 <hr>
 </div>
 <div class="section level2">
 <h2 id="quick-start-guides">Quick start guides<a class="anchor" aria-label="anchor" href="#quick-start-guides"></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li><a href="https://swarm-lab.github.io/ROpenCVLite/articles/install.html">Installing
-ROpenCVLite</a></li>
-<li><a href="https://swarm-lab.github.io/ROpenCVLite/articles/usage.html">Using
-ROpenCVLite</a></li>
-<li><a href="https://swarm-lab.github.io/ROpenCVLite/reference/">Function
-documentation</a></li>
+<li><a href="https://swarm-lab.github.io/ROpenCVLite/articles/install.html">Installing ROpenCVLite</a></li>
+<li><a href="https://swarm-lab.github.io/ROpenCVLite/articles/usage.html">Using ROpenCVLite</a></li>
+<li><a href="https://swarm-lab.github.io/ROpenCVLite/reference/">Function documentation</a></li>
 </ol>
 <hr>
 </div>
@@ -134,60 +124,26 @@ documentation</a></li>
 <div class="section level3">
 <h3 id="what-is-opencv">What is OpenCV?<a class="anchor" aria-label="anchor" href="#what-is-opencv"></a>
 </h3>
-<p><a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> is one of the
-most - if not the most - popular and efficient open-source computer
-vision library available today. If you want to develop fast video
-processing software or implement real time computer vision algorithms,
-you pretty much have to use <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> nowadays.</p>
+<p><a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> is one of the most - if not the most - popular and efficient open-source computer vision library available today. If you want to develop fast video processing software or implement real time computer vision algorithms, you pretty much have to use <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> nowadays.</p>
 </div>
 <div class="section level3">
-<h3 id="why-is-ropencvlite-necessary">Why is <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
-necessary?<a class="anchor" aria-label="anchor" href="#why-is-ropencvlite-necessary"></a>
+<h3 id="why-is-ropencvlite-necessary">Why is <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> necessary?<a class="anchor" aria-label="anchor" href="#why-is-ropencvlite-necessary"></a>
 </h3>
-<p>There are no computer vision package available for <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> currently. There
-are some very good image processing packages (see <a href="https://dahtah.github.io/imager/" class="external-link">imager</a> for instance) but
-none of them can handle fast processing of large videos.</p>
-<p>The goal of <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
-is to promote the development of efficient computer vision packages for
-<a href="https://cran.r-project.org" class="external-link"><code>R</code></a> based on <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>. <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
-facilitates the installation of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> in a convenient
-location for other packages to find it and compile against it.</p>
+<p>There are no computer vision package available for <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> currently. There are some very good image processing packages (see <a href="https://dahtah.github.io/imager/" class="external-link">imager</a> for instance) but none of them can handle fast processing of large videos.</p>
+<p>The goal of <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> is to promote the development of efficient computer vision packages for <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> based on <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>. <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> facilitates the installation of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> in a convenient location for other packages to find it and compile against it.</p>
 </div>
 <div class="section level3">
-<h3 id="couldnt-you-just-ship-opencvs-binaries-with-your-package">Couldn’t you just ship <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>’s binaries with your
-package?<a class="anchor" aria-label="anchor" href="#couldnt-you-just-ship-opencvs-binaries-with-your-package"></a>
+<h3 id="couldnt-you-just-ship-opencvs-binaries-with-your-package">Couldn’t you just ship <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>’s binaries with your package?<a class="anchor" aria-label="anchor" href="#couldnt-you-just-ship-opencvs-binaries-with-your-package"></a>
 </h3>
-<p>Yes, but… it is fairly difficult to ship binary files compiled
-against <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> that will
-work for sure on someone else’s computer. It is not <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>’s fault; it is
-because there are so many video formats and standards for peripherals
-out there that nobody can be certain what interfaces and libraries will
-be available on anyone’s computer to grab images from videos and camera
-streams. The least worst solution for developers is therefore to make
-sure that there is a copy of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> on each user’s
-computer that has been compiled taking into account the specificities of
-said computer.</p>
+<p>Yes, but… it is fairly difficult to ship binary files compiled against <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> that will work for sure on someone else’s computer. It is not <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>’s fault; it is because there are so many video formats and standards for peripherals out there that nobody can be certain what interfaces and libraries will be available on anyone’s computer to grab images from videos and camera streams. The least worst solution for developers is therefore to make sure that there is a copy of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> on each user’s computer that has been compiled taking into account the specificities of said computer.</p>
 <p>HOWEVER…</p>
-<p><a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> is notoriously
-difficult to compile and install from scratch, especially for people
-without experience with low level languages. This is where <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
-come into play. This package tries as much as possible to cleanly
-compile <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> and to
-install it in a standardized location that all <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> package developers
-can easily find.</p>
+<p><a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> is notoriously difficult to compile and install from scratch, especially for people without experience with low level languages. This is where <a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> come into play. This package tries as much as possible to cleanly compile <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> and to install it in a standardized location that all <a href="https://cran.r-project.org" class="external-link"><code>R</code></a> package developers can easily find.</p>
 </div>
 <div class="section level3">
 <h3 id="why-lite-are-you-keeping-something-from-us">Why “Lite”? Are you keeping something from us?<a class="anchor" aria-label="anchor" href="#why-lite-are-you-keeping-something-from-us"></a>
 </h3>
-<p><a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a>
-compiles and installs the core modules of the <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> library but does not
-compile or install its <a href="https://github.com/opencv/opencv_contrib" class="external-link">contributed extra
-modules</a>. This is to reduce the compilation time (which is already
-long enough) and also because most of these extra modules are (1) too
-specific for most applications of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>, and (2) they do not
-always compile nicely.</p>
-<p>We will work toward providing a mechanism to install the extra
-modules, but this is not part of our immediate plans.</p>
+<p><a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> compiles and installs the core modules of the <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> library but does not compile or install its <a href="https://github.com/opencv/opencv_contrib" class="external-link">contributed extra modules</a>. This is to reduce the compilation time (which is already long enough) and also because most of these extra modules are (1) too specific for most applications of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>, and (2) they do not always compile nicely.</p>
+<p>We will work toward providing a mechanism to install the extra modules, but this is not part of our immediate plans.</p>
 </div>
 </div>
 </div>
@@ -240,14 +196,12 @@ modules, but this is not part of our immediate plans.</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.theswarmlab.com" class="external-link">Simon
-Garnier</a>.</p>
+<p>Developed by <a href="https://www.theswarmlab.com" class="external-link">Simon Garnier</a>.</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
