@@ -1,3 +1,15 @@
+# ROpenCVLite 4.55.2
+
+## New features
+
+* N/A.
+
+## Minor improvements and fixes
+
+* Compatible with new RTools 4.2 toolchain.
+
+---
+
 # ROpenCVLite 4.55.1
 
 ## New features
