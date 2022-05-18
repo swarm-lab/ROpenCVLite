@@ -66,7 +66,7 @@ OpenCVPath <- function() {
 isOpenCVInstalled <- function() {
   path <- try(OpenCVPath(), silent = TRUE)
 
-  if (class(path) == "try-error") {
+  if (inherits(path, "try-error")) {
     FALSE
   } else {
     dir.exists(paste0(path, "/include/"))
@@ -174,7 +174,7 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
       unlink(path, recursive = TRUE)
     }
 
-    if (class(path) != "try-error") {
+    if (inherits(path, "try-error")) {
       if (dir.exists(old)) {
         message("Removing old OpenCV installation.")
         unlink(old, recursive = TRUE)
