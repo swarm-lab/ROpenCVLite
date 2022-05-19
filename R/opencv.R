@@ -215,7 +215,7 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
             openCVArch <- if (arch[i] == 64) "x64" else "x86"
 
             if (rtools4) {
-              if (R.Version()$minor >= "2") {
+              if (!grepl("40", pkgbuild::rtools_path())) {
                 if (openCVArch == "x64") {
                   gcc_path <- paste0(rtools4Path, "/x86_64-w64-mingw32.static.posix", "/bin/gcc.exe")
                   gpp_path <- paste0(rtools4Path, "/x86_64-w64-mingw32.static.posix", "/bin/g++.exe")
