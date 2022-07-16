@@ -188,9 +188,9 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
       tmpDir <- gsub("\\\\", "/", base::tempdir())
       dir.create(tmpDir, showWarnings = FALSE)
 
-      utils::download.file("https://github.com/opencv/opencv/archive/4.5.5.tar.gz",
-                           paste0(tmpDir, "/opencv-4.5.5.tar.gz"))
-      utils::untar(paste0(tmpDir, "/opencv-4.5.5.tar.gz"),
+      utils::download.file("https://github.com/opencv/opencv/archive/4.6.0.tar.gz",
+                           paste0(tmpDir, "/opencv-4.6.0.tar.gz"))
+      utils::untar(paste0(tmpDir, "/opencv-4.6.0.tar.gz"),
                    exdir = tmpDir)
 
       arch <- c("64", "32")
@@ -209,7 +209,7 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
 
         for (i in 1:2) {
           if (archAvail[i] == TRUE) {
-            sourceDir <- paste0(tmpDir, "/opencv-4.5.5/")
+            sourceDir <- paste0(tmpDir, "/opencv-4.6.0/")
             buildDir <- paste0(sourceDir, "build", arch[i])
             dir.create(buildDir, showWarnings = FALSE)
             openCVArch <- if (arch[i] == 64) "x64" else "x86"
@@ -253,16 +253,16 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
       tmpDir <- base::tempdir()
       dir.create(tmpDir, showWarnings = FALSE)
 
-      utils::download.file("https://github.com/opencv/opencv/archive/4.5.5.zip",
-                           paste0(tmpDir, "/opencv-4.5.5.zip"))
-      utils::unzip(paste0(tmpDir, "/opencv-4.5.5.zip"),
+      utils::download.file("https://github.com/opencv/opencv/archive/4.6.0.zip",
+                           paste0(tmpDir, "/opencv-4.6.0.zip"))
+      utils::unzip(paste0(tmpDir, "/opencv-4.6.0.zip"),
                    exdir = tmpDir)
 
-      file.copy(paste0(pkgPath, "/OpenCVModule.4.5.5.cmake"),
-                paste0(tmpDir, "/opencv-4.5.5/cmake/OpenCVModule.cmake"),
+      file.copy(paste0(pkgPath, "/OpenCVModule.4.6.0.cmake"),
+                paste0(tmpDir, "/opencv-4.6.0/cmake/OpenCVModule.cmake"),
                 overwrite = TRUE)
 
-      sourceDir <- paste0(tmpDir, "/opencv-4.5.5/")
+      sourceDir <- paste0(tmpDir, "/opencv-4.6.0/")
       buildDir <- paste0(sourceDir, "build")
       dir.create(buildDir, showWarnings = FALSE)
 

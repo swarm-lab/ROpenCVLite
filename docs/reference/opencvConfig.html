@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ROpenCVLite</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">4.55.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">4.60.1</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">opencvConfig</span><span class="op">(</span>output <span class="op">=</span> <span class="st">"libs"</span>, arch <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">opencvConfig</span><span class="op">(</span>output <span class="op">=</span> <span class="st">"libs"</span>, arch <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -81,13 +81,18 @@
     <dl><dt>output</dt>
 <dd><p>Either 'libs' for library configuration options or 'cflags' for
 C/C++ configuration flags.</p></dd>
+
+
 <dt>arch</dt>
 <dd><p>architecture relevant for Windows.  If <code>NULL</code>, then
 <code>R.version$arch</code> will be used.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A concatenated character string (with <code><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></code>) of the
+    
+
+<p>A concatenated character string (with <code><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></code>) of the
  configuration options.</p>
     </div>
     <div id="author">
@@ -97,12 +102,12 @@ C/C++ configuration flags.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="isOpenCVInstalled.html">isOpenCVInstalled</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu">opencvConfig</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">opencvConfig</span><span class="op">(</span>output <span class="op">=</span> <span class="st">"cflags"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">opencvConfig</span><span class="op">(</span>arch <span class="op">=</span> <span class="va">R.version</span><span class="op">$</span><span class="va">arch</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="isOpenCVInstalled.html">isOpenCVInstalled</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">opencvConfig</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">opencvConfig</span><span class="op">(</span>output <span class="op">=</span> <span class="st">"cflags"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">opencvConfig</span><span class="op">(</span>arch <span class="op">=</span> <span class="va">R.version</span><span class="op">$</span><span class="va">arch</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -117,7 +122,7 @@ C/C++ configuration flags.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
