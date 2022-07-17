@@ -154,10 +154,10 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
     }
   } else {
     if (batch) {
-      warning("OpenCV being installed in non-interactive mode!")
+      packageStartupMessage("OpenCV being installed in non-interactive mode!")
       install <- 1
     } else {
-      warning("OpenCV can only be installed in interactive mode or if the batch mode is activated.")
+      packageStartupMessage("OpenCV can only be installed in interactive mode. To override this in a non-interactive context, use installOpenCV(batch = TRUE).")
     }
   }
 
@@ -278,10 +278,42 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
 
     writeLines(path, con = paste0(pkgPath, "/path"))
   } else {
-    message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
+    packageStartupMessage("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
   }
 
   isOpenCVInstalled()
+}
+
+
+#' @title Remove OpenCV
+#'
+#' @description This function removes OpenCV from the system.
+#'
+#' @return A boolean.
+#'
+#' @author Simon Garnier, \email{garnier@@njit.edu}
+#'
+#' @examples
+#' \dontrun{
+#'  installOpenCV()
+#' }
+#'
+#' @export
+removeOpenCV <- function() {
+  if (isOpenCVInstalled()) {
+    uninstall <- utils::menu(c("yes", "no"), title = "Would you like to completely remove OpenCV from your R installation? You can reinstall it at any time by using the installOpenCV() function.")
+    print(uninstall)
+
+    if (uninstall == 1) {
+      unlink(OpenCVPath(), recursive = TRUE)
+      !isOpenCVInstalled()
+    } else {
+      !isOpenCVInstalled()
+    }
+  } else {
+    message("OpenCV is not installed on this system. Nothing to be done.")
+    !isOpenCVInstalled()
+  }
 }
 
 
