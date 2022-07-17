@@ -1,3 +1,15 @@
+# ROpenCVLite 4.60.2
+
+## New features
+
+* Adds function to remove OpenCV.
+
+## Minor improvements and fixes
+
+* Removes unnecessary messages during package installation. 
+
+---
+
 # ROpenCVLite 4.60.1
 
 ## New features
