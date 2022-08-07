@@ -269,7 +269,11 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
       if (grepl("Apple clang", system("c++ --version", intern = TRUE))[1]) {
         system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_AVFOUNDATION=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -D BUILD_ZLIB=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", path, " -B", buildDir, ' -H', sourceDir))
       } else {
-        system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_V4L=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", path, " -B", buildDir, ' -H', sourceDir))
+        if (grepl("aarch64", system("uname -m", intern = TRUE))) {
+          system(paste0("cmake -DWITH_IPP=OFF -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_V4L=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", path, " -B", buildDir, ' -H', sourceDir))
+        } else {
+          system(paste0("cmake -DWITH_IPP=ON -DBUILD_opencv_world=OFF -DBUILD_opencv_contrib_world=OFF -DBUILD_opencv_matlab=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF -DWITH_OPENMP=ON -DWITH_TBB=ON -DWITH_FFMPEG=ON -DWITH_V4L=ON -DWITH_OPENCL=ON -DWITH_EIGEN=ON -DWITH_OPENCLAMDFFT=ON -DWITH_OPENCLAMDBLAS=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DINSTALL_CREATE_DISTRIB=ON -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=", path, " -B", buildDir, ' -H', sourceDir))
+        }
       }
 
       system(paste0("make -j", parallel::detectCores(), " -C ", buildDir))
