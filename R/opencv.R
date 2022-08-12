@@ -343,7 +343,9 @@ opencvVersion <- function() {
       pc <- utils::read.table(paste0(OpenCVPath(), pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     } else {
-      pcPath <- "/lib/cmake/opencv4/OpenCVConfig-version.cmake"
+      odir <- dir(OpenCVPath())
+      lib <- odir[grepl("lib", odir)]
+      pcPath <- paste0(lib, "/cmake/opencv4/OpenCVConfig-version.cmake")
       pc <- utils::read.table(paste0(OpenCVPath(), pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     }
@@ -402,7 +404,9 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       cat(paste0('-L"', utils::shortPathName(libDir), '"'), libs)
     } else {
       execPrefix <- prefix
-      libDir <- paste0(execPrefix, "/lib")
+      odir <- dir(execPrefix)
+      lib <- odir[grepl("lib", odir)]
+      libDir <- paste0(execPrefix, "/", lib)
       libs <- gsub("libopencv", "opencv", list.files(libDir, "lib*"))
       libs <- gsub("\\.so", "", libs)
       libs <- gsub("\\.dylib", "", libs)
