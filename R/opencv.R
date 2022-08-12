@@ -345,7 +345,7 @@ opencvVersion <- function() {
     } else {
       odir <- dir(OpenCVPath())
       lib <- odir[grepl("lib", odir)]
-      pcPath <- paste0(lib, "/cmake/opencv4/OpenCVConfig-version.cmake")
+      pcPath <- paste0("/", lib, "/cmake/opencv4/OpenCVConfig-version.cmake")
       pc <- utils::read.table(paste0(OpenCVPath(), pcPath), sep = "\t")[1, 1]
       paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
     }
