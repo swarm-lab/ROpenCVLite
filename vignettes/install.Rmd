@@ -9,10 +9,10 @@ vignette: >
 ---
 
 Installing [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) should go 
-smoothly on all major operating systems (Mac, Windows, and "Ubuntu-like" Linux). 
-There are a few steps to follow before installing the package itself in order to
-prepare all the necessary external (i.e. non-R) dependencies for 
-[`OpenCV`](https://opencv.org/). 
+smoothly on all major operating systems (Mac, Windows, and most major Linux 
+distributions). There are a few steps to follow before installing the package 
+itself in order to prepare all the necessary external (i.e. non-R) dependencies 
+for [`OpenCV`](https://opencv.org/). 
 
 All installation steps are described below. 
 
@@ -36,7 +36,16 @@ Before installing `ROpenCVLite`, you will need to install the latest versions of
 
 #### 1.1.1 - Cmake
 
-**+ Option 1**
++ **Option 1**
+
+Use the [`winget`](https://learn.microsoft.com/en-us/windows/package-manager/winget/) 
+utility to install `Cmake` from the terminal/PowerShell:
+
+```{powershell eval=FALSE}
+winget install cmake
+```
+
++ **Option 2**
 
 Use the convenience function provided by the `installr` library: 
 
@@ -50,7 +59,7 @@ installr::install.CMake()
 During the installation process, make sure to tell the installer to add `CMake` 
 to your "PATH".
 
-**+ Option 2**
++ **Option 3**
 
 Download the `CMake` installer for Windows at 
 [https://cmake.org/download/](https://cmake.org/download/). Make sure to tell 
@@ -58,7 +67,16 @@ the installer to add `CMake` to your "PATH".
 
 #### 1.1.2 - Rtools
 
-**+ Option 1**
++ **Option 1**
+
+Use the [`winget`](https://learn.microsoft.com/en-us/windows/package-manager/winget/) 
+utility to install `Cmake` from the terminal/PowerShell:
+
+```{powershell eval=FALSE}
+winget install RProject.Rtools
+```
+
++ **Option 2**
 
 Use the convenience function provided by the `installr` library: 
 
@@ -72,7 +90,7 @@ installr::install.Rtools()
 During the installation process, make sure to tell the installer to add `Rtools` 
 to your "PATH".
 
-**+ Option 2**
++ **Option 3**
 
 Download the latest "recommended" version of `Rtools` at 
 [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/). 
@@ -85,7 +103,25 @@ Make sure to tell the installer to add `Rtools` to your "PATH".
 Before installing `ROpenCVLite`, you will need to install the latest version of
 [`CMake`](https://cmake.org/). 
 
-**+ Option 1**
++ **Option 1**
+
+If you have [`homebrew`](https://brew.sh/) installed, run the following command
+in your terminal: 
+
+```bash
+brew install cmake
+```
+
++ **Option 2**
+
+If you have [`MacPorts`](https://www.macports.org/) installed, run the following 
+command in your terminal: 
+
+```bash
+sudo port install cmake
+```
+
++ **Option 3**
 
 Go to [https://cmake.org/download/](https://cmake.org/download/). Scroll down 
 until you reach the "Latest Release" section. Download the installer for Mac OS 
@@ -99,24 +135,6 @@ To make `Cmake` accessible to `R`, open a terminal and type:
 
 It will ask for your administrator password. 
 
-**+ Option 2**
-
-If you have [`homebrew`](https://brew.sh/) installed, run the following command
-in your terminal: 
-
-```bash
-brew install cmake
-```
-
-**+ Option 3**
-
-If you have [`MacPorts`](https://www.macports.org/) installed, run the following 
-command in your terminal: 
-
-```bash
-sudo port install cmake
-```
-
 --- 
 
 ### 1.3 - Linux
@@ -124,7 +142,7 @@ sudo port install cmake
 Before installing `ROpenCVLite`, you will need to install the latest version of
 [`CMake`](https://cmake.org/). Hereafter are two options to do this on Linux.
 
-**+ Option 1**
++ **Option 1**
 
 Use your distribution's package management system. For instance on Ubuntu-like
 systems, you can install Cmake by typing the following command in your terminal:
@@ -137,7 +155,7 @@ Other distributions will have different package managers. Refer to the
 documentation of your distribution for finding the proper way to install Cmake 
 on your system. 
 
-**+ Option 2**
++ **Option 2**
 
 Download `CMake` for Linux at [https://cmake.org/download/](https://cmake.org/download/).
 However it is recommended that you install it using your distribution's package
