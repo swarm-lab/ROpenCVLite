@@ -1,8 +1,8 @@
 Package: ROpenCVLite
 Type: Package
 Title: Helper Package for Installing OpenCV with R
-Version: 4.60.2
-Date: 2022-07-17
+Version: 4.60.3
+Date: 2022-12-01
 Authors@R: c(
     person("Simon", "Garnier", email = "garnier@njit.edu", role = c("aut", "cre"),
       comment = c(ORCID = "0000-0002-3886-3974")),
@@ -11,8 +11,9 @@ Authors@R: c(
 Maintainer: Simon Garnier <garnier@njit.edu>
 Description: Installs 'OpenCV' for use by other packages. 'OpenCV' <https://opencv.org/> 
     is library of programming functions mainly aimed at real-time computer 
-    vision. This 'Lite' version contains the stable base version of 'OpenCV' and 
-    does not contain any of its externally contributed modules.
+    vision. This 'Lite' version installs the stable base version of 'OpenCV' and 
+    some of its experimental externally contributed modules. It does not provide 
+    R bindings directly. 
 License: GPL-3
 LazyData: TRUE
 Imports:
