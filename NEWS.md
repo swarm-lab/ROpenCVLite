@@ -1,3 +1,15 @@
+# ROpenCVLite 4.60.3
+
+## New features
+
+* Adds ximgproc "extra" module.
+
+## Minor improvements and fixes
+
+* N/A.
+
+---
+
 # ROpenCVLite 4.60.2
 
 ## New features
