@@ -27,8 +27,10 @@ RoxygenNote: 7.2.3
 Biarch: true
 Encoding: UTF-8
 Suggests: 
+    covr,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://swarm-lab.github.io/ROpenCVLite/, https://github.com/swarm-lab/ROpenCVLite
+URL: https://swarm-lab.github.io/ROpenCVLite/,
+    https://github.com/swarm-lab/ROpenCVLite
 BugReports: https://github.com/swarm-lab/ROpenCVLite/issues
