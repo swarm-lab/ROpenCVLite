@@ -1,9 +1,11 @@
 # ROpenCVLite - Install OpenCV with R <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
+<!-- badges: start -->
 [![R-CMD-check](https://github.com/swarm-lab/ROpenCVLite/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/swarm-lab/ROpenCVLite/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/swarm-lab/ROpenCVLite/branch/master/graph/badge.svg)](https://app.codecov.io/gh/swarm-lab/ROpenCVLite?branch=master)
 ![CRAN](https://www.r-pkg.org/badges/version/ROpenCVLite)
 ![CRANLOGS](https://cranlogs.r-pkg.org/badges/ROpenCVLite)
+<!-- badges: end -->
 
 ## Description 
 
