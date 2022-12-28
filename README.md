@@ -3,8 +3,9 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/swarm-lab/ROpenCVLite/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/swarm-lab/ROpenCVLite/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/swarm-lab/ROpenCVLite/branch/master/graph/badge.svg)](https://app.codecov.io/gh/swarm-lab/ROpenCVLite?branch=master)
-![CRAN](https://www.r-pkg.org/badges/version/ROpenCVLite)
-![CRANLOGS](https://cranlogs.r-pkg.org/badges/ROpenCVLite)
+[![CRAN status](https://www.r-pkg.org/badges/version/ROpenCVLite)](https://CRAN.R-project.org/package=ROpenCVLite)
+[![CRANLOGS downloads](https://cranlogs.r-pkg.org/badges/ROpenCVLite)](https://cran.r-project.org/package=ROpenCVLite)
+
 <!-- badges: end -->
 
 ## Description 
