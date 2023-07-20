@@ -11,7 +11,7 @@
 #  installr::install.Rtools()
 
 ## ----eval=FALSE---------------------------------------------------------------
-#  install.package("devtools")
+#  install.packages("devtools")
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  install.packages("ROpenCVLite")

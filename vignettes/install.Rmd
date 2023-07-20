@@ -169,7 +169,7 @@ Before installing `ROpenCVLite`, you will need to install the `devtools` package
 in `R`. 
 
 ```{r eval=FALSE}
-install.package("devtools")
+install.packages("devtools")
 ```
 
 ---
