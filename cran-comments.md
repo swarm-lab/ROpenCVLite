@@ -1,8 +1,8 @@
 ## Test environments
 
-* local M1 OS X 13.1, R 4.2.2
-* local Windows 10, R 4.2.2
-* local Ubuntu 22.04, R 4.2.2
+* local M1 OS X 13.4.1, R 4.3.1
+* local Windows 10, R 4.3.1
+* local Ubuntu 22.04, R 4.3.1
 * Github Actions "windows-latest (release)"
 * Github Actions "macOS-latest (release)"
 * Github Actions "ubuntu-latest (release)"
