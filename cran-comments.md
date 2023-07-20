@@ -1,6 +1,6 @@
 ## Test environments
 
-* local M1 OS X 13.1, R 4.2.2
+* local M1 OS X 13.4.1, R 4.3.1
 * local Windows 10, R 4.2.2
 * local Ubuntu 22.04, R 4.2.2
 * Github Actions "windows-latest (release)"
