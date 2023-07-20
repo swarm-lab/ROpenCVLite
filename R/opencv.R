@@ -8,7 +8,9 @@
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
 #' @examples
-#' defaultOpenCVPath()
+#' \dontrun{
+#'  defaultOpenCVPath()
+#' }
 #'
 #' @export
 defaultOpenCVPath <- function() {
@@ -385,10 +387,12 @@ opencvVersion <- function() {
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
 #' @examples
-#' if (isOpenCVInstalled()) {
-#'   opencvConfig()
-#'   opencvConfig(output = "cflags")
-#'   opencvConfig(arch = R.version$arch)
+#' \dontrun{
+#'  if (isOpenCVInstalled()) {
+#'    opencvConfig()
+#'    opencvConfig(output = "cflags")
+#'    opencvConfig(arch = R.version$arch)
+#'  }
 #' }
 #'
 #' @export
