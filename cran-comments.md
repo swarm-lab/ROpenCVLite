@@ -23,4 +23,10 @@ There are currently no downstream dependencies for this package.
 
 ## CRAN team comments
 
-N/A.
+* Version jumps in minor (submitted: 4.80.0, existing: 4.70.0)
+
+This is normal. The package version follows that of OpenCV. 
+
+* Package CITATION file contains call(s) to old-style citEntry(). Please use bibentry() instead.
+
+Fixed. 

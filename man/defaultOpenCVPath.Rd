@@ -14,7 +14,9 @@ This function returns the location at which OpenCV should be
  installed by default.
 }
 \examples{
-defaultOpenCVPath()
+\dontrun{
+ defaultOpenCVPath()
+}
 
 }
 \author{
