@@ -214,8 +214,8 @@ installOpenCV <- function(path = defaultOpenCVPath(), batch = FALSE) {
 
         for (i in 1:2) {
           if (archAvail[i] == TRUE) {
-            sourceDir <- paste0(tmpDir, "/opencv-4.7.0/")
-            contribDir <- paste0(tmpDir, "/opencv_contrib-4.7.0/modules")
+            sourceDir <- paste0(tmpDir, "/opencv-4.8.0/")
+            contribDir <- paste0(tmpDir, "/opencv_contrib-4.8.0/modules")
             buildDir <- paste0(sourceDir, "build", arch[i])
             dir.create(buildDir, showWarnings = FALSE)
             openCVArch <- if (arch[i] == 64) "x64" else "x86"
