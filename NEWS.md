@@ -2,6 +2,18 @@
 
 ## New features
 
+* N/A.
+
+## Minor improvements and fixes
+
+* Add compilation flags required with latest Rtools on Windows.
+
+---
+
+# ROpenCVLite 4.80.0
+
+## New features
+
 * Upgrade package to OpenCV 4.8.0.
 
 ## Minor improvements and fixes
