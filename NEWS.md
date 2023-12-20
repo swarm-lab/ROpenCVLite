@@ -1,4 +1,16 @@
-# ROpenCVLite 4.80.0
+# ROpenCVLite 4.80.2
+
+## New features
+
+* Overhaul of the installation functions for easier update management. 
+
+## Minor improvements and fixes
+
+* Add compilation flags required to avoid errors on Windows 11.
+
+---
+
+# ROpenCVLite 4.80.1
 
 ## New features
 
