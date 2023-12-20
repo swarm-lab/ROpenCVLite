@@ -22,7 +22,7 @@ defaultOpenCVPath <- function() {
 .configure <- function(install_path = defaultOpenCVPath(), version) {
   config <- list()
 
-  config$install_path <- normalizePath(install_path, mustWork = FALSE)
+  config$install_path <- normalizePath(install_path, mustWork = FALSE, winslash = "/")
   config$pkg_path <- find.package("ROpenCVLite")
 
   config$arch <- unname(Sys.info()["machine"])
@@ -35,40 +35,38 @@ defaultOpenCVPath <- function() {
     config$os <- gsub("\r", "", gsub("Caption=", "", system('wmic os get Caption,CSDVersion /value', intern = TRUE)[3]))
     config$core <- paste0("https://github.com/opencv/opencv/archive/", version, ".tar.gz")
     config$contrib <- paste0("https://github.com/opencv/opencv_contrib/archive/", version, ".tar.gz")
-    config$rtools_path <- pkgbuild::rtools_path()
+    config$rtools_path <- normalizePath(pkgbuild::rtools_path(), mustWork = FALSE, winslash = "/")
 
     if (is.null(config$rtools_path))
       stop("Rtools is not installed.")
 
-    config$rtools_version <- as.numeric(
-      regmatches(config$rtools_path,
-                 regexec("rtools\\s*(.*?)\\s*/",
-                         config$rtools_path,
-                         ignore.case = TRUE))[[1]][2]
-    )
+    ix <- which(startsWith(config$rtools_path, c(normalizePath(Sys.getenv("RTOOLS40_HOME"), mustWork = FALSE, winslash = "/"),
+                                                 normalizePath(Sys.getenv("RTOOLS42_HOME"), mustWork = FALSE, winslash = "/"),
+                                                 normalizePath(Sys.getenv("RTOOLS43_HOME"), mustWork = FALSE, winslash = "/"))))
+    config$rtools_version <- switch(ix, 40, 42, 43, NA)
 
     if (is.na(config$rtools_version)) {
-      config$rtools_path <- gsub("(Rtools/).*", "\\1", config$rtools_path)
-      config$cmake_path <- system("where cmake.exe", intern = TRUE)
-      config$gcc_path <- paste0(config$rtools_path, "/mingw_64/bin/gcc.exe")
-      config$gpp_path <- paste0(config$rtools_path, "/mingw_64/bin/g++.exe")
-      config$windres_path <- paste0(config$rtools_path, "/mingw_64/bin/windres.exe")
-      config$make_path <- paste0(config$rtools_path, "/mingw_64/bin/mingw32-make.exe")
+      config$rtools_path <- gsub("(Rtools).*", "\\1", config$rtools_path)
+      config$cmake_path <- normalizePath(system("where cmake.exe", intern = TRUE), mustWork = FALSE, winslash = "/")
+      config$gcc_path <- normalizePath(paste0(config$rtools_path, "/mingw_64/bin/gcc.exe"), mustWork = FALSE, winslash = "/")
+      config$gpp_path <- normalizePath(paste0(config$rtools_path, "/mingw_64/bin/g++.exe"), mustWork = FALSE, winslash = "/")
+      config$windres_path <- normalizePath(paste0(config$rtools_path, "/mingw_64/bin/windres.exe"), mustWork = FALSE, winslash = "/")
+      config$make_path <- normalizePath(paste0(config$rtools_path, "/mingw_64/bin/mingw32-make.exe"), mustWork = FALSE, winslash = "/")
     } else {
-      config$rtools_path <- gsub(paste0("(rtools", config$rtools_version, "/).*"), "\\1", config$rtools_path)
+      config$rtools_path <- normalizePath(Sys.getenv(paste0("RTOOLS", config$rtools_version, "_HOME")), mustWork = FALSE, winslash = "/")
 
       if (config$rtools_version == 40) {
-        config$cmake_path <- system("where cmake.exe", intern = TRUE)
-        config$gcc_path <- paste0(config$rtools_path, "/mingw64/bin/gcc.exe")
-        config$gpp_path <- paste0(config$rtools_path, "/mingw64/bin/g++.exe")
-        config$windres_path <- paste0(config$rtools_path, "/mingw64/bin/windres.exe")
-        config$make_path <- paste0(config$rtools_path, "/usr/bin/make.exe")
+        config$cmake_path <- normalizePath(system("where cmake.exe", intern = TRUE), mustWork = FALSE, winslash = "/")
+        config$gcc_path <- normalizePath(paste0(config$rtools_path, "/mingw64/bin/gcc.exe"), mustWork = FALSE, winslash = "/")
+        config$gpp_path <- normalizePath(paste0(config$rtools_path, "/mingw64/bin/g++.exe"), mustWork = FALSE, winslash = "/")
+        config$windres_path <-normalizePath( paste0(config$rtools_path, "/mingw64/bin/windres.exe"), mustWork = FALSE, winslash = "/")
+        config$make_path <- normalizePath(paste0(config$rtools_path, "/usr/bin/make.exe"), mustWork = FALSE, winslash = "/")
       } else {
-        config$cmake_path <- paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix", "/bin/cmake.exe")
-        config$gcc_path <- paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix", "/bin/gcc.exe")
-        config$gpp_path <- paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix", "/bin/g++.exe")
-        config$windres_path <- paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix", "/bin/windres.exe")
-        config$make_path <- paste0(config$rtools_path, "/usr/bin/make.exe")
+        config$cmake_path <- normalizePath(paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix/bin/cmake.exe"), mustWork = FALSE, winslash = "/")
+        config$gcc_path <- normalizePath(paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix/bin/gcc.exe"), mustWork = FALSE, winslash = "/")
+        config$gpp_path <- normalizePath(paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix/bin/g++.exe"), mustWork = FALSE, winslash = "/")
+        config$windres_path <- normalizePath(paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix/bin/windres.exe"), mustWork = FALSE, winslash = "/")
+        config$make_path <- normalizePath(paste0(config$rtools_path, "/usr/bin/make.exe"), mustWork = FALSE, winslash = "/")
       }
     }
   } else if (config$os_type == "unix") {
