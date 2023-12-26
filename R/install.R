@@ -38,20 +38,17 @@ defaultOpenCVPath <- function() {
     config$rtools_path <- normalizePath(pkgbuild::rtools_path(), mustWork = FALSE, winslash = "/")
 
     if (is.null(config$rtools_path))
-      stop("Rtools is not installed.")
+      stop("Rtools is missing.")
 
-    ix <- which(startsWith(config$rtools_path, c(normalizePath(Sys.getenv("RTOOLS40_HOME"), mustWork = FALSE, winslash = "/"),
-                                                 normalizePath(Sys.getenv("RTOOLS42_HOME"), mustWork = FALSE, winslash = "/"),
-                                                 normalizePath(Sys.getenv("RTOOLS43_HOME"), mustWork = FALSE, winslash = "/"))))
-    config$rtools_version <- switch(ix, 40, 42, 43, NA)
+    ix <- c(startsWith(config$rtools_path,
+                       c(normalizePath(Sys.getenv("RTOOLS40_HOME"), mustWork = FALSE, winslash = "/"),
+                         normalizePath(Sys.getenv("RTOOLS42_HOME"), mustWork = FALSE, winslash = "/"),
+                         normalizePath(Sys.getenv("RTOOLS43_HOME"), mustWork = FALSE, winslash = "/"))),
+            TRUE)
+    config$rtools_version <- switch(which(ix)[1], 40, 42, 43, NA)
 
     if (is.na(config$rtools_version)) {
-      config$rtools_path <- gsub("(Rtools).*", "\\1", config$rtools_path)
-      config$cmake_path <- normalizePath(system("where cmake.exe", intern = TRUE), mustWork = FALSE, winslash = "/")
-      config$gcc_path <- normalizePath(paste0(config$rtools_path, "/mingw_64/bin/gcc.exe"), mustWork = FALSE, winslash = "/")
-      config$gpp_path <- normalizePath(paste0(config$rtools_path, "/mingw_64/bin/g++.exe"), mustWork = FALSE, winslash = "/")
-      config$windres_path <- normalizePath(paste0(config$rtools_path, "/mingw_64/bin/windres.exe"), mustWork = FALSE, winslash = "/")
-      config$make_path <- normalizePath(paste0(config$rtools_path, "/mingw_64/bin/mingw32-make.exe"), mustWork = FALSE, winslash = "/")
+      stop("Unsupported Rtools version.")
     } else {
       config$rtools_path <- normalizePath(Sys.getenv(paste0("RTOOLS", config$rtools_version, "_HOME")), mustWork = FALSE, winslash = "/")
 
@@ -92,22 +89,25 @@ defaultOpenCVPath <- function() {
 
 .cmake <- function(config) {
   paste0(
-    config$cmake_path,
+    '"', config$cmake_path, '"',
     ' -G "Unix Makefiles"',
-    ' -DCMAKE_C_COMPILER=', config$gcc_path,
+    ' -Wno-dev',
+    ' -DCMAKE_C_COMPILER="', config$gcc_path, '"',
+    ' -DCMAKE_CXX_COMPILER="', config$gpp_path, '"',
     switch(config$os_type,
-           windows = paste0(' -DCMAKE_RC_COMPILER=', config$windres_path,
+           windows = paste0(' -DCMAKE_RC_COMPILER="', config$windres_path, '"',
                             ' -DOpenCV_ARCH=x64',
                             ' -DOpenCV_RUNTIME=mingw',
                             ' -DBUILD_SHARED_LIBS=ON',
                             if (grepl("11", config$os)) ' -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV')
     ),
-    ' -DCMAKE_MAKE_PROGRAM=', config$make_path,
+    ' -DCMAKE_MAKE_PROGRAM="', config$make_path, '"',
+    ' -DCMAKE_CXX_STANDARD=11',
     ' -DENABLE_PRECOMPILED_HEADERS=OFF',
     ' -DOPENCV_EXTRA_MODULES_PATH=', config$contrib_dir,
     ' -DBUILD_LIST=calib3d,core,dnn,features2d,flann,gapi,highgui,imgcodecs,imgproc,ml,objdetect,photo,stitching,video,videoio,ximgproc',
-    ' -DWITH_TBB=ON',
     ' -DWITH_OPENMP=ON',
+    ' -DWITH_TBB=ON',
     ' -DWITH_EIGEN=ON',
     ' -DWITH_LAPACK=ON',
     ' -DBUILD_opencv_world=OFF',
@@ -118,9 +118,9 @@ defaultOpenCVPath <- function() {
     ' -DCMAKE_CXX_FLAGS_RELEASE="-fstack-protector-strong"',
     ' -DINSTALL_CREATE_DISTRIB=ON',
     ' -DCMAKE_BUILD_TYPE=RELEASE',
-    ' -DCMAKE_INSTALL_PREFIX=', config$install_path,
-    ' -B', config$build_dir,
-    ' -H', config$source_dir
+    ' -DCMAKE_INSTALL_PREFIX="', config$install_path, '"',
+    ' -B"', config$build_dir, '"',
+    ' -H"', config$source_dir, '"'
   )
 }
 
@@ -224,6 +224,7 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE) {
                  paste0(config$source_dir, "cmake/OpenCVModule.cmake"))
     }
 
+    dir.create(config$build_dir, showWarnings = FALSE)
     system(.cmake(config))
     system(paste0(config$make_path, " -j", parallel::detectCores(), " -C ", config$build_dir))
     system(paste0(config$make_path, " -C", config$build_dir, " install"))
