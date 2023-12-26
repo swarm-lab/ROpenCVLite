@@ -23,8 +23,10 @@ Imports:
 SystemRequirements: 
   cmake
 RoxygenNote: 7.2.3
-Biarch: true
+Biarch: false
 Encoding: UTF-8
+Depends:
+    R (>= 4.0.0)
 Suggests: 
     covr,
     knitr,
