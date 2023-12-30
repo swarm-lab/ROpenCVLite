@@ -26,9 +26,12 @@ res <- run("rig", c("list", "--plain"), echo_cmd = TRUE, stderr_to_stdout = TRUE
            windows_verbatim_args = TRUE)
 v <- strsplit(res$stdout, c("\n", "\r\n"))[[1]]
 
-env_par <- ps::ps_environ(ps::ps_parent(ps::ps_handle()))
-attr(env_par, "class") <- NULL
-env_par <- env_par[nchar(names(env_par)) > 0]
+env_par <- NULL
+if (.Platform$OS.type == "windows") {
+  env_par <- ps::ps_environ(ps::ps_parent(ps::ps_handle()))
+  attr(env_par, "class") <- NULL
+  env_par <- env_par[nchar(names(env_par)) > 0]
+}
 
 for (r in v) {
   pb <- progress_bar$new(format = "  Compiling [:bar] :percent", clear = FALSE)
