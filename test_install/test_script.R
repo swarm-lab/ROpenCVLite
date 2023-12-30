@@ -21,6 +21,10 @@ if (!requireNamespace("parallel", quietly = TRUE)) {
   install.packages("parallel")
 }
 
+if (!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+
 
 # Testing -----------------------------------------------------------------
 tryCatch({
