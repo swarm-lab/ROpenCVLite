@@ -8,6 +8,20 @@ tryCatch({
 }, error = function(e) cat("ROpenCVLite is not installed. Nothing to remove."))
 
 
+# Dependencies ------------------------------------------------------------
+if (!requireNamespace("utils", quietly = TRUE)) {
+  install.packages("utils")
+}
+
+if (!requireNamespace("pkgbuild", quietly = TRUE)) {
+  install.packages("pkgbuild")
+}
+
+if (!requireNamespace("parallel", quietly = TRUE)) {
+  install.packages("parallel")
+}
+
+
 # Testing -----------------------------------------------------------------
 tryCatch({
   install.packages(".",  type = "source", repos = NULL,
