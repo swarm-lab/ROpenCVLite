@@ -1,12 +1,14 @@
-# ROpenCVLite 4.80.2
+# ROpenCVLite 4.90.0
 
 ## New features
 
-* Overhaul of the installation functions for easier update management. 
+* Upgrade to OpenCV 4.9.0.
+* Remove support for R < 4.0.0.
 
 ## Minor improvements and fixes
 
 * Add compilation flags required to avoid errors on Windows 11.
+* Overhaul of the installation functions for easier update management. 
 
 ---
 
