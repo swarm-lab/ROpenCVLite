@@ -29,13 +29,13 @@ v <- strsplit(res$stdout, c("\n", "\r\n"))[[1]]
 for (r in v) {
   pb <- progress_bar$new(format = "  Compiling [:bar] :percent", clear = FALSE)
 
-  res <- run("rig", c("run", paste0("-r ", r), "-f test_install/test_script.R"),
+  res <- run("rig", c("run", paste0("-r", r), "-ftest_install/test_script.R"),
              echo_cmd = TRUE, spinner = TRUE, stderr_to_stdout = TRUE,
              windows_verbatim_args = TRUE, stdout_line_callback = callback)
 
   pb$terminate()
 
-  stdout <- strsplit(res$stdout, "\r\n")[[1]]
+  stdout <- strsplit(res$stdout, c("\n", "\r\n"))[[1]]
 
   if (stdout[length(stdout)] != "Success") {
     con <- file(paste0("test_install/log_", r, ".txt"), "wb")
