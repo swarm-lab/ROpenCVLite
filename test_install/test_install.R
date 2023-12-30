@@ -1,3 +1,26 @@
+# Dependencies ------------------------------------------------------------
+if (!requireNamespace("utils", quietly = TRUE)) {
+  install.packages("utils")
+}
+
+if (!requireNamespace("pkgbuild", quietly = TRUE)) {
+  install.packages("pkgbuild")
+}
+
+if (!requireNamespace("parallel", quietly = TRUE)) {
+  install.packages("parallel")
+}
+
+if (!requireNamespace("processx", quietly = TRUE)) {
+  install.packages("processx")
+}
+
+if (!requireNamespace("progress", quietly = TRUE)) {
+  install.packages("progress")
+}
+
+
+# Environment -------------------------------------------------------------
 library(processx)
 library(progress)
 
@@ -9,8 +32,14 @@ callback <- function(line, proc) {
   }
 }
 
-for (r in list("release", "devel", "4.2.3", "4.1.3", "4.0.5")) {
-  pb <- progress_bar$new(format = "  Compiling [:bar] :percent")
+
+# Script ------------------------------------------------------------------
+res <- run("rig", c("list", "--plain"), echo_cmd = TRUE, stderr_to_stdout = TRUE,
+           windows_verbatim_args = TRUE)
+v <- strsplit(res$stdout, c("\n", "\r\n"))[[1]]
+
+for (r in v) {
+  pb <- progress_bar$new(format = "  Compiling [:bar] :percent", clear = FALSE)
 
   res <- run("rig", c("run", paste0("-r ", r), "-f test_install/test_script.R"),
              echo_cmd = TRUE, spinner = TRUE, stderr_to_stdout = TRUE,
@@ -20,9 +49,9 @@ for (r in list("release", "devel", "4.2.3", "4.1.3", "4.0.5")) {
 
   stdout <- strsplit(res$stdout, "\r\n")[[1]]
 
-  if (stdout[length(stdout)] == "Failure") {
+  if (stdout[length(stdout)] != "Success") {
     con <- file(paste0("test_install/log_", r, ".txt"), "wb")
-    writeBin(paste(stdout, collapse="\n"), con)
+    writeBin(paste(stdout, collapse = "\n"), con)
     close(con)
   }
 

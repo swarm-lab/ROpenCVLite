@@ -1,3 +1,4 @@
+# Cleanup -----------------------------------------------------------------
 tryCatch({
   remove.packages("Rvision")
 }, error = function(e) cat("Rvision is not installed. Nothing to remove."))
@@ -6,6 +7,8 @@ tryCatch({
   remove.packages("ROpenCVLite")
 }, error = function(e) cat("ROpenCVLite is not installed. Nothing to remove."))
 
+
+# Testing -----------------------------------------------------------------
 tryCatch({
   install.packages(".",  type = "source", repos = NULL,
                    INSTALL_opts = c("--preclean", "--no-multiarch", "--with-keep.source"))
