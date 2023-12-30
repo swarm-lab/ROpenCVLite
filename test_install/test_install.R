@@ -1,16 +1,4 @@
 # Dependencies ------------------------------------------------------------
-if (!requireNamespace("utils", quietly = TRUE)) {
-  install.packages("utils")
-}
-
-if (!requireNamespace("pkgbuild", quietly = TRUE)) {
-  install.packages("pkgbuild")
-}
-
-if (!requireNamespace("parallel", quietly = TRUE)) {
-  install.packages("parallel")
-}
-
 if (!requireNamespace("processx", quietly = TRUE)) {
   install.packages("processx")
 }
