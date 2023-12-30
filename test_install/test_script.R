@@ -33,7 +33,7 @@ tryCatch({
 
   ROpenCVLite::installOpenCV(batch = TRUE)
 
-  remotes::install_github("swarm-lab/Rvision", force = TRUE)
+  remotes::install_github("swarm-lab/Rvision", force = TRUE, INSTALL_opts = "--no-multiarch")
 
   a <- Rvision::zeros(100, 100)
   Rvision::changeBitDepth(a, "32F", 1 / 255, target = "self")
