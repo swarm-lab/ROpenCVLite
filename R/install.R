@@ -22,9 +22,6 @@ defaultOpenCVPath <- function() {
 .configure <- function(install_path = defaultOpenCVPath(), version) {
   config <- list()
 
-  config$install_path <- normalizePath(install_path, mustWork = FALSE, winslash = "/")
-  config$pkg_path <- find.package("ROpenCVLite")
-
   config$arch <- unname(Sys.info()["machine"])
   if (!grepl("64", config$arch))
     stop("Unsupported CPU architecture.")
@@ -32,15 +29,17 @@ defaultOpenCVPath <- function() {
   config$os_type <- .Platform$OS.type
 
   if (config$os_type == "windows") {
+    config$install_path <- shortPathName(install_path)
+    config$pkg_path <- shortPathName(find.package("ROpenCVLite"))
     config$os <- gsub("\r", "", gsub("Caption=", "", system('wmic os get Caption,CSDVersion /value', intern = TRUE)[3]))
     config$core <- paste0("https://github.com/opencv/opencv/archive/", version, ".tar.gz")
     config$contrib <- paste0("https://github.com/opencv/opencv_contrib/archive/", version, ".tar.gz")
-    config$rtools_path <- normalizePath(pkgbuild::rtools_path()[1], mustWork = FALSE, winslash = "/")
+    config$rtools_path <- shortPathName(pkgbuild::rtools_path()[1])
 
     if (is.null(config$rtools_path))
       stop("Rtools is missing.")
 
-    config$rtools_path <- gsub("/usr/bin", "", config$rtools_path)
+    config$rtools_path <- gsub("\\\\usr\\\\bin", "", config$rtools_path)
     config$rtools_version <- system(
       paste0("powershell (Get-Item ", config$rtools_path, "/unins000.exe).VersionInfo.ProductVersion"),
       intern = TRUE)
@@ -50,19 +49,32 @@ defaultOpenCVPath <- function() {
       stop("Unsupported Rtools version.")
 
     if (config$rtools_version < "4.2") {
-      config$cmake_path <- normalizePath(system("where cmake.exe", intern = TRUE), mustWork = FALSE, winslash = "/")
-      config$gcc_path <- normalizePath(paste0(config$rtools_path, "/mingw64/bin/gcc.exe"), mustWork = FALSE, winslash = "/")
-      config$gpp_path <- normalizePath(paste0(config$rtools_path, "/mingw64/bin/g++.exe"), mustWork = FALSE, winslash = "/")
-      config$windres_path <-normalizePath( paste0(config$rtools_path, "/mingw64/bin/windres.exe"), mustWork = FALSE, winslash = "/")
-      config$make_path <- normalizePath(paste0(config$rtools_path, "/usr/bin/make.exe"), mustWork = FALSE, winslash = "/")
+      config$cmake_path <- shortPathName(system("where cmake.exe", intern = TRUE))
+
+      if (length(config$cmake_path) > 1) {
+        v <- sapply(config$cmake_path, function(cmake) gsub("cmake version ", "", system(paste0(cmake, " --version"), intern = TRUE)[1]))
+        config$cmake_path <- config$cmake_path[which(v == max(v))]
+      }
+
+      config$gcc_path <- paste0(config$rtools_path, "\\mingw64\\bin\\gcc.exe")
+      config$gpp_path <- paste0(config$rtools_path, "\\mingw64\\bin\\g++.exe")
+      config$windres_path <- paste0(config$rtools_path, "\\mingw64\\bin\\windres.exe")
+      config$make_path <- paste0(config$rtools_path, "\\usr\\bin\\make.exe")
     } else {
-      config$cmake_path <- normalizePath(paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix/bin/cmake.exe"), mustWork = FALSE, winslash = "/")
-      config$gcc_path <- normalizePath(paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix/bin/gcc.exe"), mustWork = FALSE, winslash = "/")
-      config$gpp_path <- normalizePath(paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix/bin/g++.exe"), mustWork = FALSE, winslash = "/")
-      config$windres_path <- normalizePath(paste0(config$rtools_path, "/x86_64-w64-mingw32.static.posix/bin/windres.exe"), mustWork = FALSE, winslash = "/")
-      config$make_path <- normalizePath(paste0(config$rtools_path, "/usr/bin/make.exe"), mustWork = FALSE, winslash = "/")
+      config$cmake_path <- paste0(config$rtools_path, "\\x86_64-w64-mingw32.static.posix\\bin\\cmake.exe")
+      config$gcc_path <- paste0(config$rtools_path, "\\x86_64-w64-mingw32.static.posix\\bin\\gcc.exe")
+      config$gpp_path <- paste0(config$rtools_path, "\\x86_64-w64-mingw32.static.posix\\bin\\g++.exe")
+      config$windres_path <- paste0(config$rtools_path, "\\x86_64-w64-mingw32.static.posix\\bin\\windres.exe")
+      config$make_path <- paste0(config$rtools_path, "\\usr\\bin\\make.exe")
     }
+
+    config$tmp_dir <- base::tempdir()
+    config$source_dir <- paste0(config$tmp_dir, "\\opencv-", version, "\\")
+    config$contrib_dir <- paste0(config$tmp_dir, "\\opencv_contrib-", version, "\\modules")
+    config$build_dir <- paste0(config$source_dir, "build")
   } else if (config$os_type == "unix") {
+    config$install_path <- install_path
+    config$pkg_path <- find.package("ROpenCVLite")
     config$os <- unname(Sys.info()["sysname"])
     config$core <- paste0("https://github.com/opencv/opencv/archive/", version, ".zip")
     config$contrib <- paste0("https://github.com/opencv/opencv_contrib/archive/", version, ".zip")
@@ -70,15 +82,16 @@ defaultOpenCVPath <- function() {
     config$gcc_path <- system("which gcc", intern = TRUE)
     config$gpp_path <- system("which g++", intern = TRUE)
     config$make_path <- system("which make", intern = TRUE)
+    config$tmp_dir <- base::tempdir()
+    config$source_dir <- paste0(config$tmp_dir, "/opencv-", version, "/")
+    config$contrib_dir <- paste0(config$tmp_dir, "/opencv_contrib-", version, "/modules")
+    config$build_dir <- paste0(config$source_dir, "build")
   } else {
     stop("Unsupported OS type.")
   }
 
-  config$tmp_dir <- gsub("\\\\", "/", base::tempdir())
-  config$source_dir <- paste0(config$tmp_dir, "/opencv-", version, "/")
-  config$contrib_dir <- paste0(config$tmp_dir, "/opencv_contrib-", version, "/modules")
-  config$build_dir <- paste0(config$source_dir, "build")
-
+  ix <- grepl("path", names(config)) | grepl("dir", names(config))
+  config[ix] <- lapply(config[ix], normalizePath, mustWork = FALSE, winslash = "/")
   config
 }
 
@@ -156,12 +169,18 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE) {
       cv_version <- gsub("Version ", "", opencvVersion())
 
       if (pkg_version == cv_version) {
-        install <- utils::menu(c("yes", "no"), title = "OpenCV is already installed on this system. Would you like to reinstall it now? This will take several minutes.")
+        install <- utils::menu(
+          c("yes", "no"),
+          title = "OpenCV is already installed on this system. Would you like to reinstall it now? This will take several minutes.")
       } else {
-        install <- utils::menu(c("yes", "no"), title = "A new version of OpenCV is available. Would you like to install it now? This will take several minutes.")
+        install <- utils::menu(
+          c("yes", "no"),
+          title = "A new version of OpenCV is available. Would you like to install it now? This will take several minutes.")
       }
     } else {
-      install <- utils::menu(c("yes", "no"), title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
+      install <- utils::menu(
+        c("yes", "no"),
+        title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
     }
   } else {
     if (batch) {
@@ -249,7 +268,9 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE) {
 #' @export
 removeOpenCV <- function() {
   if (isOpenCVInstalled()) {
-    uninstall <- utils::menu(c("yes", "no"), title = "Would you like to completely remove OpenCV from your R installation? You can reinstall it at any time by using the installOpenCV() function.")
+    uninstall <- utils::menu(
+      c("yes", "no"),
+      title = "Would you like to completely remove OpenCV from your R installation? You can reinstall it at any time by using the installOpenCV() function.")
     print(uninstall)
 
     if (uninstall == 1) {
