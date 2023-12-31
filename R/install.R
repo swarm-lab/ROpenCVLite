@@ -29,12 +29,12 @@ defaultOpenCVPath <- function() {
   config$os_type <- .Platform$OS.type
 
   if (config$os_type == "windows") {
-    config$install_path <- shortPathName(install_path)
-    config$pkg_path <- shortPathName(find.package("ROpenCVLite"))
+    config$install_path <- utils::shortPathName(install_path)
+    config$pkg_path <- utils::shortPathName(find.package("ROpenCVLite"))
     config$os <- gsub("\r", "", gsub("Caption=", "", system('wmic os get Caption,CSDVersion /value', intern = TRUE)[3]))
     config$core <- paste0("https://github.com/opencv/opencv/archive/", version, ".tar.gz")
     config$contrib <- paste0("https://github.com/opencv/opencv_contrib/archive/", version, ".tar.gz")
-    config$rtools_path <- shortPathName(pkgbuild::rtools_path()[1])
+    config$rtools_path <- utils::shortPathName(pkgbuild::rtools_path()[1])
 
     if (is.null(config$rtools_path))
       stop("Rtools is missing.")
@@ -49,7 +49,7 @@ defaultOpenCVPath <- function() {
       stop("Unsupported Rtools version.")
 
     if (config$rtools_version < "4.2") {
-      config$cmake_path <- shortPathName(system("where cmake.exe", intern = TRUE))
+      config$cmake_path <- utils::shortPathName(system("where cmake.exe", intern = TRUE))
 
       if (length(config$cmake_path) > 1) {
         v <- sapply(config$cmake_path, function(cmake) gsub("cmake version ", "", system(paste0(cmake, " --version"), intern = TRUE)[1]))

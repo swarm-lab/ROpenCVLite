@@ -39,4 +39,3 @@ You can find an example of how to set up your package with
 * [DESCRIPTION](https://github.com/swarm-lab/Rvision/blob/master/DESCRIPTION)
 * [Makevars](https://github.com/swarm-lab/Rvision/blob/master/src/Makevars)
 * [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/src/Makevars.win)
-* [Makevars.win](https://github.com/swarm-lab/Rvision/blob/master/src/Makevars.win)

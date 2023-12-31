@@ -2,7 +2,7 @@
 
 ## New features
 
-* Upgrade to OpenCV 4.9.0.
+* Upgrade package to OpenCV 4.9.0.
 * Remove support for R < 4.0.0.
 
 ## Minor improvements and fixes
