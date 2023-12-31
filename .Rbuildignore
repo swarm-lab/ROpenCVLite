@@ -16,3 +16,4 @@ revdep
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
+test_install
