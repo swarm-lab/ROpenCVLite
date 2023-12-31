@@ -2,13 +2,13 @@
 #  if (!require("installr"))
 #    install.packages("installr")
 #  
-#  installr::install.CMake()
+#  installr::install.Rtools()
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  if (!require("installr"))
 #    install.packages("installr")
 #  
-#  installr::install.Rtools()
+#  installr::install.CMake()
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  install.packages("devtools")
