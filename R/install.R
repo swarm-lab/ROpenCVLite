@@ -72,6 +72,9 @@ defaultOpenCVPath <- function() {
     config$source_dir <- paste0(config$tmp_dir, "\\opencv-", version, "\\")
     config$contrib_dir <- paste0(config$tmp_dir, "\\opencv_contrib-", version, "\\modules")
     config$build_dir <- paste0(config$source_dir, "build")
+
+    ix <- grepl("path", names(config)) | grepl("dir", names(config))
+    config[ix] <- lapply(config[ix], function(st) gsub("\\\\", "/", utils::shortPathName(st)))
   } else if (config$os_type == "unix") {
     config$install_path <- install_path
     config$pkg_path <- find.package("ROpenCVLite")
@@ -86,12 +89,13 @@ defaultOpenCVPath <- function() {
     config$source_dir <- paste0(config$tmp_dir, "/opencv-", version, "/")
     config$contrib_dir <- paste0(config$tmp_dir, "/opencv_contrib-", version, "/modules")
     config$build_dir <- paste0(config$source_dir, "build")
+
+    ix <- grepl("path", names(config)) | grepl("dir", names(config))
+    config[ix] <- lapply(config[ix], normalizePath, mustWork = FALSE, winslash = "/")
   } else {
     stop("Unsupported OS type.")
   }
 
-  ix <- grepl("path", names(config)) | grepl("dir", names(config))
-  config[ix] <- lapply(config[ix], normalizePath, mustWork = FALSE, winslash = "/")
   config
 }
 
