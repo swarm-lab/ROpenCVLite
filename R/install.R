@@ -112,7 +112,8 @@ defaultOpenCVPath <- function() {
                             ' -DOpenCV_ARCH=x64',
                             ' -DOpenCV_RUNTIME=mingw',
                             ' -DBUILD_SHARED_LIBS=ON',
-                            if (grepl("11", config$os)) ' -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV')
+                            ' -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV')
+                            # if (grepl("11", config$os)) ' -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV')
     ),
     ' -DCMAKE_MAKE_PROGRAM="', config$make_path, '"',
     ' -DCMAKE_CXX_STANDARD=11',
