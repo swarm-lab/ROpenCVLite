@@ -1,3 +1,15 @@
+# ROpenCVLite 4.90.1
+
+## New features
+
+* N/A.
+
+## Minor improvements and fixes
+
+* Remove some processor optimization to avoid errors on Windows with recent CPUs.
+
+---
+
 # ROpenCVLite 4.90.0
 
 ## New features
