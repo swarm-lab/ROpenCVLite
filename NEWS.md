@@ -2,7 +2,8 @@
 
 ## New features
 
-* N/A.
+* Adds WeChat QR code module (thanks to @wresch).
+* Adds pkgconfig files (thanks to @wresch).  
 
 ## Minor improvements and fixes
 
