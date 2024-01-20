@@ -1,3 +1,16 @@
+# ROpenCVLite 4.90.1
+
+## New features
+
+* Adds WeChat QR code module (thanks to @wresch).
+* Adds pkgconfig files (thanks to @wresch).  
+
+## Minor improvements and fixes
+
+* Remove some processor optimization to avoid errors on Windows with recent CPUs.
+
+---
+
 # ROpenCVLite 4.90.0
 
 ## New features
