@@ -16,9 +16,7 @@
 
 ## R CMD check results
 
-* Version jumps in minor (submitted: 4.90.0, existing: 4.80.1)
-  
-This is normal. The package numbering scheme is based on the OpenCV version number. 
+* N/A.
 
 ## Downstream dependencies
 
