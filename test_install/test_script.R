@@ -27,6 +27,9 @@ if (!requireNamespace("remotes", quietly = TRUE)) {
 
 
 # Testing -----------------------------------------------------------------
+old_timeout <- getOption("timeout")
+options(timeout = 240)
+
 tryCatch({
   install.packages(".",  type = "source", repos = NULL,
                    INSTALL_opts = c("--preclean", "--no-multiarch", "--with-keep.source"))
@@ -40,3 +43,6 @@ tryCatch({
 
   cat("Success")
 }, error = function(e) cat("Failure"))
+
+
+options(timeout = old_timeout)
