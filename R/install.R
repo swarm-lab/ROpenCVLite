@@ -112,13 +112,14 @@ defaultOpenCVPath <- function() {
                             ' -DOpenCV_ARCH=x64',
                             ' -DOpenCV_RUNTIME=mingw',
                             ' -DBUILD_SHARED_LIBS=ON',
-                            if (grepl("11", config$os)) ' -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV')
+                            ' -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV')
     ),
     ' -DCMAKE_MAKE_PROGRAM="', config$make_path, '"',
     ' -DCMAKE_CXX_STANDARD=11',
     ' -DENABLE_PRECOMPILED_HEADERS=OFF',
     ' -DOPENCV_EXTRA_MODULES_PATH=', config$contrib_dir,
-    ' -DBUILD_LIST=calib3d,core,dnn,features2d,flann,gapi,highgui,imgcodecs,imgproc,ml,objdetect,photo,stitching,video,videoio,ximgproc',
+    ' -DBUILD_LIST=calib3d,core,dnn,features2d,flann,gapi,highgui,imgcodecs,imgproc,ml,objdetect,photo,stitching,video,videoio,ximgproc,wechat_qrcode',
+    ' -DOPENCV_GENERATE_PKGCONFIG=ON',
     ' -DWITH_OPENMP=ON',
     ' -DWITH_TBB=ON',
     ' -DWITH_EIGEN=ON',
