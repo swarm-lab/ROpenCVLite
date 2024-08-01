@@ -1,3 +1,15 @@
+# ROpenCVLite 4.90.2
+
+## New features
+
+* N/A.
+
+## Minor improvements and fixes
+
+* Removes pkgbuild dependency. 
+
+---
+
 # ROpenCVLite 4.90.1
 
 ## New features

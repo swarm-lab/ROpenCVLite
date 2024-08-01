@@ -218,3 +218,34 @@ opencvConfig <- function(output = "libs", arch = NULL) {
     stop("output should be either 'libs' or 'cflags'")
   }
 }
+
+
+.findRtools <- function() {
+  if (.Platform$OS.type != "windows") {
+    stop("Rtools is Windows only.")
+  }
+
+  if (version$major < 4) {
+    stop("ROpenCVLite requires a R version > 4.0.")
+  }
+
+  if (version$minor < 2) {
+    rtools <- "rtools40"
+  } else {
+    rtools <- paste0("rtools", sub("\\D*(\\d+).*", "\\1", paste0(version$major, version$minor)))
+  }
+
+  path <- strsplit(Sys.getenv("PATH"), ";")[[1]]
+  ix <- grep(rtools, path)[1]
+  rtools_path <- utils::shortPathName(sub(paste0("(", rtools, ").*"), "\\1", path[ix]))
+  rtools_version <- system(
+    paste0("powershell (Get-Item ", rtools_path, "/unins000.exe).VersionInfo.ProductVersion"),
+    intern = TRUE
+  )
+  rtools_version <- gsub(" ", "", rtools_version)
+
+  if (is.na(rtools_version))
+    stop("Rtools unavailable or unsupported Rtools version.")
+
+  list(path = unname(rtools_path), version = unname(rtools_version))
+}
