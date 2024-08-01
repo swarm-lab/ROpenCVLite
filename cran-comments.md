@@ -1,6 +1,6 @@
 ## Test environments
 
-* local M1 OS X 14.2.1, R 4.0.5, 4.1.3, 4.2.3, 4.3.2, 4.4.1, R devel
+* local M1 OS X 14.5, R 4.0.5, 4.1.3, 4.2.3, 4.3.2, 4.4.1, R devel
 * local Windows 10, R 4.0.5, 4.1.3, 4.2.3, 4.3.2, 4.4.1, R devel
 * local Windows 11, R 4.0.5, 4.1.3, 4.2.3, 4.3.2, 4.4.1, R devel
 * local Ubuntu 24.04, R 4.0.5, 4.1.3, 4.2.3, 4.3.2, 4.4.1, R devel
