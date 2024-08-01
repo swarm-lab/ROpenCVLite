@@ -1,8 +1,8 @@
 Package: ROpenCVLite
 Type: Package
 Title: Helper Package for Installing OpenCV with R
-Version: 4.90.1
-Date: 2024-01-20
+Version: 4.90.2
+Date: 2024-08-01
 Authors@R: c(
     person("Simon", "Garnier", email = "garnier@njit.edu", role = c("aut", "cre"),
       comment = c(ORCID = "0000-0002-3886-3974")),
@@ -18,11 +18,10 @@ License: GPL-3
 LazyData: TRUE
 Imports:
     utils,
-    pkgbuild,
     parallel
 SystemRequirements: 
   cmake
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.2
 Biarch: false
 Encoding: UTF-8
 Depends:
