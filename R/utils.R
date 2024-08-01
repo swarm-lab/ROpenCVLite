@@ -221,6 +221,10 @@ opencvConfig <- function(output = "libs", arch = NULL) {
 
 
 .findRtools <- function() {
+  if (.Platform$OS.type != "windows") {
+    stop("Rtools is Windows only.")
+  }
+
   if (version$major < 4) {
     stop("ROpenCVLite requires a R version > 4.0.")
   }
