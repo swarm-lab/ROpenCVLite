@@ -34,19 +34,9 @@ defaultOpenCVPath <- function() {
     config$os <- gsub("\r", "", gsub("Caption=", "", system('wmic os get Caption,CSDVersion /value', intern = TRUE)[3]))
     config$core <- paste0("https://github.com/opencv/opencv/archive/", version, ".tar.gz")
     config$contrib <- paste0("https://github.com/opencv/opencv_contrib/archive/", version, ".tar.gz")
-    config$rtools_path <- utils::shortPathName(pkgbuild::rtools_path()[1])
-
-    if (is.null(config$rtools_path))
-      stop("Rtools is missing.")
-
-    config$rtools_path <- gsub("\\\\usr\\\\bin", "", config$rtools_path)
-    config$rtools_version <- system(
-      paste0("powershell (Get-Item ", config$rtools_path, "/unins000.exe).VersionInfo.ProductVersion"),
-      intern = TRUE)
-    config$rtools_version <- gsub(" ", "", config$rtools_version)
-
-    if (is.na(config$rtools_version))
-      stop("Unsupported Rtools version.")
+    rtools <- .findRtools()
+    config$rtools_path <- rtools$path
+    config$rtools_version <- rtools$version
 
     if (config$rtools_version < "4.2") {
       config$cmake_path <- utils::shortPathName(system("where cmake.exe", intern = TRUE))
