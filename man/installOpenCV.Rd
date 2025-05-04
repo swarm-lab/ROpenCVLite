@@ -25,7 +25,7 @@ This function attempts to download, compile and install OpenCV
 }
 \examples{
 \dontrun{
- installOpenCV()
+installOpenCV()
 }
 
 }

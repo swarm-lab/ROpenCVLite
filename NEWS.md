@@ -1,3 +1,15 @@
+# ROpenCVLite 4.110.0
+
+## New features
+
+* Upgrades package to OpenCV 4.11.0.
+
+## Minor improvements and fixes
+
+* Fixes issue with CMake 4.
+
+---
+
 # ROpenCVLite 4.90.2
 
 ## New features

@@ -14,7 +14,7 @@ This function removes OpenCV from the system.
 }
 \examples{
 \dontrun{
- installOpenCV()
+installOpenCV()
 }
 
 }
