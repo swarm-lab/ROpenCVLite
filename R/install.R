@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'  defaultOpenCVPath()
+#' defaultOpenCVPath()
 #' }
 #'
 #' @export
@@ -23,15 +23,16 @@ defaultOpenCVPath <- function() {
   config <- list()
 
   config$arch <- unname(Sys.info()["machine"])
-  if (!grepl("64", config$arch))
+  if (!grepl("64", config$arch)) {
     stop("Unsupported CPU architecture.")
+  }
 
   config$os_type <- .Platform$OS.type
 
   if (config$os_type == "windows") {
     config$install_path <- utils::shortPathName(install_path)
     config$pkg_path <- utils::shortPathName(find.package("ROpenCVLite"))
-    config$os <- gsub("\r", "", gsub("Caption=", "", system('wmic os get Caption,CSDVersion /value', intern = TRUE)[3]))
+    config$os <- gsub("\r", "", gsub("Caption=", "", system("wmic os get Caption,CSDVersion /value", intern = TRUE)[3]))
     config$core <- paste0("https://github.com/opencv/opencv/archive/", version, ".tar.gz")
     config$contrib <- paste0("https://github.com/opencv/opencv_contrib/archive/", version, ".tar.gz")
     rtools <- .findRtools()
@@ -94,34 +95,36 @@ defaultOpenCVPath <- function() {
   paste0(
     '"', config$cmake_path, '"',
     ' -G "Unix Makefiles"',
-    ' -Wno-dev',
+    " -Wno-dev",
     ' -DCMAKE_C_COMPILER="', config$gcc_path, '"',
     ' -DCMAKE_CXX_COMPILER="', config$gpp_path, '"',
     switch(config$os_type,
-           windows = paste0(' -DCMAKE_RC_COMPILER="', config$windres_path, '"',
-                            ' -DOpenCV_ARCH=x64',
-                            ' -DOpenCV_RUNTIME=mingw',
-                            ' -DBUILD_SHARED_LIBS=ON',
-                            ' -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV')
+      windows = paste0(
+        ' -DCMAKE_RC_COMPILER="', config$windres_path, '"',
+        " -DOpenCV_ARCH=x64",
+        " -DOpenCV_RUNTIME=mingw",
+        " -DBUILD_SHARED_LIBS=ON",
+        " -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV"
+      )
     ),
     ' -DCMAKE_MAKE_PROGRAM="', config$make_path, '"',
-    ' -DCMAKE_CXX_STANDARD=11',
-    ' -DENABLE_PRECOMPILED_HEADERS=OFF',
-    ' -DOPENCV_EXTRA_MODULES_PATH=', config$contrib_dir,
-    ' -DBUILD_LIST=calib3d,core,dnn,features2d,flann,gapi,highgui,imgcodecs,imgproc,ml,objdetect,photo,stitching,video,videoio,ximgproc,wechat_qrcode',
-    ' -DOPENCV_GENERATE_PKGCONFIG=ON',
-    ' -DWITH_OPENMP=ON',
-    ' -DWITH_TBB=ON',
-    ' -DWITH_EIGEN=ON',
-    ' -DWITH_LAPACK=ON',
-    ' -DBUILD_opencv_world=OFF',
-    ' -DBUILD_opencv_contrib_world=OFF',
-    ' -DBUILD_PERF_TESTS=OFF',
-    ' -DBUILD_TESTS=OFF',
+    " -DCMAKE_CXX_STANDARD=11",
+    " -DENABLE_PRECOMPILED_HEADERS=OFF",
+    " -DOPENCV_EXTRA_MODULES_PATH=", config$contrib_dir,
+    " -DBUILD_LIST=calib3d,core,dnn,features2d,flann,gapi,highgui,imgcodecs,imgproc,ml,objdetect,photo,stitching,video,videoio,ximgproc,wechat_qrcode",
+    " -DOPENCV_GENERATE_PKGCONFIG=ON",
+    " -DWITH_OPENMP=ON",
+    " -DWITH_TBB=ON",
+    " -DWITH_EIGEN=ON",
+    " -DWITH_LAPACK=ON",
+    " -DBUILD_opencv_world=OFF",
+    " -DBUILD_opencv_contrib_world=OFF",
+    " -DBUILD_PERF_TESTS=OFF",
+    " -DBUILD_TESTS=OFF",
     ' -DCMAKE_C_FLAGS_RELEASE="-fstack-protector-strong"',
     ' -DCMAKE_CXX_FLAGS_RELEASE="-fstack-protector-strong"',
-    ' -DINSTALL_CREATE_DISTRIB=ON',
-    ' -DCMAKE_BUILD_TYPE=RELEASE',
+    " -DINSTALL_CREATE_DISTRIB=ON",
+    " -DCMAKE_BUILD_TYPE=RELEASE",
     ' -DCMAKE_INSTALL_PREFIX="', config$install_path, '"',
     ' -B"', config$build_dir, '"',
     ' -H"', config$source_dir, '"'
@@ -149,15 +152,13 @@ defaultOpenCVPath <- function() {
 #'
 #' @examples
 #' \dontrun{
-#'  installOpenCV()
+#' installOpenCV()
 #' }
 #'
 #' @export
 installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE) {
   install <- 0
-  pkg_version <- paste0(
-    strsplit(as.character(utils::packageVersion("ROpenCVLite")), "")[[1]][c(1, 3, 4)],
-    collapse = ".")
+  pkg_version <- "4.11.0"
 
   if (interactive()) {
     if (isOpenCVInstalled()) {
@@ -166,16 +167,19 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE) {
       if (pkg_version == cv_version) {
         install <- utils::menu(
           c("yes", "no"),
-          title = "OpenCV is already installed on this system. Would you like to reinstall it now? This will take several minutes.")
+          title = "OpenCV is already installed on this system. Would you like to reinstall it now? This will take several minutes."
+        )
       } else {
         install <- utils::menu(
           c("yes", "no"),
-          title = "A new version of OpenCV is available. Would you like to install it now? This will take several minutes.")
+          title = "A new version of OpenCV is available. Would you like to install it now? This will take several minutes."
+        )
       }
     } else {
       install <- utils::menu(
         c("yes", "no"),
-        title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes.")
+        title = "OpenCV is not installed on this system. Would you like to install it now? This will take several minutes."
+      )
     }
   } else {
     if (batch) {
@@ -186,8 +190,9 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE) {
     }
   }
 
-  if (!isCmakeInstalled())
+  if (!isCmakeInstalled()) {
     install <- 0
+  }
 
   if (install == 1) {
     config <- .configure(normalizePath(install_path, mustWork = FALSE), pkg_version)
@@ -225,14 +230,25 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE) {
       insert <- c(
         '# set CMAKE_INSTALL_NAME_DIR if CMAKE_INSTALL_PREFIX isn\'t default value of "/usr/local"',
         'if(UNIX AND NOT ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr/local")',
-        '  set(CMAKE_INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib)',
+        "  set(CMAKE_INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/lib)",
         '#  message ("setting CMAKE_INSTALL_NAME_DIR: ${CMAKE_INSTALL_NAME_DIR}")',
-        'endif()',
-        ''
+        "endif()",
+        ""
       )
-      writeLines(c(tmp[1:ix], insert, tmp[(ix + 1):length(tmp)]),
-                 paste0(config$source_dir, "cmake/OpenCVModule.cmake"))
+      writeLines(
+        c(tmp[1:ix], insert, tmp[(ix + 1):length(tmp)]),
+        paste0(config$source_dir, "cmake/OpenCVModule.cmake")
+      )
     }
+
+    # To be removed once the CMake 4 issue is resolved in the next OpenCV release
+    tmp <- readLines(paste0(config$source_dir, "cmake/OpenCVGenPkgconfig.cmake"))
+    ix <- which(grepl("cmake_minimum_required", tmp))
+    insert <- "cmake_minimum_required(VERSION 3.5)"
+    writeLines(
+      c(tmp[1:(ix - 1)], insert, tmp[(ix + 1):length(tmp)]),
+      paste0(config$source_dir, "cmake/OpenCVGenPkgconfig.cmake")
+    )
 
     dir.create(config$build_dir, showWarnings = FALSE)
     system(.cmake(config))
@@ -257,7 +273,7 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE) {
 #'
 #' @examples
 #' \dontrun{
-#'  installOpenCV()
+#' installOpenCV()
 #' }
 #'
 #' @export
@@ -265,7 +281,8 @@ removeOpenCV <- function() {
   if (isOpenCVInstalled()) {
     uninstall <- utils::menu(
       c("yes", "no"),
-      title = "Would you like to completely remove OpenCV from your R installation? You can reinstall it at any time by using the installOpenCV() function.")
+      title = "Would you like to completely remove OpenCV from your R installation? You can reinstall it at any time by using the installOpenCV() function."
+    )
     print(uninstall)
 
     if (uninstall == 1) {

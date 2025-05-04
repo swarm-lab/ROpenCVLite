@@ -15,7 +15,7 @@ This function returns the location at which OpenCV should be
 }
 \examples{
 \dontrun{
- defaultOpenCVPath()
+defaultOpenCVPath()
 }
 
 }
