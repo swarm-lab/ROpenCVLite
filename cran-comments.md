@@ -20,4 +20,7 @@ There are currently no downstream dependencies for this package.
 
 ## CRAN team comments
 
-N/A.
+* 1 NOTE: Version jumps in minor (submitted: 4.110.0, existing: 4.90.2)
+
+This is normal. Version 4.100.0 was skipped because I chose to skip the upgrade
+to OpenCV 4.10.0 and move directly to OpenCV 4.11.0. 
