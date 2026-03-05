@@ -239,7 +239,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
   ix <- grep(rtools, path)[1]
   rtools_path <- utils::shortPathName(sub(paste0("(", rtools, ").*"), "\\1", path[ix]))
   rtools_version <- system(
-    paste0("powershell (Get-Item ", rtools_path, "/unins000.exe).VersionInfo.ProductVersion"),
+    paste0("powershell -NoProfile (Get-Item ", rtools_path, "/unins000.exe).VersionInfo.ProductVersion"),
     intern = TRUE
   )
   rtools_version <- gsub(" ", "", rtools_version)
