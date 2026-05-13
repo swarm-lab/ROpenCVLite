@@ -32,13 +32,9 @@
   }
 
   if (needs_install) {
-    if (interactive()) {
-      packageStartupMessage(
-        "OpenCV is not installed or needs updating. ",
-        "Run installOpenCV() to install it."
-      )
-    } else {
-      installOpenCV(batch = TRUE)
-    }
+    packageStartupMessage(
+      "OpenCV is not installed or needs updating. ",
+      "Run installOpenCV() to install it."
+    )
   }
 }
