@@ -323,9 +323,9 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
 
     message("Configuring OpenCV build...")
     cmake <- .cmake(config)
-    cmake_out <- system2(cmake$command, shQuote(cmake$args), stdout = TRUE, stderr = TRUE)
-    if (!is.null(attr(cmake_out, "status")) && attr(cmake_out, "status") != 0) {
-      message(paste(cmake_out, collapse = "\n"))
+    cmake_err <- system2(cmake$command, shQuote(cmake$args), stdout = "", stderr = TRUE)
+    if (!is.null(attr(cmake_err, "status")) && attr(cmake_err, "status") != 0) {
+      message(paste(cmake_err, collapse = "\n"))
       stop("CMake configuration failed. See output above for details.")
     }
 
