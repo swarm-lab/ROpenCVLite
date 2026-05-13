@@ -107,7 +107,7 @@ defaultOpenCVPath <- function() {
       "-DOpenCV_ARCH=x64",
       "-DOpenCV_RUNTIME=mingw",
       "-DBUILD_SHARED_LIBS=ON",
-      if (config$optimize_for_host) "-DCPU_BASELINE=DETECT -DCPU_DISPATCH=DETECT"
+      if (config$optimize_for_host) c("-DCPU_BASELINE=DETECT", "-DCPU_DISPATCH=DETECT")
       else "-DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AV"
     )
   }
@@ -323,7 +323,7 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
 
     message("Configuring OpenCV build...")
     cmake <- .cmake(config)
-    cmake_out <- system2(cmake$command, cmake$args, stdout = TRUE, stderr = TRUE)
+    cmake_out <- system2(cmake$command, shQuote(cmake$args), stdout = TRUE, stderr = TRUE)
     if (!is.null(attr(cmake_out, "status")) && attr(cmake_out, "status") != 0) {
       message(paste(cmake_out, collapse = "\n"))
       stop("CMake configuration failed. See output above for details.")
