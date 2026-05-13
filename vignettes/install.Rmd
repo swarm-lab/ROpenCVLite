@@ -143,7 +143,13 @@ the installer to add `CMake` to your "PATH" during the installation process.
 ### 1.2 - Mac
 
 Before installing `ROpenCVLite`, you will need to install the latest version of
-[`CMake`](https://cmake.org/). There are multiple ways to install `Cmake` on Mac:
+[`CMake`](https://cmake.org/). There are multiple ways to install `Cmake` on Mac.
+
+> **Apple Silicon (M-series Macs):** `ROpenCVLite` is fully supported on arm64
+> hardware. The package will compile a native arm64 build of OpenCV automatically.
+> If you are running an x86_64 version of R under Rosetta 2, the build will target
+> x86_64 instead. To get a native arm64 build, use an arm64 build of R (available
+> from [CRAN](https://cran.r-project.org/bin/macosx/) as the "arm64" installer).
 
 ##### **Option 1**
 

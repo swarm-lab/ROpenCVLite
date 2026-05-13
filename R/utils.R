@@ -68,7 +68,17 @@ isOpenCVInstalled <- function() {
 #'
 #' @export
 isCmakeInstalled <- function() {
-  cmake <- system("cmake --version", ignore.stdout = TRUE) == 0
+  if (.Platform$OS.type == "windows") {
+    rtools <- tryCatch(.findRtools(), error = function(e) NULL)
+    cmake_path <- if (!is.null(rtools) && rtools$version >= "4.2") {
+      paste0(rtools$path, "/x86_64-w64-mingw32.static.posix/bin/cmake.exe")
+    } else {
+      system("where cmake.exe", intern = TRUE)[1]
+    }
+    cmake <- !is.na(cmake_path) && nchar(cmake_path) > 0 && file.exists(cmake_path)
+  } else {
+    cmake <- system("cmake --version", ignore.stdout = TRUE) == 0
+  }
 
   if (cmake) {
     cmake
@@ -180,15 +190,37 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       odir <- dir(execPrefix)
       lib <- odir[grepl("lib", odir)]
       libDir <- paste0(execPrefix, "/", lib)
-      libs <- gsub("libopencv", "opencv", list.files(libDir, "lib*"))
-      libs <- gsub("\\.so", "", libs)
-      libs <- gsub("\\.dylib", "", libs)
-      libs <- libs[!grepl("\\.", libs)]
-      libs <- paste0("-l", libs)
-      if (Sys.info()[1] == "Darwin") {
-        cat(paste0("-L", libDir, " ", paste0(libs, collapse = " ")))
-      } else {
-        cat(paste0("-Wl,-rpath=", libDir, " ", "-L", libDir, " ", paste0(libs, collapse = " ")))
+      pkgconfig_dirs <- libDir[dir.exists(paste0(libDir, "/pkgconfig"))]
+
+      pkg_config <- Sys.which("pkg-config")
+      used_pkgconfig <- FALSE
+
+      if (nchar(pkg_config) > 0 && length(pkgconfig_dirs) > 0) {
+        old_path <- Sys.getenv("PKG_CONFIG_PATH")
+        Sys.setenv(PKG_CONFIG_PATH = paste(
+          c(pkgconfig_dirs, old_path), collapse = ":"
+        ))
+        result <- system2(pkg_config, c("--libs", "opencv4"),
+                          stdout = TRUE, stderr = FALSE)
+        Sys.setenv(PKG_CONFIG_PATH = old_path)
+        status <- attr(result, "status")
+        if (is.null(status) || status == 0) {
+          cat(result)
+          used_pkgconfig <- TRUE
+        }
+      }
+
+      if (!used_pkgconfig) {
+        libs <- gsub("libopencv", "opencv", list.files(libDir, "lib*"))
+        libs <- gsub("\\.so", "", libs)
+        libs <- gsub("\\.dylib", "", libs)
+        libs <- libs[!grepl("\\.", libs)]
+        libs <- paste0("-l", libs)
+        if (Sys.info()[1] == "Darwin") {
+          cat(paste0("-L", libDir, " ", paste0(libs, collapse = " ")))
+        } else {
+          cat(paste0("-Wl,-rpath=", libDir, " ", "-L", libDir, " ", paste0(libs, collapse = " ")))
+        }
       }
     }
   } else if (output == "cflags") {
@@ -209,10 +241,37 @@ opencvConfig <- function(output = "libs", arch = NULL) {
                  utils::shortPathName(includedirNew), '" -I"',
                  utils::shortPathName(execdir), '"'))
     } else {
-      includedirOld <- paste0(prefix, "/include/opencv4")
-      includedirNew <- paste0(prefix, "/include")
+      pkg_config <- Sys.which("pkg-config")
+      pkgconfig_found <- FALSE
 
-      cat(paste0("-I", includedirOld, " -I", includedirNew))
+      if (nchar(pkg_config) > 0) {
+        execPrefix <- prefix
+        odir <- dir(execPrefix)
+        lib <- odir[grepl("lib", odir)]
+        libDir <- paste0(execPrefix, "/", lib)
+        pkgconfig_dirs <- libDir[dir.exists(paste0(libDir, "/pkgconfig"))]
+
+        if (length(pkgconfig_dirs) > 0) {
+          old_path <- Sys.getenv("PKG_CONFIG_PATH")
+          Sys.setenv(PKG_CONFIG_PATH = paste(
+            c(pkgconfig_dirs, old_path), collapse = ":"
+          ))
+          result <- system2(pkg_config, c("--cflags", "opencv4"),
+                            stdout = TRUE, stderr = FALSE)
+          Sys.setenv(PKG_CONFIG_PATH = old_path)
+          status <- attr(result, "status")
+          if (is.null(status) || status == 0) {
+            cat(result)
+            pkgconfig_found <- TRUE
+          }
+        }
+      }
+
+      if (!pkgconfig_found) {
+        includedirOld <- paste0(prefix, "/include/opencv4")
+        includedirNew <- paste0(prefix, "/include")
+        cat(paste0("-I", includedirOld, " -I", includedirNew))
+      }
     }
   } else {
     stop("output should be either 'libs' or 'cflags'")
