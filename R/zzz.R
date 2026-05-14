@@ -17,7 +17,7 @@
 }
 
 .onAttach <- function(lib, pkg) {
-  pkg_cv_version <- package_version("4.11.0")
+  pkg_cv_version <- package_version("4.13.0")
 
   needs_install <- if (!ROpenCVLite::isOpenCVInstalled()) {
     TRUE

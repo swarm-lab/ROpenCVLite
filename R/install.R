@@ -197,7 +197,7 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
                                       "ximgproc", "wechat_qrcode")) {
   modules <- match.arg(modules, several.ok = TRUE)
   install <- 0
-  pkg_version <- "4.11.0"
+  pkg_version <- "4.13.0"
 
   if (interactive()) {
     if (isOpenCVInstalled()) {
