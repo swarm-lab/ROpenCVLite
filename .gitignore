@@ -13,3 +13,4 @@ src/opencv-*/
 old
 *.insyncdl
 docs
+.claude
