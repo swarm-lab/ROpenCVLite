@@ -116,6 +116,10 @@ defaultOpenCVPath <- function() {
     args <- c(args, "-DCMAKE_OSX_ARCHITECTURES=arm64")
   }
 
+  if (config$os_type != "windows" && config$optimize_for_host) {
+    args <- c(args, "-DCPU_BASELINE=DETECT", "-DCPU_DISPATCH=DETECT")
+  }
+
   if (nchar(config$ccache_launcher) > 0) {
     args <- c(args,
       paste0("-DCMAKE_C_COMPILER_LAUNCHER=", config$ccache_launcher),
@@ -171,8 +175,10 @@ defaultOpenCVPath <- function() {
 #'
 #' @param optimize_for_host A boolean indicating whether to let CMake detect
 #'  and use the host CPU's full instruction set (\code{TRUE}) instead of the
-#'  default portable build targeting SSE4/AVX (\code{FALSE}). Produces a faster
-#'  binary on the build machine but the result may not run on other hardware.
+#'  defaults (\code{FALSE}). On Windows the default is a conservative
+#'  SSE4/AVX-limited build; on Unix/macOS CMake's own defaults apply. Setting
+#'  this to \code{TRUE} produces a faster binary on the build machine but the
+#'  result may not run on other hardware.
 #'
 #' @param modules A character vector of OpenCV modules to compile. Defaults to
 #'  the full set supported by \code{ROpenCVLite}. Specify a subset to reduce
