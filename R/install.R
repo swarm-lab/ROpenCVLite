@@ -371,7 +371,6 @@ removeOpenCV <- function() {
       c("yes", "no"),
       title = "Would you like to completely remove OpenCV from your R installation? You can reinstall it at any time by using the installOpenCV() function."
     )
-    print(uninstall)
 
     if (uninstall == 1) {
       unlink(OpenCVPath(), recursive = TRUE)
