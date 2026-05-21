@@ -1,3 +1,26 @@
+# ROpenCVLite 4.130.0
+
+## New features
+
+* Updates package to target OpenCV 4.13.0.
+* `installOpenCV()` now respects custom install paths when setting `PATH` and
+  `LD_LIBRARY_PATH` at package load time.
+* `optimize_for_host` parameter in `installOpenCV()` is now supported on
+  Unix and macOS (previously Windows-only).
+
+## Minor improvements and fixes
+
+* Fixes a bug where old OpenCV installations were not removed when reinstalling.
+* Removes a debug `print()` call from `removeOpenCV()`.
+* Diagnostic messages now use `message()` throughout, enabling suppression via
+  `suppressMessages()`.
+* Path construction in `defaultOpenCVPath()` is now robust to install trees
+  that contain "ROpenCVLite" in a parent directory.
+* Build steps use `system2()` instead of `system(paste0(...))` for safer
+  handling of paths with spaces.
+
+---
+
 # ROpenCVLite 4.110.0
 
 ## New features
