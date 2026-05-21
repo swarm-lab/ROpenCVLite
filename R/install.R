@@ -17,7 +17,7 @@
 #' @export
 defaultOpenCVPath <- function() {
   pkgPath <- find.package("ROpenCVLite")
-  paste0(gsub("ROpenCVLite", "", pkgPath), "ROpenCV")
+  file.path(dirname(pkgPath), "ROpenCV")
 }
 
 
