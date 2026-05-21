@@ -10,9 +10,7 @@
 #' @author Simon Garnier, \email{garnier@@njit.edu}
 #'
 #' @examples
-#' \dontrun{
 #' defaultOpenCVPath()
-#' }
 #'
 #' @export
 defaultOpenCVPath <- function() {

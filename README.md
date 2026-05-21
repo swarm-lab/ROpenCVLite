@@ -75,11 +75,8 @@ package developers can easily find.
 ### Why "Lite"? Are you keeping something from us? 
 
 [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) compiles and installs 
-the core modules of the [`OpenCV`](https://opencv.org/) library but does not 
-compile or install its [contributed extra modules](https://github.com/opencv/opencv_contrib).
-This is to reduce the compilation time (which is already long enough) and also 
-because most of these extra modules are (1) too specific for most applications of 
-[`OpenCV`](https://opencv.org/), and (2) they do not always compile nicely.
-
-We will work toward providing a mechanism to install the extra modules, but this 
-is not part of our immediate plans. 
+the core modules of the [`OpenCV`](https://opencv.org/) library plus a selection 
+of its [contributed extra modules](https://github.com/opencv/opencv_contrib) 
+(currently: `ximgproc` and `wechat_qrcode`). It does not compile the full set of 
+contributed modules, to reduce compilation time and because many are too specific 
+for most applications or do not always compile reliably.
