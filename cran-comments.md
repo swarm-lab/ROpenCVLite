@@ -7,7 +7,16 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
+
+* Version jumps in minor (submitted: 4.130.0, existing: 4.110.0)
+
+## CRAN team comments
+
+* 1 NOTE: Version jumps in minor (submitted: 4.130.0, existing: 4.110.0)
+
+Version 4.120.0 was skipped because I chose to skip the upgrade to OpenCV 4.12.0
+and move directly to OpenCV 4.13.0.
 
 ## Downstream dependencies
 
