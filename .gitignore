@@ -16,3 +16,4 @@ docs
 .claude
 .mnem
 vignettes/*.html
+specs/
