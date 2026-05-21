@@ -299,8 +299,17 @@ opencvConfig <- function(output = "libs", arch = NULL) {
   }
 
   path <- strsplit(Sys.getenv("PATH"), ";")[[1]]
-  ix <- grep(rtools, path)[1]
-  rtools_path <- utils::shortPathName(sub(paste0("(", rtools, ").*"), "\\1", path[ix]))
+  ix <- grep(rtools, path, ignore.case = TRUE)[1]
+  if (is.na(ix)) {
+    # Fall back to any installed Rtools 4.x (e.g. Rtools44 covers R 4.0+)
+    ix <- grep("rtools4", path, ignore.case = TRUE)[1]
+    if (!is.na(ix)) {
+      rtools <- sub("(?i).*(rtools4[0-9]*).*", "\\1", path[ix])
+    }
+  }
+  if (is.na(ix))
+    stop("Rtools not found on PATH. Please install Rtools from https://cran.r-project.org/bin/windows/Rtools/")
+  rtools_path <- utils::shortPathName(sub(paste0("(?i)(", rtools, ").*"), "\\1", path[ix], perl = TRUE))
   rtools_version <- system(
     paste0("powershell -NoProfile (Get-Item ", rtools_path, "/unins000.exe).VersionInfo.ProductVersion"),
     intern = TRUE

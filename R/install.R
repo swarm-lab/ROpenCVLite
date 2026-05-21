@@ -34,7 +34,13 @@ defaultOpenCVPath <- function() {
   if (config$os_type == "windows") {
     config$install_path <- utils::shortPathName(install_path)
     config$pkg_path <- utils::shortPathName(find.package("ROpenCVLite"))
-    config$os <- gsub("\r", "", gsub("Caption=", "", system("wmic os get Caption,CSDVersion /value", intern = TRUE)[3]))
+    config$os <- tryCatch(
+      gsub("\\s+", " ", trimws(system(
+        "powershell -NoProfile -Command \"(Get-CimInstance Win32_OperatingSystem).Caption\"",
+        intern = TRUE
+      ))),
+      error = function(e) "Windows"
+    )
     config$core <- paste0("https://github.com/opencv/opencv/archive/", version, ".tar.gz")
     config$contrib <- paste0("https://github.com/opencv/opencv_contrib/archive/", version, ".tar.gz")
     rtools <- .findRtools()
