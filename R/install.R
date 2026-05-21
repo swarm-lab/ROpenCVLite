@@ -1,3 +1,5 @@
+.opencv_version <- "4.13.0"
+
 #' @title Default Install Location of OpenCV
 #'
 #' @description This function returns the location at which OpenCV should be
@@ -203,7 +205,7 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
                                       "ximgproc", "wechat_qrcode")) {
   modules <- match.arg(modules, several.ok = TRUE)
   install <- 0
-  pkg_version <- "4.13.0"
+  pkg_version <- .opencv_version
 
   if (interactive()) {
     if (isOpenCVInstalled()) {
@@ -228,10 +230,10 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
     }
   } else {
     if (batch) {
-      packageStartupMessage("OpenCV being installed in non-interactive mode!")
+      message("OpenCV being installed in non-interactive mode!")
       install <- 1
     } else {
-      packageStartupMessage("OpenCV can only be installed in interactive mode. To override this in a non-interactive context, use installOpenCV(batch = TRUE).")
+      message("OpenCV can only be installed in interactive mode. To override this in a non-interactive context, use installOpenCV(batch = TRUE).")
     }
   }
 
@@ -344,7 +346,7 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
 
     writeLines(config$install_path, con = paste0(config$pkg_path, "/path"))
   } else {
-    packageStartupMessage("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
+    message("OpenCV was not installed at this time. You can install it at any time by using the installOpenCV() function.")
   }
 
   isOpenCVInstalled()
