@@ -10,6 +10,8 @@
 
 ## Minor improvements and fixes
 
+* Fixes Rtools detection on systems with strict PowerShell execution policies
+  by adding `-NoProfile` flag to PowerShell calls (thanks to @allan-sims, #54).
 * Fixes a bug where old OpenCV installations were not removed when reinstalling.
 * Removes a debug `print()` call from `removeOpenCV()`.
 * Diagnostic messages now use `message()` throughout, enabling suppression via
