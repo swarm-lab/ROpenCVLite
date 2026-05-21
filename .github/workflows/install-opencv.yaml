@@ -1,0 +1,71 @@
+on:
+  workflow_dispatch:
+
+name: install-opencv
+
+jobs:
+  install-opencv:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 180
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: local::.
+
+      - name: Install build dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y cmake g++ make pkg-config libgtk-3-dev
+
+      - name: Set OpenCV install path
+        run: echo "OPENCV_INSTALL_PATH=$RUNNER_TEMP/ROpenCV" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Cache OpenCV installation
+        id: opencv-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.OPENCV_INSTALL_PATH }}
+          key: opencv-${{ hashFiles('R/install.R') }}-${{ runner.os }}
+
+      - name: Register cached OpenCV path
+        if: steps.opencv-cache.outputs.cache-hit == 'true'
+        shell: Rscript {0}
+        run: |
+          writeLines(
+            normalizePath(Sys.getenv("OPENCV_INSTALL_PATH"), mustWork = FALSE),
+            file.path(find.package("ROpenCVLite"), "path")
+          )
+
+      - name: Install OpenCV
+        if: steps.opencv-cache.outputs.cache-hit != 'true'
+        shell: Rscript {0}
+        run: |
+          ROpenCVLite::installOpenCV(
+            install_path = Sys.getenv("OPENCV_INSTALL_PATH"),
+            batch = TRUE
+          )
+
+      - name: Verify OpenCV installation
+        shell: Rscript {0}
+        run: |
+          stopifnot(ROpenCVLite::isOpenCVInstalled())
+          cat("OpenCV version:", ROpenCVLite::opencvVersion(), "\n")
+          cat("OpenCV path:", ROpenCVLite::OpenCVPath(), "\n")
