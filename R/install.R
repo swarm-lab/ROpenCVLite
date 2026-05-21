@@ -337,11 +337,11 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
 
     message("Compiling OpenCV (this will take several minutes)...")
     n_cores <- max(1L, parallel::detectCores(logical = FALSE), na.rm = TRUE)
-    if (system(paste0(config$make_path, " -j", n_cores, " -C ", config$build_dir)) != 0)
+    if (system2(config$make_path, c(paste0("-j", n_cores), "-C", config$build_dir)) != 0)
       stop("OpenCV compilation failed. See output above for details.")
 
     message("Installing OpenCV...")
-    if (system(paste0(config$make_path, " -C", config$build_dir, " install")) != 0)
+    if (system2(config$make_path, c("-C", config$build_dir, "install")) != 0)
       stop("OpenCV installation failed. See output above for details.")
 
     writeLines(config$install_path, con = paste0(config$pkg_path, "/path"))
