@@ -1,10 +1,10 @@
-pandoc: 3.1.11
-pkgdown: 2.1.2
+pandoc: 3.8.3
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   install: install.html
   usage: usage.html
-last_built: 2025-05-06T15:32Z
+last_built: 2026-05-21T11:29Z
 urls:
   reference: https://swarm-lab.github.io/ROpenCVLite/reference
   article: https://swarm-lab.github.io/ROpenCVLite/articles

@@ -1,0 +1,264 @@
+# 1 - Installing ROpenCVLite
+
+Installing [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite)
+should go smoothly on all major operating systems (Mac, Windows, and
+most major Linux distributions). There are a few steps to follow before
+installing the package itself in order to prepare all the necessary
+external (i.e. non-R) dependencies for [`OpenCV`](https://opencv.org/).
+You should also make sure that your R version is 4.0 or higher. Support
+for older versions of R has been removed.
+
+All installation steps are described below.
+
+------------------------------------------------------------------------
+
+- [1 - Before installing](#before-installing)
+  - [1.1 - Windows](#windows)
+  - [1.2 - Mac](#mac)
+  - [1.3 - Linux](#linux)
+- [2 - Installing `ROpenCVLite`](#installing-ropencvlite)
+
+------------------------------------------------------------------------
+
+## 1 - Before installing
+
+### 1.1 - Windows
+
+Before installing `ROpenCVLite`, you will need to install
+[`Rtools`](https://cran.r-project.org/bin/windows/Rtools/) and
+[`CMake`](https://cmake.org/).
+
+#### 1.1.1 - Rtools
+
+You will need to install the version of `Rtools` that corresponds to
+your version of R. You can check your version of R by typing `R.version`
+in the R console.
+
+- If your R version starts with 4.0 or 4.1, you will need to install
+  `Rtools40`.
+- If your R version starts with 4.2, you will need to install
+  `Rtools42`.
+- If your R version starts with 4.3 or 4.4 (devel), you will need to
+  install `Rtools43`.
+
+There are multiple ways to install `Rtools` on Windows:
+
+##### **Option 1**
+
+Use the convenience function provided by the `installr` library:
+
+``` r
+
+if (!require("installr"))
+  install.packages("installr")
+  
+installr::install.Rtools()
+```
+
+*Note:* If you install `Rtools40`, make sure to tell the installer to
+add `Rtools` to your “PATH” during the installation process. This is not
+required anymore with `Rtools42` and `Rtools43`.
+
+##### **Option 2**
+
+If you have the [`rig`](https://github.com/r-lib/rig) utility installed
+on your computer, you can install `Rtools` from a terminal running
+PowerShell:
+
+``` bash
+# For Rtools40
+rig add rtools40
+
+# For Rtools42
+rig add rtools42
+
+# For Rtools43
+rig add rtools43
+```
+
+##### **Option 3**
+
+If you have the
+[`winget`](https://learn.microsoft.com/en-us/windows/package-manager/)
+utility installed on your computer, you can install `Rtools` from a
+terminal running PowerShell:
+
+``` bash
+winget install RProject.Rtools
+```
+
+*Note:* Only `Rtools42` seems to be available through `winget` at the
+moment.
+
+##### **Option 4**
+
+You can manually download `Rtools` at
+<https://cran.r-project.org/bin/windows/Rtools/>.
+
+*Note:* If you install `Rtools40`, make sure to tell the installer to
+add `Rtools` to your “PATH” during the installation process. This is not
+required anymore with `Rtools42` and `Rtools43`.
+
+#### 1.1.2 - Cmake
+
+Installing `Cmake` is only required if your R version starts with 4.0 or
+4.1 and, therefore, you have installed `Rtools40`. For newer versions of
+R, `Cmake` is included in `Rtools42` and `Rtools43` and you can skip
+this step.
+
+Any version of `Cmake` 3.24 or higher should work. There are multiple
+ways to install `Cmake` on Windows:
+
+##### **Option 1**
+
+Use the convenience function provided by the `installr` library:
+
+``` r
+
+if (!require("installr"))
+  install.packages("installr")
+  
+installr::install.CMake()
+```
+
+During the installation process, make sure to tell the installer to add
+`CMake` to your “PATH”.
+
+##### **Option 2**
+
+If you have the
+[`winget`](https://learn.microsoft.com/en-us/windows/package-manager/)
+utility installed on your computer, you can install `Cmake` from a
+terminal running PowerShell:
+
+``` bash
+winget install cmake
+```
+
+##### **Option 3**
+
+You can manually download the `CMake` installer for Windows at
+<https://cmake.org/download/>. Make sure to tell the installer to add
+`CMake` to your “PATH” during the installation process.
+
+------------------------------------------------------------------------
+
+### 1.2 - Mac
+
+Before installing `ROpenCVLite`, you will need to install the latest
+version of [`CMake`](https://cmake.org/). There are multiple ways to
+install `Cmake` on Mac.
+
+> **Apple Silicon (M-series Macs):** `ROpenCVLite` is fully supported on
+> arm64 hardware. The package will compile a native arm64 build of
+> OpenCV automatically. If you are running an x86_64 version of R under
+> Rosetta 2, the build will target x86_64 instead. To get a native arm64
+> build, use an arm64 build of R (available from
+> [CRAN](https://cran.r-project.org/bin/macosx/) as the “arm64”
+> installer).
+
+##### **Option 1**
+
+If you have [`homebrew`](https://brew.sh/) installed, run the following
+command in your terminal:
+
+``` bash
+brew install cmake
+```
+
+##### **Option 2**
+
+If you have [`MacPorts`](https://www.macports.org/) installed, run the
+following command in your terminal:
+
+``` bash
+sudo port install cmake
+```
+
+##### **Option 3**
+
+Go to <https://cmake.org/download/>. Scroll down until you reach the
+“Latest Release” section. Download the installer for Mac OS X (.dmg
+file). Once the download is complete, double-click on the installer and
+accept the license agreement. Drag and drop the `Cmake` app into your
+`Applications` folder.
+
+To make `Cmake` accessible to `R`, open a terminal and type:
+
+`sudo "/Applications/CMake.app/Contents/bin/cmake-gui" --install`
+
+It will ask for your administrator password.
+
+------------------------------------------------------------------------
+
+### 1.3 - Linux
+
+Before installing `ROpenCVLite`, you will need to install the latest
+version of [`CMake`](https://cmake.org/). Hereafter are two options to
+do this on Linux.
+
+- **Option 1**
+
+Use your distribution’s package management system. For instance on
+Ubuntu-like systems, you can install `Cmake` by typing the following
+command in your terminal:
+
+``` bash
+sudo apt install cmake
+```
+
+Other distributions will have different package managers. Refer to the
+documentation of your distribution for finding the proper way to install
+`Cmake` on your system.
+
+- **Option 2**
+
+Download `CMake` for Linux at <https://cmake.org/download/>. However it
+is recommended that you install it using your distribution’s package
+management system.
+
+------------------------------------------------------------------------
+
+## 2 - Installing `ROpenCVLite`
+
+You can install `ROpenCVLite` from CRAN as follows:
+
+``` r
+
+install.packages("ROpenCVLite")
+```
+
+Or you can install the latest development version (not recommended) as
+follows:
+
+``` r
+
+# Using pak (recommended)
+pak::pak("swarm-lab/ROpenCVLite")
+
+# Or using remotes
+remotes::install_github("swarm-lab/ROpenCVLite")
+```
+
+This will not install `OpenCV` yet. You will be asked whether you want
+to install it the first time you load the package.
+
+``` r
+
+library(ROpenCVLite)
+```
+
+This step can take some time. Go make yourself a cup of coffee or two
+while `ROpenCVLite` downloads, compiles and installs `OpenCV` on your
+system.
+
+In addition, you can also request the (re)installation of `OpenCV` at
+any time as follows:
+
+``` r
+
+ROpenCVLite::installOpenCV()
+```
+
+`ROpenCVLite` will also automatically detect when a new version of
+`OpenCV` is available and will offer to update it for you.
