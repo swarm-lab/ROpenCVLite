@@ -13,5 +13,5 @@ src/opencv-*/
 old
 *.insyncdl
 docs
-!docs/superpowers/
 .claude
+vignettes/*.html

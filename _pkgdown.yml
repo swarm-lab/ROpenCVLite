@@ -7,3 +7,26 @@ template:
 authors:
   Simon Garnier:
     href: https://www.theswarmlab.com
+
+reference:
+  - title: Package
+    desc: Package documentation
+    contents:
+      - ROpenCVLite-package
+  - title: Installation
+    desc: Install and remove OpenCV
+    contents:
+      - installOpenCV
+      - removeOpenCV
+      - defaultOpenCVPath
+  - title: Status
+    desc: Check OpenCV and CMake installation status
+    contents:
+      - isOpenCVInstalled
+      - isCmakeInstalled
+      - opencvVersion
+  - title: Configuration
+    desc: Retrieve build configuration for linking against OpenCV
+    contents:
+      - opencvConfig
+      - OpenCVPath
