@@ -23,7 +23,6 @@ All installation steps are described below.
   + [1.1 - Windows](#windows)
   + [1.2 - Mac](#mac)
   + [1.3 - Linux](#linux)
-  + [1.4 - Mac, Linux and Windows](#mac-linux-and-windows)
 + [2 - Installing `ROpenCVLite`](#installing-ropencvlite)
   
 ---
@@ -95,11 +94,11 @@ winget install RProject.Rtools
 You can manually download `Rtools` at
 [https://cran.r-project.org/bin/windows/Rtools/](https://cran.r-project.org/bin/windows/Rtools/). 
 
-*Note:* If you install `Rtools40`, make sure to tell the installer to add `Rtools` 
-to your "PATH" during the installation process. This is not required anymore 
+*Note:* If you install `Rtools40`, make sure to tell the installer to add `Rtools`
+to your "PATH" during the installation process. This is not required anymore
 with `Rtools42` and `Rtools43`.
 
-#### 1.1.1 - Cmake
+#### 1.1.2 - Cmake
 
 Installing `Cmake` is only required if your R version starts with 4.0 or 4.1 and, 
 therefore, you have installed `Rtools40`. For newer versions of R, `Cmake` is
@@ -211,17 +210,6 @@ management system.
 
 ---
 
-### 1.4 - Mac, Linux and Windows
-
-Before installing `ROpenCVLite`, you will need to install the `devtools` package 
-in `R`. 
-
-```{r eval=FALSE}
-install.packages("devtools")
-```
-
----
-
 ## 2 - Installing `ROpenCVLite`
 
 You can install `ROpenCVLite` from CRAN as follows:
@@ -230,10 +218,14 @@ You can install `ROpenCVLite` from CRAN as follows:
 install.packages("ROpenCVLite")
 ```
 
-Or you can install the latest development version (not recommended) as follows: 
+Or you can install the latest development version (not recommended) as follows:
 
 ```{r eval=FALSE}
-devtools::install_github("swarm-lab/ROpenCVLite")
+# Using pak (recommended)
+pak::pak("swarm-lab/ROpenCVLite")
+
+# Or using remotes
+remotes::install_github("swarm-lab/ROpenCVLite")
 ```
 
 This will not install `OpenCV` yet. You will be asked whether you want to install
