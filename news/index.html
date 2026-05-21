@@ -48,7 +48,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="minor-improvements-and-fixes-4-130-0">Minor improvements and fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-fixes-4-130-0"></a></h3>
-<ul><li>Fixes a bug where old OpenCV installations were not removed when reinstalling.</li>
+<ul><li>Fixes Rtools detection on systems with strict PowerShell execution policies by adding <code>-NoProfile</code> flag to PowerShell calls (thanks to <a href="https://github.com/allan-sims" class="external-link">@allan-sims</a>, <a href="https://github.com/swarm-lab/ROpenCVLite/issues/54" class="external-link">#54</a>).</li>
+<li>Fixes a bug where old OpenCV installations were not removed when reinstalling.</li>
 <li>Removes a debug <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> call from <code><a href="../reference/removeOpenCV.html">removeOpenCV()</a></code>.</li>
 <li>Diagnostic messages now use <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> throughout, enabling suppression via <code><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages()</a></code>.</li>
 <li>Path construction in <code><a href="../reference/defaultOpenCVPath.html">defaultOpenCVPath()</a></code> is now robust to install trees that contain “ROpenCVLite” in a parent directory.</li>

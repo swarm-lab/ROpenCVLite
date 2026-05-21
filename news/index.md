@@ -14,6 +14,10 @@
 
 ### Minor improvements and fixes
 
+- Fixes Rtools detection on systems with strict PowerShell execution
+  policies by adding `-NoProfile` flag to PowerShell calls (thanks to
+  [@allan-sims](https://github.com/allan-sims),
+  [\#54](https://github.com/swarm-lab/ROpenCVLite/issues/54)).
 - Fixes a bug where old OpenCV installations were not removed when
   reinstalling.
 - Removes a debug [`print()`](https://rdrr.io/r/base/print.html) call
