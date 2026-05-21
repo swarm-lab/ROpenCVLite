@@ -32,14 +32,9 @@ Before installing `ROpenCVLite`, you will need to install
 
 You will need to install the version of `Rtools` that corresponds to
 your version of R. You can check your version of R by typing `R.version`
-in the R console.
-
-- If your R version starts with 4.0 or 4.1, you will need to install
-  `Rtools40`.
-- If your R version starts with 4.2, you will need to install
-  `Rtools42`.
-- If your R version starts with 4.3 or 4.4 (devel), you will need to
-  install `Rtools43`.
+in the R console. The [Rtools download
+page](https://cran.r-project.org/bin/windows/Rtools/) always lists the
+current recommended version for each R release.
 
 There are multiple ways to install `Rtools` on Windows:
 
@@ -51,29 +46,19 @@ Use the convenience function provided by the `installr` library:
 
 if (!require("installr"))
   install.packages("installr")
-  
+
 installr::install.Rtools()
 ```
-
-*Note:* If you install `Rtools40`, make sure to tell the installer to
-add `Rtools` to your “PATH” during the installation process. This is not
-required anymore with `Rtools42` and `Rtools43`.
 
 ##### **Option 2**
 
 If you have the [`rig`](https://github.com/r-lib/rig) utility installed
 on your computer, you can install `Rtools` from a terminal running
-PowerShell:
+PowerShell (replace `rtools44` with the version matching your R
+installation):
 
 ``` bash
-# For Rtools40
-rig add rtools40
-
-# For Rtools42
-rig add rtools42
-
-# For Rtools43
-rig add rtools43
+rig add rtools44
 ```
 
 ##### **Option 3**
@@ -87,17 +72,10 @@ terminal running PowerShell:
 winget install RProject.Rtools
 ```
 
-*Note:* Only `Rtools42` seems to be available through `winget` at the
-moment.
-
 ##### **Option 4**
 
 You can manually download `Rtools` at
 <https://cran.r-project.org/bin/windows/Rtools/>.
-
-*Note:* If you install `Rtools40`, make sure to tell the installer to
-add `Rtools` to your “PATH” during the installation process. This is not
-required anymore with `Rtools42` and `Rtools43`.
 
 #### 1.1.2 - Cmake
 
@@ -240,25 +218,24 @@ pak::pak("swarm-lab/ROpenCVLite")
 remotes::install_github("swarm-lab/ROpenCVLite")
 ```
 
-This will not install `OpenCV` yet. You will be asked whether you want
-to install it the first time you load the package.
+This will not install `OpenCV` yet. The first time you load the package,
+it will notify you if `OpenCV` needs to be installed or updated:
 
 ``` r
 
 library(ROpenCVLite)
 ```
 
-This step can take some time. Go make yourself a cup of coffee or two
-while `ROpenCVLite` downloads, compiles and installs `OpenCV` on your
-system.
-
-In addition, you can also request the (re)installation of `OpenCV` at
-any time as follows:
+To install or update `OpenCV`, run:
 
 ``` r
 
 ROpenCVLite::installOpenCV()
 ```
 
+This step can take some time. Go make yourself a cup of coffee or two
+while `ROpenCVLite` downloads, compiles and installs `OpenCV` on your
+system.
+
 `ROpenCVLite` will also automatically detect when a new version of
-`OpenCV` is available and will offer to update it for you.
+`OpenCV` is available and notify you at startup.

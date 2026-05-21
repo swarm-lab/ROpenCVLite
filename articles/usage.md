@@ -26,7 +26,7 @@ Follow these steps to configure your package for
     [`ROpenCVLite`](https://github.com/swarm-lab/ROpenCVLite) to:
     - set the `PKG_LIBS` value of the Makevars and Makevars.win files of
       your package (using `opencvConfig("libs")`).
-    - set the `PKG_CPPFLAGS` () value of the Makevars and Makevars.win
+    - set the `PKG_CPPFLAGS` value of the Makevars and Makevars.win
       files of your package (using `opencvConfig("cflags")`).
 
 You can find an example of how to set up your package with
