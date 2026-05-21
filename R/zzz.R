@@ -1,23 +1,26 @@
 .onLoad <- function(lib, pkg) {
+  cvPath <- tryCatch(OpenCVPath(), error = function(e) NULL)
+  if (is.null(cvPath)) return(invisible(NULL))
+
   if (.Platform$OS.type == "windows") {
-    pkgPath <- find.package("ROpenCVLite")
-    installPath <- gsub("ROpenCVLite", "", pkgPath)
     opath <- Sys.getenv("PATH")
-    binPath <- if (.Platform$r_arch == "i386") "/opencv/x86/mingw/bin" else "/opencv/x64/mingw/bin"
-    binPath <- utils::shortPathName(paste0(installPath, binPath))
+    binPath <- if (.Platform$r_arch == "i386") {
+      file.path(cvPath, "x86", "mingw", "bin")
+    } else {
+      file.path(cvPath, "x64", "mingw", "bin")
+    }
+    binPath <- utils::shortPathName(binPath)
     Sys.setenv(PATH = paste(binPath, opath, sep = ";"))
   }
 
   if (Sys.info()[["sysname"]] == "Linux") {
-    pkgPath <- find.package("ROpenCVLite")
-    installPath <- gsub("ROpenCVLite", "", pkgPath)
-    libPath <- paste0(installPath, "/opencv/lib")
+    libPath <- file.path(cvPath, "lib")
     Sys.setenv(LD_LIBRARY_PATH = paste0(Sys.getenv("LD_LIBRARY_PATH"), ":", libPath))
   }
 }
 
 .onAttach <- function(lib, pkg) {
-  pkg_cv_version <- package_version("4.13.0")
+  pkg_cv_version <- package_version(.opencv_version)
 
   needs_install <- if (!ROpenCVLite::isOpenCVInstalled()) {
     TRUE
