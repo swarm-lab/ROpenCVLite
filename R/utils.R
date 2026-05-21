@@ -83,20 +83,21 @@ isCmakeInstalled <- function() {
   if (cmake) {
     cmake
   } else {
-    cat("------------------ CMAKE NOT FOUND --------------------\n")
-    cat("\n")
-    cat("CMake was not found on the PATH. Please install CMake:\n")
-    cat("\n")
-    cat(" - installr::install.cmake()  (Windows; inside the R console)\n")
-    cat(" - yum install cmake          (Fedora/CentOS; inside a terminal)\n")
-    cat(" - apt install cmake          (Debian/Ubuntu; inside a terminal)\n")
-    cat(" - brew install cmake         (MacOS; inside a terminal with Homebrew)\n")
-    cat(" - port install cmake         (MacOS; inside a terminal with MacPorts)\n")
-    cat("\n")
-    cat("Alternatively install CMake from: <https://cmake.org/>\n")
-    cat("\n")
-    cat("-------------------------------------------------------\n")
-    cat("\n")
+    message(
+      "------------------ CMAKE NOT FOUND --------------------\n",
+      "\n",
+      "CMake was not found on the PATH. Please install CMake:\n",
+      "\n",
+      " - installr::install.cmake()  (Windows; inside the R console)\n",
+      " - yum install cmake          (Fedora/CentOS; inside a terminal)\n",
+      " - apt install cmake          (Debian/Ubuntu; inside a terminal)\n",
+      " - brew install cmake         (MacOS; inside a terminal with Homebrew)\n",
+      " - port install cmake         (MacOS; inside a terminal with MacPorts)\n",
+      "\n",
+      "Alternatively install CMake from: <https://cmake.org/>\n",
+      "\n",
+      "-------------------------------------------------------\n"
+    )
     cmake
   }
 }
