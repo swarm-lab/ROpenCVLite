@@ -24,10 +24,12 @@ Biarch: false
 Encoding: UTF-8
 Depends:
     R (>= 4.0.0)
-Suggests: 
+Suggests:
     covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://swarm-lab.github.io/ROpenCVLite/,
     https://github.com/swarm-lab/ROpenCVLite
