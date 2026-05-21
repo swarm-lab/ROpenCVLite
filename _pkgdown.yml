@@ -9,10 +9,6 @@ authors:
     href: https://www.theswarmlab.com
 
 reference:
-  - title: Package
-    desc: Package documentation
-    contents:
-      - ROpenCVLite-package
   - title: Installation
     desc: Install and remove OpenCV
     contents:
