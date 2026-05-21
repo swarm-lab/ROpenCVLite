@@ -18,3 +18,4 @@ revdep
 ^codecov\.yml$
 test_install
 .claude
+^specs$
