@@ -382,6 +382,6 @@ removeOpenCV <- function() {
     }
   } else {
     message("OpenCV is not installed on this system. Nothing to be done.")
-    !isOpenCVInstalled()
+    FALSE
   }
 }
