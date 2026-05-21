@@ -2,8 +2,8 @@
 
 ## Authors
 
-- **[Simon Garnier](https://www.theswarmlab.com)**. Author, maintainer.
-  [](https://orcid.org/0000-0002-3886-3974)
+- **[Simon Garnier](https://www.theswarmlab.com)**. Author, maintainer,
+  copyright holder. [](https://orcid.org/0000-0002-3886-3974)
 
 - **Muschelli John**. Contributor.
 

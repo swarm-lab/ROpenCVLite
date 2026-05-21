@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Helper Package for Installing OpenCV with R • ROpenCVLite</title>
+<title>Helper Package for Installing OpenCV • ROpenCVLite</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -15,7 +15,7 @@
 <link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Helper Package for Installing OpenCV with R">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Helper Package for Installing OpenCV">
 <meta name="description" content="Installs OpenCV for use by other packages. OpenCV &lt;https://opencv.org/&gt; is library of programming functions mainly aimed at real-time computer vision. This Lite version installs the stable base version of OpenCV and some of its experimental externally contributed modules. It does not provide R bindings directly.">
 <meta property="og:description" content="Installs OpenCV for use by other packages. OpenCV &lt;https://opencv.org/&gt; is library of programming functions mainly aimed at real-time computer vision. This Lite version installs the stable base version of OpenCV and some of its experimental externally contributed modules. It does not provide R bindings directly.">
 <meta property="og:image" content="https://swarm-lab.github.io/ROpenCVLite/logo.svg">
@@ -107,8 +107,7 @@
 <div class="section level3">
 <h3 id="why-lite-are-you-keeping-something-from-us">Why “Lite”? Are you keeping something from us?<a class="anchor" aria-label="anchor" href="#why-lite-are-you-keeping-something-from-us"></a>
 </h3>
-<p><a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> compiles and installs the core modules of the <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> library but does not compile or install its <a href="https://github.com/opencv/opencv_contrib" class="external-link">contributed extra modules</a>. This is to reduce the compilation time (which is already long enough) and also because most of these extra modules are (1) too specific for most applications of <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a>, and (2) they do not always compile nicely.</p>
-<p>We will work toward providing a mechanism to install the extra modules, but this is not part of our immediate plans.</p>
+<p><a href="https://github.com/swarm-lab/ROpenCVLite" class="external-link"><code>ROpenCVLite</code></a> compiles and installs the core modules of the <a href="https://opencv.org/" class="external-link"><code>OpenCV</code></a> library plus a selection of its <a href="https://github.com/opencv/opencv_contrib" class="external-link">contributed extra modules</a> (currently: <code>ximgproc</code> and <code>wechat_qrcode</code>). It does not compile the full set of contributed modules, to reduce compilation time and because many are too specific for most applications or do not always compile reliably.</p>
 </div>
 </div>
 </div>
@@ -140,7 +139,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://www.theswarmlab.com" class="external-link">Simon Garnier</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-3886-3974" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<a href="https://www.theswarmlab.com" class="external-link">Simon Garnier</a> <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-3886-3974" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>

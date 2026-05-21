@@ -20,7 +20,6 @@ Simon Garnier, <garnier@njit.edu>
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
 defaultOpenCVPath()
-} # }
+#> [1] "/home/runner/work/_temp/Library/ROpenCV"
 ```
