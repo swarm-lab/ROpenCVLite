@@ -103,6 +103,12 @@ isCmakeInstalled <- function() {
 }
 
 
+.parse_opencv_version <- function(path) {
+  pc <- utils::read.table(path, sep = "\t")[1, 1]
+  paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
+}
+
+
 #' @title OpenCV Version
 #'
 #' @description This function determines the version of OpenCV installed within
@@ -121,15 +127,12 @@ isCmakeInstalled <- function() {
 opencvVersion <- function() {
   if (isOpenCVInstalled()) {
     if (.Platform$OS.type == "windows") {
-      pcPath <- "/OpenCVConfig-version.cmake"
-      pc <- utils::read.table(paste0(OpenCVPath(), pcPath), sep = "\t")[1, 1]
-      paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
+      .parse_opencv_version(paste0(OpenCVPath(), "/OpenCVConfig-version.cmake"))
     } else {
       odir <- dir(OpenCVPath())
       lib <- odir[grepl("lib", odir)]
       pcPath <- paste0("/", lib, "/cmake/opencv4/OpenCVConfig-version.cmake")
-      pc <- utils::read.table(paste0(OpenCVPath(), pcPath), sep = "\t")[1, 1]
-      paste0("Version ", gsub(")", "", gsub(".*VERSION ", "", pc)))
+      .parse_opencv_version(paste0(OpenCVPath(), pcPath))
     }
   } else {
     stop("OpenCV is not installed on this system. Please use installOpenCV() to install it.")
@@ -172,7 +175,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
   if (output == "libs") {
     if (.Platform$OS.type == "windows") {
       if (is.null(arch)) {
-        arch = R.version$arch
+        arch <- R.version$arch
       }
       if (grepl("i386", arch)) {
         execPrefix <- paste0(prefix, "/x86/mingw")
@@ -230,7 +233,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       includedirNew <- paste0(prefix, "/include")
 
       if (is.null(arch)) {
-        arch = R.version$arch
+        arch <- R.version$arch
       }
       if (grepl("i386", arch)) {
         execdir <- paste0(prefix, "/x86/mingw/bin")
