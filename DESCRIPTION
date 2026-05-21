@@ -8,14 +8,12 @@ Authors@R: c(
       comment = c(ORCID = "0000-0002-3886-3974")),
     person("Muschelli", "John", email = "muschellij2@gmail.com", role = c("ctb"))
   )
-Maintainer: Simon Garnier <garnier@njit.edu>
-Description: Installs 'OpenCV' for use by other packages. 'OpenCV' <https://opencv.org/> 
-    is library of programming functions mainly aimed at real-time computer 
-    vision. This 'Lite' version installs the stable base version of 'OpenCV' and 
-    some of its experimental externally contributed modules. It does not provide 
-    R bindings directly. 
+Description: Installs 'OpenCV' for use by other packages. 'OpenCV' <https://opencv.org/>
+    is library of programming functions mainly aimed at real-time computer
+    vision. This 'Lite' version installs the stable base version of 'OpenCV' and
+    some of its experimental externally contributed modules. It does not provide
+    R bindings directly.
 License: GPL-3
-LazyData: TRUE
 Imports:
     utils,
     parallel
