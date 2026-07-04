@@ -49,8 +49,15 @@ isOpenCVInstalled <- function() {
 
   if (inherits(path, "try-error")) {
     FALSE
+  } else if (!dir.exists(paste0(path, "/include/"))) {
+    FALSE
+  } else if (.Platform$OS.type == "windows") {
+    file.exists(paste0(path, "/OpenCVConfig-version.cmake"))
   } else {
-    dir.exists(paste0(path, "/include/"))
+    odir <- dir(path)
+    lib <- odir[grepl("lib", odir)]
+    cmakeDir <- paste0(path, "/", lib, "/cmake")
+    dir.exists(cmakeDir) && any(grepl("^opencv[0-9]+$", dir(cmakeDir)))
   }
 }
 
@@ -131,7 +138,10 @@ opencvVersion <- function() {
     } else {
       odir <- dir(OpenCVPath())
       lib <- odir[grepl("lib", odir)]
-      pcPath <- paste0("/", lib, "/cmake/", .opencvN(), "/OpenCVConfig-version.cmake")
+      cmakeDir <- paste0(OpenCVPath(), "/", lib, "/cmake")
+      opencvDir <- dir(cmakeDir)
+      opencvDir <- opencvDir[grepl("^opencv[0-9]+$", opencvDir)][1]
+      pcPath <- paste0("/", lib, "/cmake/", opencvDir, "/OpenCVConfig-version.cmake")
       .parse_opencv_version(paste0(OpenCVPath(), pcPath))
     }
   } else {
