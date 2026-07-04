@@ -336,6 +336,22 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
         utils::download.file(config$contrib, contrib_archive)
       utils::untar(core_archive, exdir = config$tmp_dir)
       utils::untar(contrib_archive, exdir = config$tmp_dir)
+
+      # Fixes MinGW build of 3rdparty/mlas (used by the dnn module): its aligned
+      # allocation code path is only guarded for _MSC_VER, not MinGW, and falls
+      # through to posix_memalign(), which MinGW's CRT doesn't provide. Mirrors
+      # opencv/opencv#29352, merged upstream after the 5.0.0 tag was cut.
+      mlasi_path <- paste0(config$source_dir, "3rdparty/mlas/lib/mlasi.h")
+      tmp <- readLines(mlasi_path)
+      ix <- which(tmp == "#include <intrin.h>")
+      tmp <- c(tmp[1:ix], "#include <malloc.h>", tmp[(ix + 1):length(tmp)])
+      tmp[tmp == "#ifdef _MSC_VER"] <- "#ifdef _WIN32"
+      writeLines(tmp, mlasi_path)
+
+      platform_path <- paste0(config$source_dir, "3rdparty/mlas/lib/platform.cpp")
+      tmp <- readLines(platform_path)
+      tmp[tmp == "#ifdef _MSC_VER"] <- "#ifdef _WIN32"
+      writeLines(tmp, platform_path)
     } else {
       core_archive <- paste0(config$cache_dir, "/opencv-", pkg_version, ".zip")
       contrib_archive <- paste0(config$cache_dir, "/opencv_contrib-", pkg_version, ".zip")
