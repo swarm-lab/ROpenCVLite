@@ -22,6 +22,9 @@
 * `installOpenCV()` now explicitly pins `CMAKE_ASM_COMPILER` to the same MinGW
   toolchain used for `CMAKE_C_COMPILER`/`CMAKE_CXX_COMPILER` on Windows, instead of
   letting CMake auto-detect an assembler that may be ABI-incompatible.
+* On Windows, `installOpenCV()` now compiles with `-Wa,-mbig-obj`. OpenCV 5's `dnn`
+  module has template-heavy translation units (e.g. `nary_eltwise_layers.cpp`) that
+  exceed MinGW's default COFF object section-size limit ("file too big") without it.
 * `installOpenCV()` now verifies, immediately after installation, that every
   requested module produced a header on disk, and fails with an informative error
   instead of silently reporting success if CMake's `BUILD_LIST` dropped an

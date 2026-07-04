@@ -150,7 +150,11 @@ defaultOpenCVPath <- function() {
     "-DBUILD_PERF_TESTS=OFF",
     "-DBUILD_TESTS=OFF",
     "-DCMAKE_C_FLAGS_RELEASE=-fstack-protector-strong",
-    "-DCMAKE_CXX_FLAGS_RELEASE=-fstack-protector-strong",
+    # -Wa,-mbig-obj: OpenCV 5's dnn module has template-heavy translation units
+    # (e.g. nary_eltwise_layers.cpp) that exceed MinGW's default COFF object
+    # section-size limit ("file too big") without the MinGW "big object" format.
+    paste0("-DCMAKE_CXX_FLAGS_RELEASE=-fstack-protector-strong",
+           if (config$os_type == "windows") " -Wa,-mbig-obj"),
     "-DINSTALL_CREATE_DISTRIB=ON",
     "-DCMAKE_BUILD_TYPE=RELEASE",
     paste0("-DCMAKE_INSTALL_PREFIX=", config$install_path),
