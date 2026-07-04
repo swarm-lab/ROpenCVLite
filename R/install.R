@@ -1,4 +1,4 @@
-.opencv_version <- "4.13.0"
+.opencv_version <- "5.0.0"
 
 #' @title Default Install Location of OpenCV
 #'
@@ -135,7 +135,7 @@ defaultOpenCVPath <- function() {
 
   args <- c(args,
     paste0("-DCMAKE_MAKE_PROGRAM=", config$make_path),
-    "-DCMAKE_CXX_STANDARD=11",
+    "-DCMAKE_CXX_STANDARD=17",
     "-DENABLE_PRECOMPILED_HEADERS=OFF",
     paste0("-DOPENCV_EXTRA_MODULES_PATH=", config$contrib_dir),
     paste0("-DBUILD_LIST=", paste(config$modules, collapse = ",")),
@@ -158,6 +158,41 @@ defaultOpenCVPath <- function() {
   )
 
   list(command = config$cmake_path, args = args)
+}
+
+
+.module_headers <- c(
+  calib = "calib.hpp",
+  core = "core.hpp",
+  dnn = "dnn.hpp",
+  features = "features.hpp",
+  flann = "flann.hpp",
+  gapi = "gapi.hpp",
+  geometry = "geometry.hpp",
+  highgui = "highgui.hpp",
+  imgcodecs = "imgcodecs.hpp",
+  imgproc = "imgproc.hpp",
+  ml = "ml.hpp",
+  objdetect = "objdetect.hpp",
+  photo = "photo.hpp",
+  stereo = "stereo.hpp",
+  stitching = "stitching.hpp",
+  video = "video.hpp",
+  videoio = "videoio.hpp",
+  ximgproc = "ximgproc.hpp",
+  wechat_qrcode = "wechat_qrcode.hpp",
+  xobjdetect = "xobjdetect.hpp"
+)
+
+
+.verify_modules <- function(install_path, modules, os_type) {
+  header_dir <- if (os_type == "windows") {
+    file.path(install_path, "include", "opencv2")
+  } else {
+    file.path(install_path, "include", .opencvN(), "opencv2")
+  }
+
+  modules[!file.exists(file.path(header_dir, .module_headers[modules]))]
 }
 
 
@@ -187,8 +222,14 @@ defaultOpenCVPath <- function() {
 #'  result may not run on other hardware.
 #'
 #' @param modules A character vector of OpenCV modules to compile. Defaults to
-#'  the full set supported by \code{ROpenCVLite}. Specify a subset to reduce
-#'  compilation time when only specific functionality is needed.
+#'  the full set supported by \code{ROpenCVLite}: \code{"calib"}, \code{"core"},
+#'  \code{"dnn"}, \code{"features"}, \code{"flann"}, \code{"gapi"}, \code{"geometry"},
+#'  \code{"highgui"}, \code{"imgcodecs"}, \code{"imgproc"}, \code{"ml"},
+#'  \code{"objdetect"}, \code{"photo"}, \code{"stereo"}, \code{"stitching"},
+#'  \code{"video"}, \code{"videoio"}, \code{"ximgproc"}, \code{"wechat_qrcode"}, and
+#'  \code{"xobjdetect"} (providing \code{cv::CascadeClassifier}/
+#'  \code{cv::HOGDescriptor}, moved out of \code{objdetect} in OpenCV 5). Specify a
+#'  subset to reduce compilation time when only specific functionality is needed.
 #'
 #' @return A boolean.
 #'
@@ -202,11 +243,12 @@ defaultOpenCVPath <- function() {
 #' @export
 installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
                           use_ccache = FALSE, optimize_for_host = FALSE,
-                          modules = c("calib3d", "core", "dnn", "features2d",
-                                      "flann", "gapi", "highgui", "imgcodecs",
-                                      "imgproc", "ml", "objdetect", "photo",
-                                      "stitching", "video", "videoio",
-                                      "ximgproc", "wechat_qrcode")) {
+                          modules = c("calib", "core", "dnn", "features",
+                                      "flann", "gapi", "geometry", "highgui",
+                                      "imgcodecs", "imgproc", "ml", "objdetect",
+                                      "photo", "stereo", "stitching", "video",
+                                      "videoio", "ximgproc", "wechat_qrcode",
+                                      "xobjdetect")) {
   modules <- match.arg(modules, several.ok = TRUE)
   install <- 0
   pkg_version <- .opencv_version
@@ -322,15 +364,6 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
       }
     }
 
-    # To be removed once the CMake 4 issue is resolved in the next OpenCV release
-    tmp <- readLines(paste0(config$source_dir, "cmake/OpenCVGenPkgconfig.cmake"))
-    ix <- which(grepl("cmake_minimum_required", tmp))
-    insert <- "cmake_minimum_required(VERSION 3.5)"
-    writeLines(
-      c(tmp[1:(ix - 1)], insert, tmp[(ix + 1):length(tmp)]),
-      paste0(config$source_dir, "cmake/OpenCVGenPkgconfig.cmake")
-    )
-
     dir.create(config$build_dir, showWarnings = FALSE)
 
     message("Configuring OpenCV build...")
@@ -347,6 +380,15 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
     message("Installing OpenCV...")
     if (system2(config$make_path, c("-C", config$build_dir, "install")) != 0)
       stop("OpenCV installation failed. See output above for details.")
+
+    missing_modules <- .verify_modules(config$install_path, modules, config$os_type)
+    if (length(missing_modules) > 0) {
+      stop(
+        "The following requested OpenCV module(s) did not produce a header after ",
+        "installation, meaning CMake's BUILD_LIST silently dropped them: ",
+        paste(missing_modules, collapse = ", ")
+      )
+    }
 
     writeLines(config$install_path, con = paste0(config$pkg_path, "/path"))
   } else {

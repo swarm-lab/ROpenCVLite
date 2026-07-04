@@ -22,3 +22,11 @@
       Error in `opencvConfig()`:
       ! OpenCV is not installed on this system. Please use installOpenCV() to install it.
 
+# opencvConfig() errors on invalid output argument
+
+    Code
+      opencvConfig(output = "invalid")
+    Condition
+      Error in `opencvConfig()`:
+      ! output should be either 'libs' or 'cflags'
+

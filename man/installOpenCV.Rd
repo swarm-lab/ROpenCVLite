@@ -9,9 +9,9 @@ installOpenCV(
   batch = FALSE,
   use_ccache = FALSE,
   optimize_for_host = FALSE,
-  modules = c("calib3d", "core", "dnn", "features2d", "flann", "gapi", "highgui",
-    "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stitching", "video", "videoio",
-    "ximgproc", "wechat_qrcode")
+  modules = c("calib", "core", "dnn", "features", "flann", "gapi", "geometry", "highgui",
+    "imgcodecs", "imgproc", "ml", "objdetect", "photo", "stereo", "stitching", "video",
+    "videoio", "ximgproc", "wechat_qrcode", "xobjdetect")
 )
 }
 \arguments{
@@ -36,8 +36,14 @@ this to \code{TRUE} produces a faster binary on the build machine but the
 result may not run on other hardware.}
 
 \item{modules}{A character vector of OpenCV modules to compile. Defaults to
-the full set supported by \code{ROpenCVLite}. Specify a subset to reduce
-compilation time when only specific functionality is needed.}
+the full set supported by \code{ROpenCVLite}: \code{"calib"}, \code{"core"},
+\code{"dnn"}, \code{"features"}, \code{"flann"}, \code{"gapi"}, \code{"geometry"},
+\code{"highgui"}, \code{"imgcodecs"}, \code{"imgproc"}, \code{"ml"},
+\code{"objdetect"}, \code{"photo"}, \code{"stereo"}, \code{"stitching"},
+\code{"video"}, \code{"videoio"}, \code{"ximgproc"}, \code{"wechat_qrcode"}, and
+\code{"xobjdetect"} (providing \code{cv::CascadeClassifier}/
+\code{cv::HOGDescriptor}, moved out of \code{objdetect} in OpenCV 5). Specify a
+subset to reduce compilation time when only specific functionality is needed.}
 }
 \value{
 A boolean.

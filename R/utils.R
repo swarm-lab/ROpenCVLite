@@ -131,12 +131,18 @@ opencvVersion <- function() {
     } else {
       odir <- dir(OpenCVPath())
       lib <- odir[grepl("lib", odir)]
-      pcPath <- paste0("/", lib, "/cmake/opencv4/OpenCVConfig-version.cmake")
+      pcPath <- paste0("/", lib, "/cmake/", .opencvN(), "/OpenCVConfig-version.cmake")
       .parse_opencv_version(paste0(OpenCVPath(), pcPath))
     }
   } else {
     stop("OpenCV is not installed on this system. Please use installOpenCV() to install it.")
   }
+}
+
+
+.opencvN <- function() {
+  major <- strsplit(.opencv_version, ".", fixed = TRUE)[[1]][1]
+  paste0("opencv", major)
 }
 
 
@@ -202,9 +208,9 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       if (nchar(pkg_config) > 0 && length(pkgconfig_dirs) > 0) {
         old_path <- Sys.getenv("PKG_CONFIG_PATH")
         Sys.setenv(PKG_CONFIG_PATH = paste(
-          c(pkgconfig_dirs, old_path), collapse = ":"
+          c(paste0(pkgconfig_dirs, "/pkgconfig"), old_path), collapse = ":"
         ))
-        result <- system2(pkg_config, c("--libs", "opencv4"),
+        result <- system2(pkg_config, c("--libs", .opencvN()),
                           stdout = TRUE, stderr = FALSE)
         Sys.setenv(PKG_CONFIG_PATH = old_path)
         status <- attr(result, "status")
@@ -258,9 +264,9 @@ opencvConfig <- function(output = "libs", arch = NULL) {
         if (length(pkgconfig_dirs) > 0) {
           old_path <- Sys.getenv("PKG_CONFIG_PATH")
           Sys.setenv(PKG_CONFIG_PATH = paste(
-            c(pkgconfig_dirs, old_path), collapse = ":"
+            c(paste0(pkgconfig_dirs, "/pkgconfig"), old_path), collapse = ":"
           ))
-          result <- system2(pkg_config, c("--cflags", "opencv4"),
+          result <- system2(pkg_config, c("--cflags", .opencvN()),
                             stdout = TRUE, stderr = FALSE)
           Sys.setenv(PKG_CONFIG_PATH = old_path)
           status <- attr(result, "status")
@@ -272,7 +278,7 @@ opencvConfig <- function(output = "libs", arch = NULL) {
       }
 
       if (!pkgconfig_found) {
-        includedirOld <- paste0(prefix, "/include/opencv4")
+        includedirOld <- paste0(prefix, "/include/", .opencvN())
         includedirNew <- paste0(prefix, "/include")
         cat(paste0("-I", includedirOld, " -I", includedirNew))
       }

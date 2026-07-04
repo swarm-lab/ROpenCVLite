@@ -1,3 +1,38 @@
+# ROpenCVLite 5.0.0
+
+## New features
+
+* Updates package to target OpenCV 5.0.0.
+* **Breaking**: the default `modules` argument of `installOpenCV()` is updated for
+  OpenCV 5's restructured module layout: `calib3d` is replaced by `calib`, `stereo`,
+  and `geometry`; `features2d` is replaced by `features`; `xobjdetect` is added
+  (provides `cv::CascadeClassifier`/`cv::HOGDescriptor`, moved out of `objdetect` and
+  into `opencv_contrib` in OpenCV 5). `ml` and `gapi` keep their names but are now
+  sourced from `opencv_contrib` instead of core. No backward-compatibility translation
+  is provided for the old module names.
+* The OpenCV build now requires a C++17-compatible toolchain (GCC 8+/Clang 9+/MSVC
+  2017+), matching OpenCV 5's minimum requirement.
+* `installOpenCV()` now verifies, immediately after installation, that every
+  requested module produced a header on disk, and fails with an informative error
+  instead of silently reporting success if CMake's `BUILD_LIST` dropped an
+  unrecognized module name.
+
+## Minor improvements and fixes
+
+* `opencvVersion()` and `opencvConfig()` now derive the `opencvN` pkg-config/include
+  path segment from the installed OpenCV's major version instead of hardcoding
+  `opencv4`, so future major-version bumps don't require repeating this fix.
+* Removes the "CMake 4 issue" workaround that patched
+  `cmake/OpenCVGenPkgconfig.cmake`, since OpenCV 5.0.0 already declares an adequate
+  `cmake_minimum_required` on its own.
+* Fixes a pre-existing bug in `opencvConfig()` where the `pkg-config` lookup always
+  silently failed and fell back to manual header/library discovery, because
+  `PKG_CONFIG_PATH` was set to the library directory instead of its `pkgconfig`
+  subdirectory. Found while build-verifying this release against a real OpenCV 5.0.0
+  installation.
+
+---
+
 # ROpenCVLite 4.130.0
 
 ## New features
