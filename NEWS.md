@@ -12,10 +12,12 @@
   is provided for the old module names.
 * The OpenCV build now requires a C++17-compatible toolchain (GCC 8+/Clang 9+/MSVC
   2017+), matching OpenCV 5's minimum requirement.
-* On Windows, `installOpenCV()` now patches `3rdparty/mlas` to fix a MinGW build
-  failure in OpenCV 5.0.0 (`posix_memalign` is not declared under MinGW). This
-  mirrors a fix already merged upstream (opencv/opencv#29352) after the 5.0.0 tag
-  was cut.
+* On Windows, `installOpenCV()` now patches `3rdparty/mlas` to fix two MinGW build
+  failures in OpenCV 5.0.0: (1) `posix_memalign` is not declared under MinGW,
+  mirroring a fix already merged upstream (opencv/opencv#29352) after the 5.0.0 tag
+  was cut; and (2) MinGW's `_xgetbv()` builtin fails to inline without an explicit
+  `xsave` target attribute, which MSVC's `_xgetbv()` doesn't require (no upstream
+  fix exists yet for this one).
 * `installOpenCV()` now verifies, immediately after installation, that every
   requested module produced a header on disk, and fails with an informative error
   instead of silently reporting success if CMake's `BUILD_LIST` dropped an

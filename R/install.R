@@ -351,6 +351,17 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
       platform_path <- paste0(config$source_dir, "3rdparty/mlas/lib/platform.cpp")
       tmp <- readLines(platform_path)
       tmp[tmp == "#ifdef _MSC_VER"] <- "#ifdef _WIN32"
+      # MinGW's `_xgetbv()` is an always-inline GCC builtin gated on the "xsave"
+      # target feature; MSVC's `_xgetbv()` has no such requirement, so the
+      # unguarded call under `#if defined(_WIN32)` only fails to inline on MinGW.
+      ix <- which(tmp == "inline")
+      tmp <- c(
+        tmp[1:(ix - 1)],
+        '#if defined(__GNUC__) && !defined(_MSC_VER)',
+        '__attribute__((target("xsave")))',
+        '#endif',
+        tmp[ix:length(tmp)]
+      )
       writeLines(tmp, platform_path)
     } else {
       core_archive <- paste0(config$cache_dir, "/opencv-", pkg_version, ".zip")
