@@ -338,32 +338,18 @@ installOpenCV <- function(install_path = defaultOpenCVPath(), batch = FALSE,
       utils::untar(core_archive, exdir = config$tmp_dir)
       utils::untar(contrib_archive, exdir = config$tmp_dir)
 
-      # Fixes MinGW build of 3rdparty/mlas (used by the dnn module): its aligned
-      # allocation code path is only guarded for _MSC_VER, not MinGW, and falls
-      # through to posix_memalign(), which MinGW's CRT doesn't provide. Mirrors
-      # opencv/opencv#29352, merged upstream after the 5.0.0 tag was cut.
-      mlasi_path <- paste0(config$source_dir, "3rdparty/mlas/lib/mlasi.h")
-      tmp <- readLines(mlasi_path)
-      ix <- which(tmp == "#include <intrin.h>")
-      tmp <- c(tmp[1:ix], "#include <malloc.h>", tmp[(ix + 1):length(tmp)])
-      tmp[tmp == "#ifdef _MSC_VER"] <- "#ifdef _WIN32"
-      writeLines(tmp, mlasi_path)
-
-      platform_path <- paste0(config$source_dir, "3rdparty/mlas/lib/platform.cpp")
-      tmp <- readLines(platform_path)
-      tmp[tmp == "#ifdef _MSC_VER"] <- "#ifdef _WIN32"
-      # MinGW's `_xgetbv()` is an always-inline GCC builtin gated on the "xsave"
-      # target feature; MSVC's `_xgetbv()` has no such requirement, so the
-      # unguarded call under `#if defined(_WIN32)` only fails to inline on MinGW.
-      ix <- which(tmp == "inline")
-      tmp <- c(
-        tmp[1:(ix - 1)],
-        '#if defined(__GNUC__) && !defined(_MSC_VER)',
-        '__attribute__((target("xsave")))',
-        '#endif',
-        tmp[ix:length(tmp)]
-      )
-      writeLines(tmp, platform_path)
+      # 3rdparty/mlas (dnn's optional SGEMM accelerator, vendored from ONNX Runtime)
+      # is a source of repeated MinGW-only build failures (missing posix_memalign,
+      # xgetbv inlining, an unconditional -Wa,--noexecstack ASM flag that assumes
+      # ELF). mlas is purely an optimization: dnn's own CMakeLists.txt already
+      # handles HAVE_MLAS=0 gracefully, falling back to its portable built-in SGEMM
+      # with no loss of functionality. Skipping it on Windows avoids this entire
+      # class of issues rather than patching each one as it surfaces.
+      mlas_cmake_path <- paste0(config$source_dir, "3rdparty/mlas/CMakeLists.txt")
+      tmp <- readLines(mlas_cmake_path)
+      ix <- which(tmp == "set(MLAS_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)")
+      tmp <- c(tmp[1:(ix - 1)], "if(WIN32)", "  return()", "endif()", "", tmp[ix:length(tmp)])
+      writeLines(tmp, mlas_cmake_path)
     } else {
       core_archive <- paste0(config$cache_dir, "/opencv-", pkg_version, ".zip")
       contrib_archive <- paste0(config$cache_dir, "/opencv_contrib-", pkg_version, ".zip")

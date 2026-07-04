@@ -12,18 +12,16 @@
   is provided for the old module names.
 * The OpenCV build now requires a C++17-compatible toolchain (GCC 8+/Clang 9+/MSVC
   2017+), matching OpenCV 5's minimum requirement.
-* On Windows, `installOpenCV()` now patches `3rdparty/mlas` to fix two MinGW build
-  failures in OpenCV 5.0.0: (1) `posix_memalign` is not declared under MinGW,
-  mirroring a fix already merged upstream (opencv/opencv#29352) after the 5.0.0 tag
-  was cut; and (2) MinGW's `_xgetbv()` builtin fails to inline without an explicit
-  `xsave` target attribute, which MSVC's `_xgetbv()` doesn't require (no upstream
-  fix exists yet for this one).
+* On Windows, `installOpenCV()` now skips building `3rdparty/mlas` (`dnn`'s optional,
+  vendored SGEMM accelerator from ONNX Runtime) via a one-line source patch, after it
+  proved to be a repeated source of MinGW-only build failures (missing
+  `posix_memalign`, `_xgetbv` inlining, an ELF-only `-Wa,--noexecstack` assembler
+  flag). `mlas` is purely an optimization — `dnn`'s own CMakeLists.txt already
+  handles it being unavailable, falling back to its portable built-in SGEMM with no
+  loss of functionality, just reduced performance for some ops on Windows.
 * `installOpenCV()` now explicitly pins `CMAKE_ASM_COMPILER` to the same MinGW
   toolchain used for `CMAKE_C_COMPILER`/`CMAKE_CXX_COMPILER` on Windows, instead of
-  letting CMake auto-detect an assembler. Needed for OpenCV 5's `dnn` module, whose
-  `mlas` backend added hand-written `.S` assembly kernels that previously had no
-  reason to be assembled; without this, CMake could pick up an unrelated, ABI-
-  incompatible MinGW install elsewhere on `PATH`.
+  letting CMake auto-detect an assembler that may be ABI-incompatible.
 * `installOpenCV()` now verifies, immediately after installation, that every
   requested module produced a header on disk, and fails with an informative error
   instead of silently reporting success if CMake's `BUILD_LIST` dropped an
