@@ -18,6 +18,12 @@
   was cut; and (2) MinGW's `_xgetbv()` builtin fails to inline without an explicit
   `xsave` target attribute, which MSVC's `_xgetbv()` doesn't require (no upstream
   fix exists yet for this one).
+* `installOpenCV()` now explicitly pins `CMAKE_ASM_COMPILER` to the same MinGW
+  toolchain used for `CMAKE_C_COMPILER`/`CMAKE_CXX_COMPILER` on Windows, instead of
+  letting CMake auto-detect an assembler. Needed for OpenCV 5's `dnn` module, whose
+  `mlas` backend added hand-written `.S` assembly kernels that previously had no
+  reason to be assembled; without this, CMake could pick up an unrelated, ABI-
+  incompatible MinGW install elsewhere on `PATH`.
 * `installOpenCV()` now verifies, immediately after installation, that every
   requested module produced a header on disk, and fails with an informative error
   instead of silently reporting success if CMake's `BUILD_LIST` dropped an

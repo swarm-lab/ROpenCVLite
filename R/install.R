@@ -110,6 +110,7 @@ defaultOpenCVPath <- function() {
   if (config$os_type == "windows") {
     args <- c(args,
       paste0("-DCMAKE_RC_COMPILER=", config$windres_path),
+      paste0("-DCMAKE_ASM_COMPILER=", config$gcc_path),
       "-DOpenCV_ARCH=x64",
       "-DOpenCV_RUNTIME=mingw",
       "-DBUILD_SHARED_LIBS=ON",
